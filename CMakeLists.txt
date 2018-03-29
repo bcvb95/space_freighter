@@ -2,10 +2,10 @@
 cmake_minimum_required (VERSION 3.5.1)
 project (space_freighter)
 
-add_definitions("-std=c++11")
 
 SET(CMAKE_C_COMPILER "/usr/bin/gcc")
 SET(CMAKE_CXX_COMPILER "/usr/bin/g++")
+SET(CMAKE_CXX_FLAGS "-std=c++11")
 
 set(CMAKE_MODULE_PATH "/usr/local/lib/x86_64-linux-gnu/cmake/" "/usr/lib/x86_64-linux-gnu/cmake/")
 
