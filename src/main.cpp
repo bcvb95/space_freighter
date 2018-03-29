@@ -38,22 +38,22 @@ int main(int argc, char** argv)
                 switch(e.key.keysym.sym)
                 {
                     case SDLK_w:
-                        cam->GetPos()->y -= 50;
+                        cam->GetPos()->y -= 0.1;
                         break;
                     case SDLK_s:
-                        cam->GetPos()->y += 50;
+                        cam->GetPos()->y += 0.1;
                         break;
                     case SDLK_a:
-                        cam->GetPos()->x -= 50;
+                        cam->GetPos()->x -= 0.1;
                         break;
                     case SDLK_d:
-                        cam->GetPos()->x += 50;
+                        cam->GetPos()->x += 0.1;
                         break;
                     case SDLK_z:
-                        cam->Zoom(-0.01f);
+                        cam->Zoom(-0.05f);
                         break;    
                     case SDLK_x:
-                        cam->Zoom(0.01f);
+                        cam->Zoom(0.05f);
                         break;    
                 }
             }

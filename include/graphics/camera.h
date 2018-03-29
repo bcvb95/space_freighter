@@ -25,17 +25,18 @@ public:
         m_forward = glm::vec3(0,0,-1);
         m_up = glm::vec3(0,1,0);
         m_zoom = 1;
-        SetZoom();
+        SetZoom(1);
     }
 
-    void SetZoom()
+    void SetZoom(float zoom)
     {
+        m_zoom = zoom;
         float min = -pow(10, m_zoom);
         float max = pow(10, m_zoom);
         m_ortho = glm::ortho(min,max, min, max, ZNEAR, ZFAR);
     }
 
-    void Zoom(float zoomVal) {m_zoom += zoomVal; this->SetZoom();}
+    void Zoom(float zoomVal) {m_zoom += zoomVal; this->SetZoom(m_zoom);}
 
     inline glm::mat4 GetViewProjectionMatrix() const 
     {
