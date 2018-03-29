@@ -14,6 +14,7 @@ class Transform
         this->scale = scale;
     }
     Transform(const Transform& other) {};
+
     
 
     inline glm::vec3* GetPos() {return &pos;}

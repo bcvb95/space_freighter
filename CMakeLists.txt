@@ -1,6 +1,6 @@
 
 cmake_minimum_required (VERSION 3.5.1)
-project (project_test )
+project (space_freighter)
 
 SET(CMAKE_C_COMPILER "/usr/bin/gcc")
 SET(CMAKE_CXX_COMPILER "/usr/bin/g++")
@@ -11,6 +11,6 @@ include_directories(include/graphics include/core_engine)
 
 add_subdirectory(src)
 
-add_executable(project_test src/main.cpp)
-target_link_libraries(project_test core_lib graphic_lib)
+add_executable(space_freighter src/main.cpp)
+target_link_libraries(space_freighter core_lib graphic_lib)
 

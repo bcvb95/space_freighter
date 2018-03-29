@@ -15,7 +15,7 @@ public:
     Sprite();
     Sprite(const std::string& tex_file, const std::string& shader_file);
     Sprite(const Sprite& other) {};
-    ~Sprite();
+    virtual ~Sprite();
 
     Mesh* GetMesh() {return m_mesh;}
     Texture* GetTexture() {return m_texture;}

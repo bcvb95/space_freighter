@@ -15,7 +15,7 @@ public:
         m_transform = new Transform();
     };
 
-    ~GameObject()
+    virtual ~GameObject()
     {
         delete m_transform;
     }
@@ -36,9 +36,8 @@ class DrawableGameObject : public GameObject
             m_sprite = new Sprite(tex_file, shader_file);
         };
         
-        ~DrawableGameObject() 
+        virtual ~DrawableGameObject() 
         {
-            delete m_transform;
             delete m_sprite;
         }
         

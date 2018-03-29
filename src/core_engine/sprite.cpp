@@ -5,13 +5,7 @@
 #include <sprite.h>
 
 Sprite::Sprite() {};
-/*
-Sprite::Sprite(const Sprite& other)
-{
-    Sprite* newSprite = new Sprite();
-    *newSprite = other;
-};
-*/
+
 Sprite::Sprite(const std::string& tex_file, const std::string& shader_file)
 {
     Vertex square_vertices[] = { Vertex(glm::vec3(-1.0f, -1.0f, 0.0f), glm::vec2(0.0f, 1.0f)), 
@@ -23,7 +17,6 @@ Sprite::Sprite(const std::string& tex_file, const std::string& shader_file)
     m_mesh = new Mesh(square_vertices,(sizeof(square_vertices)/sizeof(square_vertices[0])));
     m_texture = new Texture(tex_file);  
     m_shader = new Shader(shader_file);
-    //delete mesh; delete tex; delete shader;
 }
 
 Sprite::~Sprite() 

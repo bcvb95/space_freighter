@@ -28,7 +28,6 @@ class Mesh
     public:
         Mesh(void);
         Mesh(Vertex* vertices, unsigned int num_vertices);
-        //Mesh(const Mesh& other) {};
 
         Mesh& operator= (const Mesh& other) 
         {
