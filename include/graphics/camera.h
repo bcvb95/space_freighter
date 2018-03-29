@@ -20,10 +20,22 @@ public:
             m_perspective = glm::perspective(FOV, width/height, ZNEAR, ZFAR);
         else
             m_ortho = glm::ortho(0.0f, width , height, 0.0f, ZNEAR, ZFAR);
+
         m_pos = pos;
         m_forward = glm::vec3(0,0,-1);
         m_up = glm::vec3(0,1,0);
+        m_zoom = 1;
+        SetZoom();
     }
+
+    void SetZoom()
+    {
+        float min = -pow(10, m_zoom);
+        float max = pow(10, m_zoom);
+        m_ortho = glm::ortho(min,max, min, max, ZNEAR, ZFAR);
+    }
+
+    void Zoom(float zoomVal) {m_zoom += zoomVal; this->SetZoom();}
 
     inline glm::mat4 GetViewProjectionMatrix() const 
     {
@@ -38,6 +50,7 @@ public:
 protected:
 private:
     int m_camType;
+    float m_zoom;
 
     glm::mat4 m_perspective;
     glm::mat4 m_ortho;

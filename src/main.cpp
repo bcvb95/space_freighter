@@ -11,14 +11,11 @@
 int main(int argc, char** argv)
 {
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
+
     Camera* cam = new Camera(glm::vec3(0,0,2), (float)WIDTH, (float)HEIGHT, 0);
 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", "../res/tex.png", "../res/basicShader");
     DrawableGameObject* go2 = new DrawableGameObject ("GO 2", "../res/tex.png", "../res/basicShader");
-
-
-    go2->GetTransform()->GetScale()->y *= 500;
-    go2->GetTransform()->GetScale()->x *= 500;
 
     std::cout << go2->GetTransform()->GetScale()->y << std::endl;
     
@@ -53,12 +50,10 @@ int main(int argc, char** argv)
                         cam->GetPos()->x += 50;
                         break;
                     case SDLK_z:
-                        go2->GetTransform()->GetScale()->x *= 0.80f;
-                        go2->GetTransform()->GetScale()->y *= 0.80f;
+                        cam->Zoom(-0.01f);
                         break;    
                     case SDLK_x:
-                        go2->GetTransform()->GetScale()->x *= 1.20f;
-                        go2->GetTransform()->GetScale()->y *= 1.20f;
+                        cam->Zoom(0.01f);
                         break;    
                 }
             }
