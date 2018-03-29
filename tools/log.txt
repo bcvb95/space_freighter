@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US" prefix="og: http://ogp.me/ns#">
+<head>
+	<meta charset="UTF-8">
+	<title>Planet Name Generator - SciFi Ideas</title>
+	<!--iOS/android/handheld specific -->	
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<link rel="stylesheet" type="text/css" media="all" href="http://www.scifiideas.com/wp-content/themes/scifiideas2014/style.css" />
+
+	<link rel="pingback" href="http://www.scifiideas.com/xmlrpc.php" />
+	
+	
+    <!-- Font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans|Oswald' rel='stylesheet' type='text/css'>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" media="all" href="http://www.scifiideas.com/wp-content/themes/scifiideas2014/css/default.css" />
+
+
+    <!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
+<!--	-->	
+	  
+<!-- This site is optimized with the Yoast SEO plugin v3.7.0 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="SciFi Ideas provides interesting ideas &amp; inspiration for science fiction writers"/>
+<meta name="robots" content="noodp"/>
+<link rel="canonical" href="http://www.scifiideas.com/planet-name-generator/" />
+<link rel="publisher" href="https://plus.google.com/u/0/+Scifiideas"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Planet Name Generator - SciFi Ideas" />
+<meta property="og:description" content="Planet Name Generator" />
+<meta property="og:url" content="http://www.scifiideas.com/planet-name-generator/" />
+<meta property="og:site_name" content="SciFi Ideas" />
+<meta property="article:publisher" content="https://www.facebook.com/SciFiIdeas" />
+<meta property="og:image" content="http://www.scifiideas.com/wp-content/uploads/2012/10/bannerbutton-dtrpg.gif" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="SciFi Ideas provides interesting ideas &amp; inspiration for science fiction writers" />
+<meta name="twitter:title" content="Planet Name Generator - SciFi Ideas" />
+<meta name="twitter:site" content="@scifi_ideas" />
+<meta name="twitter:image" content="http://www.scifiideas.com/wp-content/uploads/2012/10/bannerbutton-dtrpg.gif" />
+<meta name="twitter:creator" content="@scifi_ideas" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//s.gravatar.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="SciFi Ideas &raquo; Feed" href="http://www.scifiideas.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="SciFi Ideas &raquo; Comments Feed" href="http://www.scifiideas.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="SciFi Ideas &raquo; Planet Name Generator Comments Feed" href="http://www.scifiideas.com/planet-name-generator/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.scifiideas.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.6.10"}};
+			!function(a,b,c){function d(a){var c,d,e,f,g,h=b.createElement("canvas"),i=h.getContext&&h.getContext("2d"),j=String.fromCharCode;if(!i||!i.fillText)return!1;switch(i.textBaseline="top",i.font="600 32px Arial",a){case"flag":return i.fillText(j(55356,56806,55356,56826),0,0),!(h.toDataURL().length<3e3)&&(i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,65039,8205,55356,57096),0,0),c=h.toDataURL(),i.clearRect(0,0,h.width,h.height),i.fillText(j(55356,57331,55356,57096),0,0),d=h.toDataURL(),c!==d);case"diversity":return i.fillText(j(55356,57221),0,0),e=i.getImageData(16,16,1,1).data,f=e[0]+","+e[1]+","+e[2]+","+e[3],i.fillText(j(55356,57221,55356,57343),0,0),e=i.getImageData(16,16,1,1).data,g=e[0]+","+e[1]+","+e[2]+","+e[3],f!==g;case"simple":return i.fillText(j(55357,56835),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode8":return i.fillText(j(55356,57135),0,0),0!==i.getImageData(16,16,1,1).data[0];case"unicode9":return i.fillText(j(55358,56631),0,0),0!==i.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity","unicode9"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='my-style-css'  href='http://www.scifiideas.com/wp-content/plugins/igit-posts-slider-widget/css/jquery.simplyscroll.css?ver=4.6.10' type='text/css' media='all' />
+<link rel='stylesheet' id='GoogleFonts-css'  href='http://fonts.googleapis.com/css?family=Noto+Sans%3Aregular%2Cbold&#038;v1&#038;ver=4.6.10' type='text/css' media='all' />
+<link rel='stylesheet' id='bbp-default-css'  href='http://www.scifiideas.com/wp-content/plugins/bbpress/templates/default/css/bbpress.css?ver=2.5.10-6063' type='text/css' media='screen' />
+<link rel='stylesheet' id='Toptwenfive-social-icons-css'  href='http://www.scifiideas.com/wp-content/plugins/top-25-social-icons/css/toptwenfive.css?ver=4.6.10' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-lightbox-2.min.css-css'  href='http://www.scifiideas.com/wp-content/plugins/wp-lightbox-2/styles/lightbox.min.css?ver=1.3.4' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='http://www.scifiideas.com/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='http://www.scifiideas.com/wp-content/plugins/jetpack/css/jetpack.css?ver=4.3.2' type='text/css' media='all' />
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js?ver=1.7.1'></script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/plugins/igit-posts-slider-widget/js/jquery.simplyscroll.js?ver=4.6.10'></script>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js?ver=1.8.16'></script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/themes/scifiideas2014/js/modernizr.min.js?ver=4.6.10'></script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/themes/scifiideas2014/js/customscript.js?ver=4.6.10'></script>
+<link rel='https://api.w.org/' href='http://www.scifiideas.com/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.scifiideas.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.scifiideas.com/wp-includes/wlwmanifest.xml" /> 
+<!--Theme by MyThemeShop.com-->
+<link rel='shortlink' href='http://wp.me/P1SPp2-2bI' />
+<link rel="alternate" type="application/json+oembed" href="http://www.scifiideas.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.scifiideas.com%2Fplanet-name-generator%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.scifiideas.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.scifiideas.com%2Fplanet-name-generator%2F&#038;format=xml" />
+<script type="text/javascript"><!--
+function powerpress_pinw(pinw_url){window.open(pinw_url, 'PowerPressPlayer','toolbar=0,status=0,resizable=1,width=460,height=320');	return false;}
+//-->
+</script>
+<link rel="alternate" type="application/rss+xml" title="Default Podcast Feed" href="http://www.scifiideas.com/feed/podcast/" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'>
+<link rel='dns-prefetch' href='//jetpack.wordpress.com'>
+<link rel='dns-prefetch' href='//s0.wp.com'>
+<link rel='dns-prefetch' href='//s1.wp.com'>
+<link rel='dns-prefetch' href='//s2.wp.com'>
+<link rel='dns-prefetch' href='//public-api.wordpress.com'>
+<link rel='dns-prefetch' href='//0.gravatar.com'>
+<link rel='dns-prefetch' href='//1.gravatar.com'>
+<link rel='dns-prefetch' href='//2.gravatar.com'>
+<link rel='dns-prefetch' href='//i0.wp.com'>
+<link rel='dns-prefetch' href='//i1.wp.com'>
+<link rel='dns-prefetch' href='//i2.wp.com'>
+<!-- All in one Favicon 4.5 --><link rel="icon" href="http://www.scifiideas.com/wp-content/uploads/2014/02/favicon.png" type="image/png"/>
+<link rel="apple-touch-icon" href="http://www.scifiideas.com/wp-content/uploads/2014/02/logo200x200.png" />
+<script>
+var _prum = [['id', '53678f16abe53dfc2b366c8c'],
+             ['mark', 'firstbyte', (new Date()).getTime()]];
+(function() {
+    var s = document.getElementsByTagName('script')[0]
+      , p = document.createElement('script');
+    p.async = 'async';
+    p.src = '//rum-static.pingdom.net/prum.min.js';
+    s.parentNode.insertBefore(p, s);
+})();
+</script>
+
+<!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":"http://www.scifiideas.com/privacy/","theme":"light-bottom"};
+</script>
+
+<script type="text/javascript" src="//s3.amazonaws.com/cc.silktide.com/cookieconsent.latest.min.js"></script>
+<!-- End Cookie Consent plugin -->
+
+</head>
+<body id ="blog" class="page page-id-8414 page-template-default main">
+	<header class="main-header">
+		<div class="container">
+			<div id="header">
+															<h2 id="logo">
+							<a href="http://www.scifiideas.com">SciFi Ideas</a>
+						</h2><!-- END #logo -->
+									                <div class="widget-header">			<div class="textwidget"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- SciFi Ideas top banner -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:468px;height:60px"
+     data-ad-client="ca-pub-5448496717531349"
+     data-ad-slot="4517659440"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+		</div>				              
+			</div><!--#header-->
+            <div class="secondary-navigation">
+                <nav id="navigation" >
+                                            <ul id="menu-main-menu" class="menu"><li id="menu-item-1305" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1305"><a title="Science Fiction Ideas" href="http://www.scifiideas.com/category/sfi/">Science Fiction Ideas</a>
+<ul class="sub-menu">
+	<li id="menu-item-1325" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1325"><a title="Story Ideas" href="http://www.scifiideas.com/category/sfi/story-ideas/">Story Ideas</a></li>
+	<li id="menu-item-1322" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1322"><a href="http://www.scifiideas.com/category/sfi/alien-ideas/">Alien Ideas</a>
+	<ul class="sub-menu">
+		<li id="menu-item-7726" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7726"><a title="Alien Profiles" href="http://www.scifiideas.com/category/sfi/alien-ideas/alien-profiles/">Alien Profiles</a></li>
+		<li id="menu-item-6660" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6660"><a href="http://www.scifiideas.com/category/sfi/alien-ideas/creature-concepts/">Creature Concepts</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1323" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-1323"><a href="http://www.scifiideas.com/category/sfi/planets-main/">Systems and Worlds</a>
+	<ul class="sub-menu">
+		<li id="menu-item-7728" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7728"><a title="Planet Profiles" href="http://www.scifiideas.com/category/sfi/planets-main/planet-profiles/">Planet Profiles</a></li>
+		<li id="menu-item-2293" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-2293"><a href="http://www.scifiideas.com/tag/real-planets/">Real Planets</a></li>
+		<li id="menu-item-2294" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-2294"><a href="http://www.scifiideas.com/tag/solar-system/">The Solar System</a></li>
+	</ul>
+</li>
+	<li id="menu-item-1324" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1324"><a href="http://www.scifiideas.com/category/sfi/rpg/">RPG Ideas</a></li>
+</ul>
+</li>
+<li id="menu-item-7020" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-7020"><a href="http://www.scifiideas.com/category/inspiration/">Inspiration</a>
+<ul class="sub-menu">
+	<li id="menu-item-7727" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7727"><a href="http://www.scifiideas.com/category/inspiration/starting-points/">Starting Points</a></li>
+	<li id="menu-item-4931" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4931"><a href="http://www.scifiideas.com/category/inspiration/featured-stories/">Featured Stories</a></li>
+	<li id="menu-item-6661" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6661"><a href="http://www.scifiideas.com/category/inspiration/inspiration-gallery/">Inspiration Gallery</a></li>
+	<li id="menu-item-7021" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7021"><a href="http://www.scifiideas.com/category/science-2/">Science and Technology</a></li>
+	<li id="menu-item-3810" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3810"><a href="http://www.scifiideas.com/category/reviews/">Reviews</a></li>
+</ul>
+</li>
+<li id="menu-item-1329" class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-ancestor menu-item-has-children menu-item-1329"><a title="Writing Resources" href="http://www.scifiideas.com/category/writing-2/writing-advice/">Writing Resources</a>
+<ul class="sub-menu">
+	<li id="menu-item-4310" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag current-menu-ancestor current-menu-parent menu-item-has-children menu-item-4310"><a href="http://www.scifiideas.com/tag/name-generators/">Random Generators</a>
+	<ul class="sub-menu">
+		<li id="menu-item-4306" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4306"><a href="http://www.scifiideas.com/alien-name-generator/">Alien Name Generator</a></li>
+		<li id="menu-item-8438" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-8414 current_page_item menu-item-8438"><a href="http://www.scifiideas.com/planet-name-generator/">Planet Name Generator</a></li>
+		<li id="menu-item-9628" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9628"><a href="http://www.scifiideas.com/sci-fi-character-name-generator/">Character Name Generator</a></li>
+		<li id="menu-item-4305" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4305"><a href="http://www.scifiideas.com/spaceship-name-generator/">Spaceship Name Generator</a></li>
+		<li id="menu-item-4304" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4304"><a href="http://www.scifiideas.com/star-system-name-generator/">Star System Name Generator</a></li>
+		<li id="menu-item-4432" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4432"><a href="http://www.scifiideas.com/alien-species-generator/">Alien Species Generator</a></li>
+		<li id="menu-item-6926" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6926"><a href="http://www.scifiideas.com/planet-generator/">Planet Generator</a></li>
+		<li id="menu-item-6419" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6419"><a href="http://www.scifiideas.com/spaceship-generator/">Spaceship Generator</a></li>
+		<li id="menu-item-7812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7812"><a href="http://www.scifiideas.com/technobabble-generator/">Technobabble Generator</a></li>
+		<li id="menu-item-5365" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5365"><a href="http://www.scifiideas.com/story-idea-generator/">Sci-Fi Story Idea Generator</a></li>
+		<li id="menu-item-5966" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5966"><a href="http://www.obscurehub.com/category/generators/">More Random Generators&#8230;</a></li>
+	</ul>
+</li>
+	<li id="menu-item-7029" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7029"><a href="http://www.scifiideas.com/category/writing-2/">Writing and Publishing</a></li>
+	<li id="menu-item-9276" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-9276"><a href="http://www.scifiideas.com/category/worldbuilding/">Worldbuilding</a></li>
+	<li id="menu-item-1302" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1302"><a href="http://www.scifiideas.com/contribute/">Share Your Ideas</a></li>
+</ul>
+</li>
+<li id="menu-item-6177" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-6177"><a href="http://www.scifiideas.com/category/podcast/">Podcast</a></li>
+</ul>                                    </nav>
+            </div>
+		</div><!--.container-->
+	</header>
+
+	<div class="main-container"><div class="top">
+            <a href="#top" class="toplink"></a>
+        </div><div id="page">
+	<div class="content">
+		<article class="article">
+			<div id="content_box" >
+				<div id="content" class="hfeed">
+											<div id="post-8414" class="g post post-8414 page type-page status-publish hentry">
+							<div class="single_page">
+								<header>
+									<h1 class="title">Planet Name Generator</h1>
+								</header>
+								<div class="post-content box mark-links">
+									<p>Need a fictional planet name for your sci-fi story, novel, or game? Here are some suggestions from our random Planet Name Generator.</p>
+<p>Simply <a title="Planet Name Generator" href="http://www.scifiideas.com/planet-name-generator/">refresh the page</a> to generate more random planet names.</p>
+<hr />
+<h3>Planet Name Generator</h3>
+<p><a href="http://rpg.drivethrustuff.com/index.php?manufacturers_id=5372"><img class="alignright size-full wp-image-5457" src="http://i0.wp.com/www.scifiideas.com/wp-content/uploads/2012/10/bannerbutton-dtrpg.gif?resize=150%2C45" alt="bannerbutton-dtrpg" data-recalc-dims="1" /></a><br />
+<strong>Planet Name #1:</strong> Oya</p>
+<p><strong>Planet Name #2:</strong> Beta Lumiere 4</p>
+<p><strong>Planet Name #3:</strong> Intu</p>
+<hr />
+<p><a title="Planet Name Generator" href="http://www.scifiideas.com/planet-name-generator/">Refresh the page</a> to generate more fictional planet names.</p>
+<hr />
+<p>Did you find the Planet Name Generator useful? Try our <a title="Star System Name Generator" href="http://www.scifiideas.com/star-system-name-generator/">Star System Name Generator</a>.</p>
+<p>Also, check out our <a title="Planet Generator" href="http://www.scifiideas.com/planet-generator/">Planet Generator</a>, which creates random planet names, locations, and descriptions.</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-8414" class="share-facebook sd-button share-icon no-text" href="http://www.scifiideas.com/planet-name-generator/?share=facebook" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-pocket"><a rel="nofollow" data-shared="" class="share-pocket sd-button share-icon no-text" href="http://www.scifiideas.com/planet-name-generator/?share=pocket" target="_blank" title="Click to share on Pocket"><span></span><span class="sharing-screen-reader-text">Click to share on Pocket (Opens in new window)</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon no-text" href="http://www.scifiideas.com/planet-name-generator/?share=reddit" target="_blank" title="Click to share on Reddit"><span></span><span class="sharing-screen-reader-text">Click to share on Reddit (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-8414" class="share-twitter sd-button share-icon no-text" href="http://www.scifiideas.com/planet-name-generator/?share=twitter" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>																	</div><!--.post-content box mark-links-->
+							</div>
+						</div>
+						
+<div id="disqus_thread">
+            <div id="dsq-content">
+
+
+            <ul id="dsq-comments">
+                    <li class="comment even thread-even depth-1" id="dsq-comment-23304">
+        <div id="dsq-comment-header-23304" class="dsq-comment-header">
+            <cite id="dsq-cite-23304">
+                <span id="dsq-author-user-23304">Copernicus</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-23304" class="dsq-comment-body">
+            <div id="dsq-comment-message-23304" class="dsq-comment-message"><p>What a great tool! We are trying to create a people&#8217;s database of exoplanet names instead of scientific numbering. Check out <a href="http://www.nameaplanet.com" >http://www.nameaplanet.com</a> to name a real planet for free!</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-2" id="dsq-comment-23305">
+        <div id="dsq-comment-header-23305" class="dsq-comment-header">
+            <cite id="dsq-cite-23305">
+                <a id="dsq-author-user-23305" href="http://scifiideas.com/" target="_blank" rel="nofollow">Mark Ball</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-23305" class="dsq-comment-body">
+            <div id="dsq-comment-message-23305" class="dsq-comment-message"><p>That&#8217;s valuable work you&#8217;re doing, Copernicus. Great idea. Have you any planets called Bob yet?</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-3" id="dsq-comment-23306">
+        <div id="dsq-comment-header-23306" class="dsq-comment-header">
+            <cite id="dsq-cite-23306">
+                <span id="dsq-author-user-23306">Copernicus</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-23306" class="dsq-comment-body">
+            <div id="dsq-comment-message-23306" class="dsq-comment-message"><p>No, we have a Dave but no Bob, Bobby or even Robert as yet 🙂</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt depth-2" id="dsq-comment-26673">
+        <div id="dsq-comment-header-26673" class="dsq-comment-header">
+            <cite id="dsq-cite-26673">
+                <span id="dsq-author-user-26673">NTShd</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26673" class="dsq-comment-body">
+            <div id="dsq-comment-message-26673" class="dsq-comment-message"><p>the link leads to a 404 error-link not found. somebody fix it please</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-23389">
+        <div id="dsq-comment-header-23389" class="dsq-comment-header">
+            <cite id="dsq-cite-23389">
+                <span id="dsq-author-user-23389">sectionsolo</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-23389" class="dsq-comment-body">
+            <div id="dsq-comment-message-23389" class="dsq-comment-message"><p>Bismarck. That&#8217;s funny!</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-26738">
+        <div id="dsq-comment-header-26738" class="dsq-comment-header">
+            <cite id="dsq-cite-26738">
+                <span id="dsq-author-user-26738">NTShd</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26738" class="dsq-comment-body">
+            <div id="dsq-comment-message-26738" class="dsq-comment-message"><p>Planet Name #1: Nightfall</p>
+<p>Planet Name #2: 30 Luminae 4</p>
+<p>Planet Name #3: Nightfall</p>
+<p>Apparently there are two planets with the same name.</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-26740">
+        <div id="dsq-comment-header-26740" class="dsq-comment-header">
+            <cite id="dsq-cite-26740">
+                <a id="dsq-author-user-26740" href="http://scifiideas.com/" target="_blank" rel="nofollow">Mark Ball</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26740" class="dsq-comment-body">
+            <div id="dsq-comment-message-26740" class="dsq-comment-message"><p>About a one in a million chance, that. Bound to happen sometime.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-26900">
+        <div id="dsq-comment-header-26900" class="dsq-comment-header">
+            <cite id="dsq-cite-26900">
+                <span id="dsq-author-user-26900">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26900" class="dsq-comment-body">
+            <div id="dsq-comment-message-26900" class="dsq-comment-message"><p>Grolol</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-26901">
+        <div id="dsq-comment-header-26901" class="dsq-comment-header">
+            <cite id="dsq-cite-26901">
+                <span id="dsq-author-user-26901">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26901" class="dsq-comment-body">
+            <div id="dsq-comment-message-26901" class="dsq-comment-message"><p>Poksair 5</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-26921">
+        <div id="dsq-comment-header-26921" class="dsq-comment-header">
+            <cite id="dsq-cite-26921">
+                <span id="dsq-author-user-26921">Zion Thornton</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-26921" class="dsq-comment-body">
+            <div id="dsq-comment-message-26921" class="dsq-comment-message"><p>#1 Hetoo Prime<br />
+#2 Fideon Prime<br />
+#3 Alpha Prime<br />
+Strange??</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-27054">
+        <div id="dsq-comment-header-27054" class="dsq-comment-header">
+            <cite id="dsq-cite-27054">
+                <span id="dsq-author-user-27054">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27054" class="dsq-comment-body">
+            <div id="dsq-comment-message-27054" class="dsq-comment-message"><p>Daedalus 3</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-27055">
+        <div id="dsq-comment-header-27055" class="dsq-comment-header">
+            <cite id="dsq-cite-27055">
+                <span id="dsq-author-user-27055">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27055" class="dsq-comment-body">
+            <div id="dsq-comment-message-27055" class="dsq-comment-message"><p>Clovis</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-27056">
+        <div id="dsq-comment-header-27056" class="dsq-comment-header">
+            <cite id="dsq-cite-27056">
+                <span id="dsq-author-user-27056">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27056" class="dsq-comment-body">
+            <div id="dsq-comment-message-27056" class="dsq-comment-message"><p>Tortuga</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-27057">
+        <div id="dsq-comment-header-27057" class="dsq-comment-header">
+            <cite id="dsq-cite-27057">
+                <span id="dsq-author-user-27057">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27057" class="dsq-comment-body">
+            <div id="dsq-comment-message-27057" class="dsq-comment-message"><p>Naraka</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-even depth-1" id="dsq-comment-27058">
+        <div id="dsq-comment-header-27058" class="dsq-comment-header">
+            <cite id="dsq-cite-27058">
+                <span id="dsq-author-user-27058">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27058" class="dsq-comment-body">
+            <div id="dsq-comment-message-27058" class="dsq-comment-message"><p>Alpha Remidian 4</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-odd thread-alt depth-1" id="dsq-comment-27059">
+        <div id="dsq-comment-header-27059" class="dsq-comment-header">
+            <cite id="dsq-cite-27059">
+                <span id="dsq-author-user-27059">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27059" class="dsq-comment-body">
+            <div id="dsq-comment-message-27059" class="dsq-comment-message"><p>Lovav</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment even depth-2" id="dsq-comment-27060">
+        <div id="dsq-comment-header-27060" class="dsq-comment-header">
+            <cite id="dsq-cite-27060">
+                <a id="dsq-author-user-27060" href="http://scifiideas.com/" target="_blank" rel="nofollow">Mark Ball</a>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27060" class="dsq-comment-body">
+            <div id="dsq-comment-message-27060" class="dsq-comment-message"><p>Chris, do you realise I get an email every time you comment? lol :p</p>
+</div>
+        </div>
+
+    <ul class="children">
+    <li class="comment odd alt depth-3" id="dsq-comment-27197">
+        <div id="dsq-comment-header-27197" class="dsq-comment-header">
+            <cite id="dsq-cite-27197">
+                <span id="dsq-author-user-27197">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27197" class="dsq-comment-body">
+            <div id="dsq-comment-message-27197" class="dsq-comment-message"><p>Yes</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even depth-3" id="dsq-comment-27425">
+        <div id="dsq-comment-header-27425" class="dsq-comment-header">
+            <cite id="dsq-cite-27425">
+                <span id="dsq-author-user-27425">Matheus Alves</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27425" class="dsq-comment-body">
+            <div id="dsq-comment-message-27425" class="dsq-comment-message"><p>HAHAHA, don&#8217;t know how I did end up here. But this is hilarious</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-27096">
+        <div id="dsq-comment-header-27096" class="dsq-comment-header">
+            <cite id="dsq-cite-27096">
+                <span id="dsq-author-user-27096">Billy Joe</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27096" class="dsq-comment-body">
+            <div id="dsq-comment-message-27096" class="dsq-comment-message"><p>Planet Name #1: Psi Ithacae 3</p>
+<p>Planet Name #2: Wasp</p>
+<p>Planet Name #3: Montgomery</p>
+<p>Planet Name #3 sounds like a real place hmm</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-27138">
+        <div id="dsq-comment-header-27138" class="dsq-comment-header">
+            <cite id="dsq-cite-27138">
+                <span id="dsq-author-user-27138">Jamie Moriarty</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27138" class="dsq-comment-body">
+            <div id="dsq-comment-message-27138" class="dsq-comment-message"><p>Ventos Prime&#8230; Sounds cool to me.</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-27153">
+        <div id="dsq-comment-header-27153" class="dsq-comment-header">
+            <cite id="dsq-cite-27153">
+                <span id="dsq-author-user-27153">JediSteve</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27153" class="dsq-comment-body">
+            <div id="dsq-comment-message-27153" class="dsq-comment-message"><p>THIS IS AWESOME 😀 😀</p>
+<p>A lot of name generators I use just shove random letters together into unpronounceable gibberish. This one gives real, pronounceable names!! 😀 Thanks 😀</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-27179">
+        <div id="dsq-comment-header-27179" class="dsq-comment-header">
+            <cite id="dsq-cite-27179">
+                <span id="dsq-author-user-27179">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27179" class="dsq-comment-body">
+            <div id="dsq-comment-message-27179" class="dsq-comment-message"><p>Kovas</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-27180">
+        <div id="dsq-comment-header-27180" class="dsq-comment-header">
+            <cite id="dsq-cite-27180">
+                <span id="dsq-author-user-27180">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27180" class="dsq-comment-body">
+            <div id="dsq-comment-message-27180" class="dsq-comment-message"><p>Zerkan</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-27181">
+        <div id="dsq-comment-header-27181" class="dsq-comment-header">
+            <cite id="dsq-cite-27181">
+                <span id="dsq-author-user-27181">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27181" class="dsq-comment-body">
+            <div id="dsq-comment-message-27181" class="dsq-comment-message"><p>Zero</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment odd alt thread-even depth-1" id="dsq-comment-27199">
+        <div id="dsq-comment-header-27199" class="dsq-comment-header">
+            <cite id="dsq-cite-27199">
+                <span id="dsq-author-user-27199">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27199" class="dsq-comment-body">
+            <div id="dsq-comment-message-27199" class="dsq-comment-message"><p>Satomi 5</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+    <li class="comment even thread-odd thread-alt depth-1" id="dsq-comment-27200">
+        <div id="dsq-comment-header-27200" class="dsq-comment-header">
+            <cite id="dsq-cite-27200">
+                <span id="dsq-author-user-27200">Chris</span>
+            </cite>
+        </div>
+        <div id="dsq-comment-body-27200" class="dsq-comment-body">
+            <div id="dsq-comment-message-27200" class="dsq-comment-message"><p>Corudeen</p>
+</div>
+        </div>
+
+    </li><!-- #comment-## -->
+            </ul>
+
+
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+var disqus_url = 'http://www.scifiideas.com/planet-name-generator/';
+var disqus_identifier = '8414 http://www.scifiideas.com/?page_id=8414';
+var disqus_container_id = 'disqus_thread';
+var disqus_shortname = 'scifiideas';
+var disqus_title = "Planet Name Generator";
+var disqus_config_custom = window.disqus_config;
+var disqus_config = function () {
+    /*
+    All currently supported events:
+    onReady: fires when everything is ready,
+    onNewComment: fires when a new comment is posted,
+    onIdentify: fires when user is authenticated
+    */
+    
+    
+    this.language = '';
+        this.callbacks.onReady.push(function () {
+
+        // sync comments in the background so we don't block the page
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = '?cf_action=sync_comments&post_id=8414';
+
+        var firstScript = document.getElementsByTagName('script')[0];
+        firstScript.parentNode.insertBefore(script, firstScript);
+    });
+    
+    if (disqus_config_custom) {
+        disqus_config_custom.call(this);
+    }
+};
+
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+
+									</div>
+			</div>
+		</article>
+		<aside class="sidebar c-4-12">
+	<div id="sidebars" class="g">
+		<div class="sidebar">
+			<ul class="sidebar_list">
+				<li id="search-4" class="widget widget-sidebar"><form method="get" id="searchform" class="search-form" action="http://www.scifiideas.com" _lpchecked="1">
+	<fieldset>
+		<input type="text" name="s" id="s" value="Search the site" onblur="if (this.value == '') {this.value = 'Search the site';}" onfocus="if (this.value == 'Search the site') {this.value = '';}" >
+		<input id="search-image" class="sbutton" type="submit" style="border:0; vertical-align: top;" value="Search">
+	</fieldset>
+</form></li><li id="text-13" class="widget widget-sidebar"><h3>Our Sponsors</h3>			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-5448496717531349";
+/* SFI Blog-Sidebar 300x250 */
+google_ad_slot = "5251632249";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+		</li><li id="text-14" class="widget widget-sidebar"><h3>@scifi_ideas Tweets</h3>			<div class="textwidget"><a class="twitter-timeline" data-dnt="true" href="https://twitter.com/SciFi_Ideas" data-widget-id="276754963089199104">Tweets by @SciFi_Ideas</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+		</li><li id="facebook-like-widget-2" class="widget widget-sidebar"><h3>Find us on Facebook</h3>		<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fscifiideas&amp;width=302&amp;colorscheme=light&amp;show_faces=true&amp;stream=true&amp;header=false&amp;height=600" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:302px; height: 600px;" allowTransparency="true"></iframe>
+		</li>			</ul>
+		</div>
+	</div><!--sidebars-->
+</aside>	</div>
+</div>
+		</div>
+	</div><!--#page-->
+</div><!--.main-container-->
+
+<footer>
+	<div class="container">
+		<div class="footer-widgets">
+				<div class="f-widget f-widget-1">
+		<div class="widget"><h3>Ideas and inspiration for science fiction writers</h3>			<div class="textwidget">We write things that will inspire and encourage other scifi writers. If you've got some good ideas to share, or would like to write an article about the aliens or planets you've used in your own stories, <a href="#">let us know!</a></div>
+		</div><div class="widget"><div class="widget-text sbr_box"><ul><li class="sbr_text social-icons FB"><a href=https://www.facebook.com/SciFiIdeas  data-tip="Facebook"><img width=auto  height=auto src=http://www.scifiideas.com/wp-content/plugins/top-25-social-icons/images/circle48/facebook.png></a></li><li class="sbr_text social-icons TW"><a href=https://twitter.com/SciFi_Ideas  data-tip="Twitter"><img width=auto  height=auto src=http://www.scifiideas.com/wp-content/plugins/top-25-social-icons/images/circle48/twitter.png></a></li><li class="sbr_text social-icons Youtube"><a href=http://www.youtube.com/channel/UCOQ-r6gKAOxPDZpBl8v8IBw  data-tip="Youtube"><img width=auto  height=auto src=http://www.scifiideas.com/wp-content/plugins/top-25-social-icons/images/circle48/youtube.png></a></li></ul></div></div>	</div>
+	<div class="f-widget f-widget-2">
+		<div class="widget"><h3>Topics</h3><div class="menu-topics-container"><ul id="menu-topics" class="menu"><li id="menu-item-7093" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7093"><a href="http://www.scifiideas.com/category/sfi/alien-ideas/">Alien Ideas</a></li>
+<li id="menu-item-7094" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7094"><a href="http://www.scifiideas.com/category/sfi/story-ideas/">Story Ideas</a></li>
+<li id="menu-item-7095" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7095"><a href="http://www.scifiideas.com/category/inspiration/featured-stories/">Featured Stories</a></li>
+<li id="menu-item-7096" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7096"><a href="http://www.scifiideas.com/category/sfi/planets-main/">Systems and Worlds</a></li>
+<li id="menu-item-7097" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-7097"><a href="http://www.scifiideas.com/category/podcast/">Podcast</a></li>
+</ul></div></div><div class="widget"><h3>Our store</h3>			<div class="textwidget">We've got some useful printable resources for sale for scifi roleplayers over on DriveThruRPG. Including: 
+<ul>
+<li><a href="http://rpg.drivethrustuff.com/product/113797/100-Alien-Foodstuffs?cPath=10547">100 alien foodstuffs</a></li>
+<li><a href="http://rpg.drivethrustuff.com/product/114736/36-Space-Drinks?cPath=10547">36 space drinks</a></li>
+<li><a href="http://rpg.drivethrustuff.com/product/115968/36-Alien-Diseases?cPath=10547">36 alien diseases</a></li>
+<li><a href="http://rpg.drivethrustuff.com/product/116455/Ridiculous-Spaceship-Names">Ridiculous Spaceship Names</a></li>
+<ul></div>
+		</div>	</div>
+	<div class="f-widget last">
+		<div class="widget"><h3>Favourite posts</h3><div class="menu-favourites-footer-container"><ul id="menu-favourites-footer" class="menu"><li id="menu-item-8450" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8450"><a href="http://www.scifiideas.com/writing-2/writing-advice/love-space-opera/">For the love of space opera</a></li>
+<li id="menu-item-8451" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8451"><a href="http://www.scifiideas.com/inspiration/incredible-artwork-magnus-robot-fighter/">Incredible artwork of Magnus, robot fighter</a></li>
+<li id="menu-item-8452" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8452"><a href="http://www.scifiideas.com/writing-2/writing-advice/origins-of-your-alien-species/">Origins of your alien species</a></li>
+<li id="menu-item-8453" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8453"><a href="http://www.scifiideas.com/news/make-first-contact/">How to make first contact</a></li>
+<li id="menu-item-8454" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8454"><a href="http://www.scifiideas.com/sfi/planets-main/planet-profile-damnation/">Planet profile: Damnation</a></li>
+<li id="menu-item-8455" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8455"><a href="http://www.scifiideas.com/science-2/eyeball-earths/">Eyeball Earths</a></li>
+</ul></div></div><div class="widget"><h3>Important pages</h3><div class="menu-footer-menu-container"><ul id="menu-footer-menu" class="menu"><li id="menu-item-1301" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1301"><a href="http://www.scifiideas.com">Home</a></li>
+<li id="menu-item-4692" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4692"><a href="http://www.scifiideas.com/contact/">Contact</a></li>
+<li id="menu-item-2072" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2072"><a href="http://www.scifiideas.com/privacy/">Privacy</a></li>
+<li id="menu-item-7092" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-7092"><a href="http://rpg.drivethrustuff.com/index.php?&#038;manufacturers_id=5372">Store</a></li>
+</ul></div></div>	</div>
+			<div class="copyrights">
+
+                <span class="cright"></span>
+			</div>
+		</div><!--.footer-widgets-->
+	</div><!--.container-->
+</footer><!--footer-->
+
+<script type="text/javascript">
+
+
+
+	var _gaq = _gaq || [];
+
+	_gaq.push(['_setAccount', 'UA-26882192-1']);
+
+	_gaq.push(['_trackPageview']);
+
+
+
+	(function() {
+
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+	})();
+
+
+
+</script>
+
+<!--start footer code-->
+<!--end footer code-->
+        <script type="text/javascript">
+        // <![CDATA[
+        var disqus_shortname = 'scifiideas';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1 && nodes[i].parentNode.tagName == 'A') {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('data-dsqidentifier'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script');
+            s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+        // ]]>
+        </script>
+        	<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"http:\/\/www.scifiideas.com\/planet-name-generator\/":8414};
+	</script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-includes/js/comment-reply.min.js?ver=4.6.10'></script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/plugins/jetpack/modules/photon/photon.js?ver=20130122'></script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/plugins/bbpress/templates/default/js/editor.js?ver=2.5.10-6063'></script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201812'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var JQLBSettings = {"fitToScreen":"1","resizeSpeed":"400","displayDownloadLink":"0","navbarOnTop":"0","loopImages":"","resizeCenter":"","marginSize":"0","linkTarget":"_self","help":"","prevLinkTitle":"previous image","nextLinkTitle":"next image","prevLinkText":"\u00ab Previous","nextLinkText":"Next \u00bb","closeTitle":"close image gallery","image":"Image ","of":" of ","download":"Download","jqlb_overlay_opacity":"80","jqlb_overlay_color":"#000000","jqlb_overlay_close":"1","jqlb_border_width":"10","jqlb_border_color":"#ffffff","jqlb_border_radius":"0","jqlb_image_info_background_transparency":"100","jqlb_image_info_bg_color":"#ffffff","jqlb_image_info_text_color":"#000000","jqlb_image_info_text_fontsize":"10","jqlb_show_text_for_image":"1","jqlb_next_image_title":"next image","jqlb_previous_image_title":"previous image","jqlb_next_button_image":"http:\/\/www.scifiideas.com\/wp-content\/plugins\/wp-lightbox-2\/styles\/images\/next.gif","jqlb_previous_button_image":"http:\/\/www.scifiideas.com\/wp-content\/plugins\/wp-lightbox-2\/styles\/images\/prev.gif","jqlb_maximum_width":"","jqlb_maximum_height":"","jqlb_show_close_button":"1","jqlb_close_image_title":"close image gallery","jqlb_close_image_max_heght":"22","jqlb_image_for_close_lightbox":"http:\/\/www.scifiideas.com\/wp-content\/plugins\/wp-lightbox-2\/styles\/images\/closelabel.gif","jqlb_keyboard_navigation":"1","jqlb_popup_size_fix":"0"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/plugins/wp-lightbox-2/wp-lightbox-2.min.js?ver=1.3.4.1'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2018Maraa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.6.10'></script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-includes/js/wp-embed.min.js?ver=4.6.10'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.scifiideas.com/wp-content/plugins/jetpack/modules/sharedaddy/sharing.js?ver=4.3.2'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-pocket', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcompocket', 'menubar=1,resizable=1,width=450,height=450' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+</script>
+<script type='text/javascript' src='http://stats.wp.com/e-201812.js' async defer></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:4.3.2',blog:'27843644',post:'8414',tz:'1',srv:'www.scifiideas.com'} ]);
+	_stq.push([ 'clickTrackerInit', '27843644', '8414' ]);
+</script>
+</body>
+</html>
