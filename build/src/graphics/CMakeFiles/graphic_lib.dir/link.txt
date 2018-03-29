@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgraphic_lib.a  CMakeFiles/graphic_lib.dir/display.cpp.o CMakeFiles/graphic_lib.dir/mesh.cpp.o CMakeFiles/graphic_lib.dir/shader.cpp.o CMakeFiles/graphic_lib.dir/stb_image.c.o CMakeFiles/graphic_lib.dir/texture.cpp.o
+/usr/bin/ranlib libgraphic_lib.a

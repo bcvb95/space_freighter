@@ -1,0 +1,11 @@
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/CMakeFiles/edit_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/CMakeFiles/rebuild_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/CMakeFiles/project_test.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/CMakeFiles/edit_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/CMakeFiles/rebuild_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/graphics/CMakeFiles/edit_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/graphics/CMakeFiles/rebuild_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/graphics/CMakeFiles/graphic_lib.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/core_engine/CMakeFiles/edit_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/core_engine/CMakeFiles/rebuild_cache.dir
+/home/bjorn/Documents/self_prog/cpp/opengl/play_project/build/src/core_engine/CMakeFiles/core_lib.dir
