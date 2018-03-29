@@ -11,15 +11,14 @@
 int main(int argc, char** argv)
 {
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
-    Camera* cam = new Camera(glm::vec3(0,0,2), 70.0f, (float)WIDTH/(float)HEIGHT, 0.001f, 1000.0f);
+    Camera* cam = new Camera(glm::vec3(0,0,2), (float)WIDTH, (float)HEIGHT, 0);
 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", "../res/tex.png", "../res/basicShader");
     DrawableGameObject* go2 = new DrawableGameObject ("GO 2", "../res/tex.png", "../res/basicShader");
 
-    go2->GetTransform()->GetPos()->z = -10;
 
-    go2->GetTransform()->GetScale()->y *= 1000;
-    go2->GetTransform()->GetScale()->x *= 1000;
+    go2->GetTransform()->GetScale()->y *= 500;
+    go2->GetTransform()->GetScale()->x *= 500;
 
     std::cout << go2->GetTransform()->GetScale()->y << std::endl;
     
