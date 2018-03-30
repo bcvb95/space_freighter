@@ -16,11 +16,13 @@ public:
 
     glm::vec3 GetPos() {return pos;}
     glm::vec2 GetTexCoord() {return texCoord;}
+    glm::vec3 GetNormal() {return normal;}
 
 protected:
 private:
     glm::vec3 pos;
     glm::vec2 texCoord;
+    glm::vec3 normal;
 };
 
 class Mesh
@@ -50,6 +52,7 @@ class Mesh
         {
             POSITION_VB,
             TEXCOORD_VB,
+            NORMALS_VB,
             NUM_BUFFERS
         };
 

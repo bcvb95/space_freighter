@@ -6,9 +6,9 @@
 #include <glm/gtx/transform.hpp>
 
 #define FOV 70.0f
-#define ZNEAR 0.1f
+#define ZNEAR_ORTHO -1.0f
+#define ZNEAR_PERSP 0.1f
 #define ZFAR 1000.0f
-
 
 class Camera 
 {
@@ -17,9 +17,9 @@ public:
     {
         m_camType=type;
         if (type==1)
-            m_perspective = glm::perspective(FOV, width/height, ZNEAR, ZFAR);
+            m_perspective = glm::perspective(FOV, width/height, ZNEAR_PERSP, ZFAR);
         else
-            m_ortho = glm::ortho(0.0f, width , height, 0.0f, ZNEAR, ZFAR);
+            m_ortho = glm::ortho(0.0f, width , height, 0.0f, ZNEAR_ORTHO, ZFAR);
 
         m_pos = pos;
         m_forward = glm::vec3(0,0,-1);
@@ -33,7 +33,7 @@ public:
         m_zoom = zoom;
         float min = -pow(10, m_zoom);
         float max = pow(10, m_zoom);
-        m_ortho = glm::ortho(min,max, min, max, ZNEAR, ZFAR);
+        m_ortho = glm::ortho(min,max, min, max, ZNEAR_ORTHO, ZFAR);
     }
 
     void Zoom(float zoomVal) {m_zoom += zoomVal; this->SetZoom(m_zoom);}

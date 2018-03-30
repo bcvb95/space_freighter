@@ -8,11 +8,19 @@ Sprite::Sprite() {};
 
 Sprite::Sprite(const std::string& tex_file, const std::string& shader_file)
 {
-    Vertex square_vertices[] = { Vertex(glm::vec3(-1.0f, -1.0f, 0.0f), glm::vec2(0.0f, 1.0f)), 
-                      Vertex(glm::vec3(-1.0f, 1.0f, 0.0f), glm::vec2(0.0f, 0.0f)),  
-                      Vertex(glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(1.0f, 0.0f)),
-                      Vertex(glm::vec3(1.0f, -1.0f, 0.0f), glm::vec2(1.0f, 1.0f))};
 
+    glm::vec3 v2_pos(-1.0f, 1.0f, 0.0f);
+    glm::vec3 v1_pos(-1.0f, -1.0f, 0.0f);
+    glm::vec3 v4_pos(1.0f, 1.0f, 0.0f);
+    glm::vec3 v3_pos(1.0f, -1.0f, 0.0f);
+
+    
+    Vertex square_vertices[] = { Vertex(v1_pos, glm::vec2(0.0f, 1.0f)), 
+                      Vertex(v2_pos, glm::vec2(0.0f, 0.0f)),  
+                      Vertex(v3_pos, glm::vec2(1.0f, 1.0f)),
+                      Vertex(v4_pos, glm::vec2(1.0f, 0.0f))};
+    
+    unsigned int indxs[] = {0,1,2,0,2,3};
 
     m_mesh = new Mesh(square_vertices,(sizeof(square_vertices)/sizeof(square_vertices[0])));
     m_texture = new Texture(tex_file);  

@@ -23,11 +23,13 @@ Display::Display(int width, int height, const std::string& title)
 		std::cerr << "Glew failed to initialize!" << std::endl;
     }
 
-	glEnable(GL_DEPTH_TEST);
 	glCullFace(GL_FRONT);
-	//glEnable(GL_CULL_FACE);
 
-	// make SDL_GL context from window and find make the window the current SDL context.
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND); 
+	glEnable(GL_CULL_FACE);
+	glDisable(GL_CULL_FACE);
+	//  make SDL_GL context from window and find make the window the current SDL context.
 	SDL_GL_MakeCurrent(m_window, m_glContext);
 }
 

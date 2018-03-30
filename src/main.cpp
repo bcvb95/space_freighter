@@ -12,13 +12,11 @@ int main(int argc, char** argv)
 {
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
 
-    Camera* cam = new Camera(glm::vec3(0,0,2), (float)WIDTH, (float)HEIGHT, 0);
+    Camera* cam = new Camera(glm::vec3(0,0,3), (float)WIDTH, (float)HEIGHT, 0);
 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", "../res/tex.png", "../res/basicShader");
     DrawableGameObject* go2 = new DrawableGameObject ("GO 2", "../res/tex.png", "../res/basicShader");
 
-    std::cout << go2->GetTransform()->GetScale()->y << std::endl;
-    
     std::cout << "Hello world!\n";
 
     SDL_Event e;
@@ -35,13 +33,13 @@ int main(int argc, char** argv)
                 isRunning = false;
             else if (e.type == SDL_KEYDOWN)
             {
-                switch(e.key.keysym.sym)
+                switch(e.key.keysym.sym) // camera controls
                 {
                     case SDLK_w:
-                        cam->GetPos()->y -= 0.1;
+                        cam->GetPos()->y += 0.1;
                         break;
                     case SDLK_s:
-                        cam->GetPos()->y += 0.1;
+                        cam->GetPos()->y -= 0.1;
                         break;
                     case SDLK_a:
                         cam->GetPos()->x -= 0.1;
