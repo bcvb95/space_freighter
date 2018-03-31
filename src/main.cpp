@@ -12,10 +12,11 @@ int main(int argc, char** argv)
 {
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
 
-    Camera* cam = new Camera(glm::vec3(0,0,3), (float)WIDTH, (float)HEIGHT, 0);
+    Camera* cam = new Camera(glm::vec3(0,0,10), (float)WIDTH, (float)HEIGHT, 0);
 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", "../res/tex.png", "../res/basicShader");
-    DrawableGameObject* go2 = new DrawableGameObject ("GO 2", "../res/tex.png", "../res/basicShader");
+    go1->GetTransform()->GetPos()->z -= 5;
+    DrawableGameObject* go2 = new DrawableGameObject ("GO 2", "../res/img1.png", "../res/basicShader");
 
     std::cout << "Hello world!\n";
 
@@ -57,9 +58,10 @@ int main(int argc, char** argv)
             }
         }
 
-        go2->GetTransform()->GetRot()->y = sin(counter);
+        go1->GetTransform()->GetPos()->x = cos(counter)*2;
+        
         go2->DrawSprite(cam);
-
+        go1->DrawSprite(cam);
 
         counter += 0.01;
 

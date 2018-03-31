@@ -9,12 +9,14 @@ SET(CMAKE_CXX_FLAGS "-std=c++11")
 
 set(CMAKE_MODULE_PATH "/usr/local/lib/x86_64-linux-gnu/cmake/" "/usr/lib/x86_64-linux-gnu/cmake/")
 
-include_directories(include/graphics include/core_engine include/simulation)
 
+
+include_directories(include/graphics include/core_engine include/simulation include/SOIL/inc) #include/SOIL/inc/SOIL)
 add_subdirectory(src)
+add_subdirectory(include/SOIL)
 
 add_executable(space_freighter src/main.cpp)
-target_link_libraries(space_freighter core_lib graphic_lib)
+target_link_libraries(space_freighter core_lib graphic_lib soil)
 
 add_executable(simulation_test src/simulation/main.cpp)
 target_link_libraries(simulation_test simulation_lib)

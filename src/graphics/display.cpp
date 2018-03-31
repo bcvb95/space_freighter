@@ -24,11 +24,9 @@ Display::Display(int width, int height, const std::string& title)
     }
 
 	glCullFace(GL_FRONT);
-
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND); 
 	glEnable(GL_CULL_FACE);
-	glDisable(GL_CULL_FACE);
 	//  make SDL_GL context from window and find make the window the current SDL context.
 	SDL_GL_MakeCurrent(m_window, m_glContext);
 }

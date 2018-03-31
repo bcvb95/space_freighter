@@ -28,16 +28,24 @@ Mesh::Mesh(Vertex* vertices, unsigned int numVertices)
 
     glm::vec3 v1 = positions[1] - positions[0];
     glm::vec3 v2 = positions[2] - positions[0];
-    glm::vec3 v3 = positions[2] - positions[0];
-    glm::vec3 v4 = positions[3] - positions[0];
-    
     glm::vec3 norm1 = glm::normalize(glm::cross(v1,v2));
+    
+    glm::vec3 v3 = positions[0] - positions[1];
+    glm::vec3 v4 = positions[3] - positions[1];
     glm::vec3 norm2 = glm::normalize(glm::cross(v3,v4));
 
+    glm::vec3 v5 = positions[0] - positions[2];
+    glm::vec3 v6 = positions[3] - positions[2];
+    glm::vec3 norm3 = glm::normalize(glm::cross(v5,v6));
+    
+    glm::vec3 v7 = positions[2] - positions[3];
+    glm::vec3 v8 = positions[1] - positions[3];
+    glm::vec3 norm4 = glm::normalize(glm::cross(v7, v8));
+
     normals[0] += norm1;
-    normals[1] += norm1;
-    normals[2] += norm2;
-    normals[3] += norm2;
+    normals[1] += norm2;
+    normals[2] += norm3;
+    normals[3] += norm4;
 
     for(unsigned int i = 0; i < positions.size(); i++)
         normals[i] = glm::normalize(normals[i]);

@@ -8,7 +8,7 @@ class Texture
 {
 public:
     Texture(void);
-	Texture(const std::string& fileName);
+	Texture(const char* fileName);
 	Texture(const Texture& texture) {};
 
 	void Bind();

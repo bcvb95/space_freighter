@@ -13,7 +13,7 @@ class Sprite
 {
 public:
     Sprite();
-    Sprite(const std::string& tex_file, const std::string& shader_file);
+    Sprite(const char* tex_file, const std::string& shader_file);
     Sprite(const Sprite& other) {};
     virtual ~Sprite();
 
@@ -21,7 +21,7 @@ public:
     Texture* GetTexture() {return m_texture;}
     Shader* GetShader() {return m_shader;}
 
-    void Draw(const Transform* transform, const Camera* cam); 
+    void Draw(const Transform* transform, Camera* cam ); 
 
     void SetTexture(Texture* tex)
     {

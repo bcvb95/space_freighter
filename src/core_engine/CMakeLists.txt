@@ -6,4 +6,4 @@ add_library(core_lib
             sprite.cpp
 )   
 
-link_libraries(core_lib graphic_lib)
+#link_libraries(core_lib graphic_lib)

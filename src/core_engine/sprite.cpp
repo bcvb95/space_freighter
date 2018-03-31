@@ -6,7 +6,7 @@
 
 Sprite::Sprite() {};
 
-Sprite::Sprite(const std::string& tex_file, const std::string& shader_file)
+Sprite::Sprite(const char* tex_file, const std::string& shader_file)
 {
 
     glm::vec3 v2_pos(-1.0f, 1.0f, 0.0f);
@@ -34,10 +34,11 @@ Sprite::~Sprite()
     delete m_shader;
 }
 
-void Sprite::Draw(const Transform* transform,const Camera* cam)
-{
+void Sprite::Draw(const Transform* transform,Camera* cam)
+{   
     m_shader->Bind();
     m_texture->Bind();
     m_shader->Update(transform, cam);
+    //glEnable(GL_TEXTURE_2D);
     m_mesh->Draw();
 }

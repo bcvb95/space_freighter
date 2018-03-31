@@ -17,7 +17,6 @@ add_library(graphic_lib
             display.cpp
             mesh.cpp
             shader.cpp
-            stb_image.c
             texture.cpp
 )   
 

@@ -31,7 +31,7 @@ protected:
 class DrawableGameObject : public GameObject
 {
     public:
-        DrawableGameObject(const std::string& go_name, const std::string& tex_file, const std::string& shader_file) :  GameObject(go_name)
+        DrawableGameObject(const std::string& go_name, const char* tex_file, const std::string& shader_file) :  GameObject(go_name)
         {
             m_sprite = new Sprite(tex_file, shader_file);
         };
