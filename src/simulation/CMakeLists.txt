@@ -3,6 +3,7 @@
 add_library( simulation_lib
              mainsim.cpp
              simutils.cpp
+             generator.cpp
              universe.cpp
              world.cpp
 )

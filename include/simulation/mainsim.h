@@ -1,6 +1,7 @@
 #ifndef MAINSIM_H
 #define MAINSIM_H
 
+#include "generator.h"
 #include "universe.h"
 #include "SimConstants.h"
 #include "simutils.h"
@@ -20,12 +21,16 @@ namespace Simulation
       MainSim(void);  // Constructor
       ~MainSim(void); // Destructor
 
-      void Init(unsigned int seed);
+      void Init(unsigned int seed, int universe_size, int stepsize);
+      void Update();
 
       void DisplayWorlds();
+      void SetStepSize(int newstepsize) { this->stepsize = newstepsize; }
     private:
-      Universe* universe;
+      Generator* generator = NULL;
+      Universe* universe = NULL;
       std::mt19937* m_mtgen; // Mersenne Twister Engine for random numbers
+      int stepsize;
   };
 
 

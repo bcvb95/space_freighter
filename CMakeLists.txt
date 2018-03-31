@@ -6,6 +6,7 @@ project (space_freighter)
 SET(CMAKE_C_COMPILER "/usr/bin/gcc")
 SET(CMAKE_CXX_COMPILER "/usr/bin/g++")
 SET(CMAKE_CXX_FLAGS "-std=c++11")
+add_definitions("-ggdb3")
 
 set(CMAKE_MODULE_PATH "/usr/local/lib/x86_64-linux-gnu/cmake/" "/usr/lib/x86_64-linux-gnu/cmake/")
 

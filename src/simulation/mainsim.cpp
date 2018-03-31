@@ -4,38 +4,53 @@ namespace Simulation
 {
   // Constructor
   MainSim::MainSim(void) {
-    std::cout << "Constructing main simulation." << std::endl; 
-    universe = new Universe();
   }
   
   // Destructor
   MainSim::~MainSim(void) {
-    std::cout << "Destructing main simulation." << std::endl;
-    delete universe;
+    delete this->generator;
+    delete this->universe;
+    delete this->m_mtgen;
   }
 
-  void MainSim::Init(unsigned int seed) {
-    srand(seed);
+  void MainSim::Init(unsigned int seed, int universe_size, int _stepsize) {
+    srand(seed); // for rand()
     this->m_mtgen = new std::mt19937(seed);
-    this->universe->Init(949, this->m_mtgen);
+    this->generator = new Generator(this->m_mtgen);
+    this->universe = new Universe(universe_size);
+    this->generator->GenerateUniverse(this->universe);
+
+    this->stepsize = _stepsize;
+  }
+
+  void MainSim::Update() { 
+    this->universe->Update(this->stepsize);
   }
 
   void MainSim::DisplayWorlds () {
+    if (this->universe == NULL) {
+      throw ReferencedUninitialisedValueException((char*)"DisplayWorlds was called before universe was initialised");
+    }
     World** worlds = this->universe->getWorlds();
-    unsigned long long maxpop = std::numeric_limits<unsigned long long>::min();
-    unsigned long long minpop = std::numeric_limits<unsigned long long>::max();
+    if (worlds == NULL) {
+      throw ReferencedUninitialisedValueException((char*)"DisplayWorlds was called before worlds were initialised");
+    }
+    unsigned long maxpop = std::numeric_limits<unsigned long>::min();
+    unsigned long minpop = std::numeric_limits<unsigned long>::max();
     for (int i=0; i < this->universe->getSize(); i++) {
       printf("World %d: %s\n", worlds[i]->getID(), worlds[i]->getName());
-      unsigned long long* pop = worlds[i]->getPopulation();
+      unsigned long* popu = worlds[i]->getPopulation();
       for (unsigned int i = 0; i < SPECIES_MAX ; i++) {
-        if (pop[i] > 0) {
-          printf("- %s population:  %llu\n", SpeciesToString(static_cast<Species>(i)), pop[i]);
-          if (pop[i] > maxpop) { maxpop = pop[i]; }
-          if (pop[i] < minpop) { minpop = pop[i]; }
+        if (popu[i] > 0) {
+          printf("- %s population:  %lu\n", SpeciesToString(static_cast<Species>(i)),popu[i]);
+          if (popu[i] > maxpop) { maxpop = popu[i]; }
+          if (popu[i] < minpop) { minpop = popu[i]; }
         }
       }
+      if (worlds[i]->getTradehubCount() > 0) 
+        printf("Tradehubs: %d\nSpacestations: %d\n", worlds[i]->getTradehubCount(), worlds[i]->getSpacestationCount());
     }
-    printf("Lowest population: %llu\nHighest population: %llu\n", minpop, maxpop);
+    printf("Lowest population: %lu\nHighest population: %lu\n", minpop, maxpop);
   }
   
 }

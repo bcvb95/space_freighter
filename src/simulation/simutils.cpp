@@ -11,7 +11,7 @@ namespace Simulation {
     for (int i=0; i < range_len; i++) {
       range[i] = i + range_min;
     }
-    int ints_remain = n;
+    int ints_remain = range_len;
     int rand_int;
     for (int i=0; i < n; i++) {
       rand_int = rand() % ints_remain;

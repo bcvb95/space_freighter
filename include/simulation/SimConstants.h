@@ -8,8 +8,11 @@ namespace Simulation {
   // Population
   enum Species { Human, Orcish, Elvish, Reptillian };
   static const unsigned int SPECIES_MAX = 4;
-  static const long double HIGH_POPULATION = 1000;
-  static const long double MED_POPULATION  = 100;
-  static const long double LOW_POPULATION  = 100;
+  static const long HIGH_POPULATION = 1234908;
+  static const long MED_POPULATION  = 125922;
+  static const long LOW_POPULATION  = 15312;
+
+  static const long POP_PER_TRADEHUB     = 100000;
+  static const long POP_PER_SPACESTATION = 100000000;
 }
 #endif
