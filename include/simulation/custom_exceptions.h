@@ -19,26 +19,44 @@ namespace Simulation {
     public:
       IllegalArgumentException(char* msg) : m_msg(msg) {}
       const char* what() const throw() { 
-        char* msg_buf = (char*) malloc(sizeof(char)*50);
+        char* msg_buf = (char*) malloc(sizeof(char)*64);
         sprintf(msg_buf, "Illegal Argument: %s", m_msg); 
         return msg_buf;
       }
+  };
+
+  class ReferencedUninitialisedValueException: public SimulationException {
+    private:
+      char* m_msg;
+    public:
+      ReferencedUninitialisedValueException(char* msg) : m_msg(msg) {}
+      const char* what() const throw() { 
+        char* msg_buf = (char*) malloc(sizeof(char)*64);
+        sprintf(msg_buf, "Referenced uninitialised value: %s", m_msg); 
+        return msg_buf;
+      }
+  };
+
+  // Generator Exceptions
+  class GeneratorException: public std::exception { 
+    public: 
+      virtual const char* what() const throw() { return "Basic Generator Exception.";} 
+  };
+
+  class WorldNameFileException: public GeneratorException {
+    public:
+      const char* what() const throw() { return "Error opening world name file."; }
+  };
+
+  class NoMoreUniqueNamesException: public GeneratorException {
+    public: 
+      const char* what() const throw() { return "No more unique world names."; }
   };
 
   // Universe Exceptions
   class UniverseException: public std::exception { 
     public: 
       virtual const char* what() const throw() { return "Basic Universe Exception.";} 
-  };
-
-  class WorldNameFileException: public UniverseException {
-    public:
-      const char* what() const throw() { return "Error opening world name file."; }
-  };
-
-  class NoMoreUniqueNamesException: public UniverseException {
-    public: 
-      const char* what() const throw() { return "No more unique world names."; }
   };
 
   class IllegalMaxWorldsException: public UniverseException {

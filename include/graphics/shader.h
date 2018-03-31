@@ -17,7 +17,7 @@ class Shader
         void Bind();
         virtual ~Shader();
 
-        void Update(const Transform* transform, const Camera* cam);
+        void Update(const Transform* transform, Camera* cam);
 
     protected:
     private:
@@ -29,9 +29,21 @@ class Shader
 
         enum 
         {
-            TRANSFORM_U,
-
-            NUM_UNIFORMS
+            // Vertex shader uniform handles
+            MODEL_U,    // model transform matrix
+            PROJMAT_U,  // model view proj matrix
+    
+            // Fragment shader uniform handles
+            CAMPOS_U,   // camera pos in worldspace             
+            LIGHTPOS_U, // lightpos in worldspace
+            LIGHTCOL_U, // light color
+            
+            MATEMIS_U,  // material emmisive 
+            MATDIFFUSE_U,// material diffuse
+            MATSPEC_U,   // materal specular
+            MATSHINE_U,  // material shiniess
+            MATAMBI_U,
+            NUM_UNIFORMS 
         };
 
         GLuint m_program;

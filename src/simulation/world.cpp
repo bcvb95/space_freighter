@@ -1,6 +1,8 @@
 #include "world.h"
 #include <string.h>
 #include <stdlib.h>
+#include <iostream>
+#include "simutils.h"
 
 namespace Simulation {
   
@@ -12,13 +14,19 @@ namespace Simulation {
     free((void*)this->name);
   }
 
-  void World::Init(const unsigned char* _name, unsigned long long _popu_count[],
+  void World::Init(const unsigned char* _name, unsigned long _popu_count[],
                    unsigned int _tradehub_count, unsigned int _spacestation_count) 
   {
     this->name = _name;
-    memcpy(this->popu_count, _popu_count, sizeof(unsigned int)*SPECIES_MAX);
+    for (int i=0; i < SPECIES_MAX; i++) {
+      this->popu_count[i] = _popu_count[i];
+    }
     this->tradehub_count = _tradehub_count;
     this->spacestation_count = _spacestation_count;
+  }
+
+  void World::Update(int stepsize) {
+    
   }
 
 }
