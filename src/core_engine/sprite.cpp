@@ -4,11 +4,8 @@
 #include <glm/glm.hpp>
 #include <sprite.h>
 
-Sprite::Sprite() {};
-
-Sprite::Sprite(const char* tex_file, const std::string& shader_file)
-{
-
+Sprite::Sprite(Texture* _texure, Shader* _shader)//const char* tex_file, const std::string& shader_file)
+{ 
     glm::vec3 v2_pos(-1.0f, 1.0f, 0.0f);
     glm::vec3 v1_pos(-1.0f, -1.0f, 0.0f);
     glm::vec3 v4_pos(1.0f, 1.0f, 0.0f);
@@ -23,15 +20,13 @@ Sprite::Sprite(const char* tex_file, const std::string& shader_file)
     unsigned int indxs[] = {0,1,2,0,2,3};
 
     m_mesh = new Mesh(square_vertices,(sizeof(square_vertices)/sizeof(square_vertices[0])));
-    m_texture = new Texture(tex_file);  
-    m_shader = new Shader(shader_file);
+    m_texture = _texure;  
+    m_shader = _shader;
 }
 
 Sprite::~Sprite() 
 {
     delete m_mesh;
-    delete m_texture;
-    delete m_shader;
 }
 
 void Sprite::Draw(const Transform* transform,Camera* cam)

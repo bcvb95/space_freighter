@@ -16,11 +16,23 @@ int main(int argc, char** argv)
     Clock clock;
 
 
+<<<<<<< HEAD
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", "../res/tex.png", "../res/basicShader");
     DrawableGameObject* go2 = new DrawableGameObject ("GO 2", "../res/trans.png", "../res/basicShader");
     go1->GetTransform()->GetScale()->x *= 10;
     go1->GetTransform()->GetScale()->y *= 10;
     go2->GetTransform()->GetPos()->z = 1;
+=======
+    Shader* shader1 = new Shader("../res/basicShader");
+    Texture* texture2 = new Texture("../res/tex.png");
+    Texture* texture2 = new Texture("../res/img1.png");
+
+    DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture1, shader1);  
+    DrawableGameObject* go2 = new DrawableGameObject("GO 2", texture2, shader1);  
+    go1->GetTransform()->GetScale()->x *= 10;
+    go1->GetTransform()->GetScale()->y *= 10;
+    go2->GetTransform()->GetPos()->y = 0;
+>>>>>>> b5ef1ec1310d6aefb8825def340673b2fc8e831d
 
     std::cout << "Hello world!\n";
 
@@ -66,6 +78,11 @@ int main(int argc, char** argv)
             }
         }
         //std::cout<< "Cam zoom: " << *cam->GetZoom() << std::endl;
+<<<<<<< HEAD
+=======
+        cam->UpdateWithZoom();
+        go1->GetTransform()->GetRot()->x = cos(counter)*2;
+>>>>>>> b5ef1ec1310d6aefb8825def340673b2fc8e831d
         
         go1->DrawSprite(cam);
         go2->DrawSprite(cam);
@@ -82,6 +99,11 @@ int main(int argc, char** argv)
     delete go2;
     delete cam;
     delete window;
+
+    // delete texs and shaders
+    delete shader1;
+    delete texture1;
+    delete texture2;
 
     return 0;
 }

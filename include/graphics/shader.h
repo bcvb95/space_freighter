@@ -10,9 +10,7 @@
 class Shader 
 {
     public:
-        Shader(void);
         Shader(const std::string& filename);
-        Shader(const Shader& other){}; 
 
         void Bind();
         virtual ~Shader();

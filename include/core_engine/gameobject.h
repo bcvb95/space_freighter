@@ -9,7 +9,6 @@
 class GameObject
 {
 public:
-    GameObject() {}
     GameObject(const std::string& go_name) : m_name(go_name) 
     {
         m_transform = new Transform();
@@ -31,12 +30,12 @@ protected:
 class DrawableGameObject : public GameObject
 {
     public:
-        DrawableGameObject(const std::string& go_name, const char* tex_file, const std::string& shader_file) :  GameObject(go_name)
+        DrawableGameObject(const std::string& go_name, Texture* _texture, Shader* _shader) :  GameObject(go_name)
         {
-            m_sprite = new Sprite(tex_file, shader_file);
+            m_sprite = new Sprite(_texture, _shader);
         };
         
-        virtual ~DrawableGameObject() 
+        ~DrawableGameObject() 
         {
             delete m_sprite;
         }
