@@ -1,14 +1,4 @@
 build/
 bin/
-CMakeFiles/
-src/graphics/CMakeFiles/*
-src/core_engine/CMakeFiles/*
-src/*.cmake
-*.json
+.vscode/
 *.cmake
-*.make
-*.marks
-*.a
-*.includecache
-*.o
-Makefile
