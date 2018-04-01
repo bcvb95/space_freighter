@@ -22,7 +22,7 @@ Display::Display(int width, int height, const std::string& title)
     {
 		std::cerr << "Glew failed to initialize!" << std::endl;
     }
-
+	glViewport(0,0, width, height);
 	glCullFace(GL_FRONT);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND); 

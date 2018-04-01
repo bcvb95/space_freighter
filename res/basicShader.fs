@@ -31,8 +31,10 @@ void main()
     vec4 R = reflect(-L, N);
     float RdotV = max(dot(R,V), 0);
     float NdotH = max(dot(N,H), 0);
-    vec4 Specular = pow(RdotV, matShiny) * lightColor * matSpecular;
+    vec4 Specular = pow(NdotH, matShiny) * lightColor * matSpecular;
+    // sum up the effects
     vec4 effect = (Emmissive + ambient + Diffuse + Specular);
+    // set the fragment color
     gl_FragColor = effect * texture2D(diffuseSampler, texCoord0); 
 
 }

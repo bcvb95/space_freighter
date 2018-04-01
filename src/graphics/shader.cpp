@@ -94,8 +94,8 @@ void Shader::Update(const Transform* transform, Camera* cam)
 
     // uniforms for lighting
     glm::vec4 cam_pos = glm::vec4(*cam->GetPos(), 1); // get camera position
-    glm::vec4 light_pos = glm::vec4(0.0f,-20.0f, 10.0f,1.0f);         // set lighting position // NEEDS TO BE CHANGED //
-    glm::vec4 light_col = glm::vec4(0.0f,0.0f,0.0f,1.0f); // color of light (RED)
+    glm::vec4 light_pos = glm::vec4(0.0f,100.0f, 0.0f,1.0f);         // set lighting position // NEEDS TO BE CHANGED //
+    glm::vec4 light_col = glm::vec4(1.0f,1.0f,1.0f,1.0f); // color of light (RED)
 
     glUniform4fv(m_uniforms[CAMPOS_U], 4, glm::value_ptr(cam_pos));
     glUniform4fv(m_uniforms[LIGHTPOS_U], 4, glm::value_ptr(light_pos));

@@ -16,27 +16,35 @@ public:
     Camera(const glm::vec3& pos, float width, float height, int type)
     {
         m_camType=type;
+        m_aspect = width / height;
+        m_width = width;
+        m_height = height;
+
         if (type==1)
-            m_perspective = glm::perspective(FOV, width/height, ZNEAR_PERSP, ZFAR);
+            m_perspective = glm::perspective(FOV, m_aspect, ZNEAR_PERSP, ZFAR);
         else
-            m_ortho = glm::ortho(0.0f, width , height, 0.0f, ZNEAR_ORTHO, ZFAR);
+            this->SetZoom(1); // sets the orthographic matrix with the zoom value
+            this->UpdateWithZoom();
 
         m_pos = pos;
         m_forward = glm::vec3(0,0,-1);
         m_up = glm::vec3(0,1,0);
-        m_zoom = 1;
-        SetZoom(1);
     }
 
-    void SetZoom(float zoom)
+    void UpdateWithZoom()
     {
-        m_zoom = zoom;
         float min = -pow(10, m_zoom);
         float max = pow(10, m_zoom);
-        m_ortho = glm::ortho(min,max, min, max, ZNEAR_ORTHO, ZFAR);
+        if (m_width >= m_height){
+            m_ortho = glm::ortho(min*m_aspect,max*m_aspect, min, max, ZNEAR_ORTHO, ZFAR);
+        }else {
+            m_ortho = glm::ortho(min,max, min/m_aspect, max/m_aspect, ZNEAR_ORTHO, ZFAR);
+        }
+        
     }
 
-    void Zoom(float zoomVal) {m_zoom += zoomVal; this->SetZoom(m_zoom);}
+    void SetZoom(float zoomVal) {m_zoom = zoomVal;}
+    float* GetZoom() {return &m_zoom;}
 
     inline glm::mat4 GetViewProjectionMatrix() const 
     {
@@ -52,6 +60,9 @@ protected:
 private:
     int m_camType;
     float m_zoom;
+    float m_aspect;
+    float m_width;
+    float m_height;
 
     glm::mat4 m_perspective;
     glm::mat4 m_ortho;

@@ -1,3 +1,14 @@
 build/
 bin/
+CMakeFiles/
+src/*.cmake
 *.json
+*.cmake
+*.make
+*.marks
+*.a
+*.includecache
+*.o
+Makfile
+src/graphics/CMakeFiles/*
+src/core_engine/CMakeFiles/*
