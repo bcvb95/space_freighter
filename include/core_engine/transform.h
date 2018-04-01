@@ -37,7 +37,7 @@ class Transform
 		glm::mat4 rotMat = rotX * rotY * rotZ;
 
 
-		return scaleMat * posMat * rotMat; 
+		return posMat * rotMat * scaleMat; 
     }
     protected:
     private:
