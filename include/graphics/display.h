@@ -22,4 +22,18 @@ private:
 	SDL_GLContext m_glContext;
 };
 
+struct Clock
+{
+	uint32_t last_tick_time = 0;
+	float delta_time = 0;
+
+	void tick()
+	{
+		uint32_t tick_time = SDL_GetTicks();
+		delta_time = (float)(tick_time - last_tick_time);
+		last_tick_time = tick_time;
+	}
+};
+
+
 #endif

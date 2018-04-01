@@ -26,6 +26,7 @@ Display::Display(int width, int height, const std::string& title)
 	glCullFace(GL_FRONT);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND); 
+ 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_LINE_SMOOTH);
 	//  make SDL_GL context from window and find make the window the current SDL context.
