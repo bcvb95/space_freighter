@@ -21,5 +21,11 @@ namespace Simulation {
 
   static const long POP_PER_TRADEHUB     = 10000;
   static const long POP_PER_SPACESTATION = 100000;
+
+  // Planet orbits
+  static const int ORBIT_BASESIZE = 5;
+  static const int ORBIT_BASESPEED = 1;
+  static const int ORBIT_INC_X = 5;
+  static const int ORBIT_INC_Y = 5;
 }
 #endif

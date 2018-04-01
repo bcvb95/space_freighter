@@ -2,19 +2,19 @@
 #include "mainsim.h"
 #include "custom_exceptions.h"
 
-void ExtractNumber(char* str, int* res);
+void ExtractNumber(char*, int*);
 
 int main (int argc, char *argv[]) {
   std::cout << "Starting up simulation" << std::endl;
 
   unsigned int simulation_seed = 123454321;
   int universe_size = 949;
-  int stepsize = 5;
+  int delta_time = 5;
 
   Simulation::MainSim* sim;
   try {
     sim = new Simulation::MainSim();
-    sim->Init(simulation_seed, universe_size, stepsize);
+    sim->Init(simulation_seed, universe_size, delta_time);
   } 
   catch ( const Simulation::GeneratorException &e ) {
     std::cout << "Error in Generator while starting up: " << e.what() << std::endl;
@@ -31,20 +31,24 @@ int main (int argc, char *argv[]) {
   static int inputsize = 100;
   char input[inputsize];
   bool isRunning = true;
-  int number;
-  
+  int number, displaysteps;
+  bool readflags, pop_flag, pos_flag;
   std::cout << "Running simulation" << std::endl;
   while (isRunning) {
     for (int i=0; i < inputsize; i++) { input[i] = 0; }
-    std::cout << "Enter 'cX' to update simulation X steps. Enter 'd' to display worlds. Enter 'q' to quit." << std::endl;
+    std::cout << "Enter: 'c' to update simulation. 'd' to display worlds. 'h' for help (extra flags etc.). 'q' to quit." << std::endl;
     std::cin >> input;
     switch (input[0]) {
       case 'q':
         isRunning = false;
         break;
+      case 'h':
+        std::cout << "--- HELP ---" << std::endl;
+        std::cout << "Updating Simulator with 'c':" << std::endl;
+        break;
       case 'c':
         ExtractNumber(input, &number);
-        if (number != 0) {
+        if (number != '\0') {
           std::cout << "Updating " << number << " times." << std::endl;
           for (int i = 0; i < number; i++) {
             sim->Update();
@@ -57,7 +61,20 @@ int main (int argc, char *argv[]) {
         
         break;
       case 'd':
-        sim->DisplayWorlds();
+        readflags = pop_flag = pos_flag = false;
+        displaysteps = 0;
+        ExtractNumber(input, &displaysteps);
+        for (int i=1; i<inputsize; i++) {
+          if (input[i] == '\0') { break; }
+          if (readflags) {
+            if (input[i] == 'p') { pop_flag = true; }
+            else if (input[i] == 'w') { pos_flag = true; }
+            else if (input[i] == ' ') { break; }
+            else { std::cout << "Unknow flag -" << input[i] << std::endl; }
+          }
+          else if (input[i] == '-') { readflags = true; }
+        }
+        sim->DisplayWorlds(pop_flag, displaysteps, pos_flag);
         break;
       default:
         std::cout << "Command not understood" << std::endl;

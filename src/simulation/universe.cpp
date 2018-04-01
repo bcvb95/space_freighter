@@ -24,9 +24,9 @@ namespace Simulation {
    
   }
 
-  void Universe::Update(int stepsize) {
+  void Universe::Update(int dt) {
     for (int i = 0; i < this->solar_system_count; i++) {
-      solar_systems[i]->Update(stepsize);
+      solar_systems[i]->Update(dt);
     }
   }
 

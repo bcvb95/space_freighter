@@ -16,7 +16,7 @@ namespace Simulation
       ~Universe(void);
 
       void Init();
-      void Update(int step);
+      void Update(int dt);
 
       void AddSolarSystem (SolarSystem* solarsystem); 
 

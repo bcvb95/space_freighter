@@ -15,23 +15,23 @@ namespace Simulation
     delete this->m_mtgen;
   }
 
-  void MainSim::Init(unsigned int seed, int universe_size, int _stepsize) {
+  void MainSim::Init(unsigned int seed, int universe_size, int _delta_time) {
     srand(seed); // for rand()
     this->m_mtgen = new std::mt19937(seed);
     this->generator = new Generator(this->m_mtgen);
     this->universe = new Universe(universe_size);
     this->generator->GenerateUniverse(this->universe);
 
-    this->stepsize = _stepsize;
+    this->delta_time = _delta_time;
   }
 
   void MainSim::Update() { 
-    this->universe->Update(this->stepsize);
+    this->universe->Update(this->delta_time);
   }
 
   void DisplayWorld(World* world, unsigned long* maxpop, unsigned long* minpop);
 
-  void MainSim::DisplayWorlds () {
+  void MainSim::DisplayWorlds (bool pop_flag, int steps, bool pos_flag) {
     if (this->universe == NULL) {
       throw ReferencedUninitialisedValueException((char*)"DisplayWorlds was called before universe was initialised");
     }
@@ -39,6 +39,8 @@ namespace Simulation
     unsigned long minpop = std::numeric_limits<unsigned long>::max();
     SolarSystem** solarsystems = this->universe->getSolarSystems();
     World** worlds;
+    int stepcount = 0;
+    char input[10];
     for (int i=0; i < this->universe->getSolarSystemCount(); i++) {
         worlds = solarsystems[i]->getWorlds(); 
         if (worlds == NULL) {
@@ -47,11 +49,24 @@ namespace Simulation
         glm::vec2 ss_pos = solarsystems[i]->getPosition();
         printf("\nSolar System %d - At position (%d, %d)\n", solarsystems[i]->getID(), static_cast<int>(ss_pos.x), static_cast<int>(ss_pos.y));
         for (int j=0; j < solarsystems[i]->getWorldCount(); j++) {
-            DisplayWorld(worlds[j], &maxpop, &minpop);
+            if (stepcount >= steps && steps != 0) {
+              stepcount = 0;
+              std::cout << "Enter 'd' to display next worlds. 'q' to quit." << std::endl;
+              std::cin >> input;
+              if (input[0] == 'q') { return; }
+            }
+            if ((pop_flag && worlds[j]->getIsPopulated()) || !pop_flag) {
+                DisplayWorld(worlds[j], &maxpop, &minpop);
+                if (pos_flag) {
+                    printf("World position: (%f, %f)\n", worlds[j]->getPosition().x, worlds[j]->getPosition().y);
+                }
+                stepcount++;
+            }
+            
         }
     }
     
-    printf("Lowest population: %lu\nHighest population: %lu\n", minpop, maxpop);
+    printf("\nLowest population: %lu\nHighest population: %lu\n\n", minpop, maxpop);
   }
 
   void DisplayWorld(World* world, unsigned long* maxpop, unsigned long* minpop) {

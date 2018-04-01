@@ -27,7 +27,7 @@ namespace Simulation {
     std::normal_distribution<float> population_dist(100, 40); 
     for (int i=0; i < this->universe->getWorldCount(); i++) {
       if (worlds_to_next_system <= 0) {
-        if (current_solar_system != 0) {
+        if (current_solar_system != 0) { // Init solar system AFTER adding worlds
           current_solar_system->Init(glm::vec2(position_dist(*this->m_mtgen), position_dist(*this->m_mtgen)));
         }
         current_solar_system = new SolarSystem(this->universe->getSolarSystemCount());
@@ -73,6 +73,7 @@ namespace Simulation {
     unsigned long pop_count[SPECIES_MAX] = {0};
     int is_populated = rand() % 10;
     if (is_populated == 0 && max_world_pop != 0) {
+      world->setIsPopulated(true);
       int rand_ints[different_species];
       RandomUniqueIntegers(different_species, 0, SPECIES_MAX-1, rand_ints);
       unsigned long pop_left = max_world_pop;
