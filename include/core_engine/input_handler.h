@@ -12,6 +12,7 @@ public:
     
     void HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning);
 
+
 protected:
 private:
     const Uint8* m_keystate;
