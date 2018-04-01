@@ -68,6 +68,19 @@ namespace Simulation {
     public:
       const char* what() const throw() { return "Size of universe greater than max size."; }
   };
+
+  class ValueExceedsMaximumException: public UniverseException {
+    private:
+      char* m_msg;
+    public:
+      ValueExceedsMaximumException(char* msg) : m_msg(msg) {}
+      
+      const char* what() const throw() { 
+        char* msg_buf = (char*) malloc(sizeof(char)*64);
+        sprintf(msg_buf, "Value exceeds defined maximum value: %s", m_msg); 
+        return msg_buf; 
+      }
+  };
 }
 
 
