@@ -1,7 +1,6 @@
 #include <mesh.h>
 #include <vector>
 #include <algorithm>
-#include <core_utils.h>
 
 Mesh::Mesh() {}
 

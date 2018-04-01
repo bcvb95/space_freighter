@@ -1,6 +1,8 @@
 build/
 bin/
 CMakeFiles/
+src/graphics/CMakeFiles/*
+src/core_engine/CMakeFiles/*
 src/*.cmake
 *.json
 *.cmake
@@ -9,6 +11,4 @@ src/*.cmake
 *.a
 *.includecache
 *.o
-Makfile
-src/graphics/CMakeFiles/*
-src/core_engine/CMakeFiles/*
+Makefile

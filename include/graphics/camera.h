@@ -13,38 +13,14 @@
 class Camera 
 {
 public:
-    Camera(const glm::vec3& pos, float width, float height, int type)
-    {
-        m_camType=type;
-        m_aspect = width / height;
-        m_width = width;
-        m_height = height;
+    Camera(const glm::vec3& pos, float width, float height, int type);
 
-        if (type==1)
-            m_perspective = glm::perspective(FOV, m_aspect, ZNEAR_PERSP, ZFAR);
-        else
-            this->SetZoom(1); // sets the orthographic matrix with the zoom value
-            this->UpdateWithZoom();
+    void UpdateWithZoom();
 
-        m_pos = pos;
-        m_forward = glm::vec3(0,0,-1);
-        m_up = glm::vec3(0,1,0);
-    }
-
-    void UpdateWithZoom()
-    {
-        float min = -pow(10, m_zoom);
-        float max = pow(10, m_zoom);
-        if (m_width >= m_height){
-            m_ortho = glm::ortho(min*m_aspect,max*m_aspect, min, max, ZNEAR_ORTHO, ZFAR);
-        }else {
-            m_ortho = glm::ortho(min,max, min/m_aspect, max/m_aspect, ZNEAR_ORTHO, ZFAR);
-        }
-        
-    }
+    glm::vec3* GetPos() {return &m_pos;}
+    float* GetZoom() {return &m_zoom;}
 
     void SetZoom(float zoomVal) {m_zoom = zoomVal;}
-    float* GetZoom() {return &m_zoom;}
 
     inline glm::mat4 GetViewProjectionMatrix() const 
     {
@@ -54,7 +30,6 @@ public:
             return m_perspective * glm::lookAt(m_pos, m_pos+m_forward, m_up);
     }
 
-    glm::vec3* GetPos() {return &m_pos;}
 
 protected:
 private:
@@ -67,6 +42,7 @@ private:
     glm::mat4 m_perspective;
     glm::mat4 m_ortho;
     glm::vec3 m_pos;
+    
     glm::vec3 m_forward;
     glm::vec3 m_up;
 };

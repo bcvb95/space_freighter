@@ -15,6 +15,7 @@ include_directories(
 
 add_library(graphic_lib 
             display.cpp
+            camera.cpp
             mesh.cpp
             shader.cpp
             texture.cpp
