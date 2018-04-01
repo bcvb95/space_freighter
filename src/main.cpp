@@ -70,11 +70,6 @@ int main(int argc, char** argv)
             }
         }
         //std::cout<< "Cam zoom: " << *cam->GetZoom() << std::endl;
-<<<<<<< HEAD
-=======
-        cam->UpdateWithZoom();
-        go1->GetTransform()->GetRot()->x = cos(counter)*2;
->>>>>>> b5ef1ec1310d6aefb8825def340673b2fc8e831d
         
         go1->DrawSprite(cam);
         go2->DrawSprite(cam);
