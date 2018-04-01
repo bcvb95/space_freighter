@@ -8,8 +8,6 @@ void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::str
 static std::string LoadShader(const std::string& filename);
 GLuint CreateShader(const std::string& text, GLenum shaderType);
 
-Shader::Shader() {}
-
 Shader::Shader(const std::string& filename)
 {
     m_program = glCreateProgram();

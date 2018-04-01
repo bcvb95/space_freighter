@@ -14,12 +14,15 @@ int main(int argc, char** argv)
 
     Camera* cam = new Camera(glm::vec3(0,0,1), (float)WIDTH, (float)HEIGHT, 0);
 
-    DrawableGameObject* go1 = new DrawableGameObject("GO 1", "../res/tex.png", "../res/basicShader");
-    DrawableGameObject* go2 = new DrawableGameObject ("GO 2", "../res/img1.png", "../res/basicShader");
+    Shader* shader1 = new Shader("../res/basicShader");
+    Texture* texture1 = new Texture("../res/tex.png");
+    Texture* texture2 = new Texture("../res/img1.png");
+
+    DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture1, shader1);  
+    DrawableGameObject* go2 = new DrawableGameObject("GO 2", texture2, shader1);  
     go1->GetTransform()->GetScale()->x *= 10;
     go1->GetTransform()->GetScale()->y *= 10;
     go2->GetTransform()->GetPos()->y = 0;
-
 
     std::cout << "Hello world!\n";
 
@@ -60,7 +63,7 @@ int main(int argc, char** argv)
                 }
             }
         }
-        std::cout<< "Cam zoom: " << *cam->GetZoom() << std::endl;
+        //std::cout<< "Cam zoom: " << *cam->GetZoom() << std::endl;
         cam->UpdateWithZoom();
         go1->GetTransform()->GetRot()->x = cos(counter)*2;
         
@@ -79,6 +82,11 @@ int main(int argc, char** argv)
     delete go2;
     delete cam;
     delete window;
+
+    // delete texs and shaders
+    delete shader1;
+    delete texture1;
+    delete texture2;
 
     return 0;
 }

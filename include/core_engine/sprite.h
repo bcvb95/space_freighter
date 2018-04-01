@@ -12,9 +12,7 @@
 class Sprite
 {
 public:
-    Sprite();
-    Sprite(const char* tex_file, const std::string& shader_file);
-    Sprite(const Sprite& other) {};
+    Sprite(Texture*, Shader*);
     virtual ~Sprite();
 
     Mesh* GetMesh() {return m_mesh;}
