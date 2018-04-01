@@ -37,6 +37,7 @@ protected:
 private:
     int m_camType; // 0 for ortographic, 1 for perspective
     float m_zoom;
+    float m_maxzoom;
     float m_speed;
 
     float m_aspect;
