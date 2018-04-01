@@ -5,6 +5,7 @@ add_library( simulation_lib
              simutils.cpp
              generator.cpp
              universe.cpp
+             solarsystem.cpp
              world.cpp
 )
 

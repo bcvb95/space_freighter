@@ -6,8 +6,9 @@
 
 namespace Simulation {
   
-  World::World (int _ID) {
+  World::World (int _ID, int _ss_ID) {
     this->ID = _ID;
+    this->solar_system_ID = _ss_ID;
   }
 
   World::~World() {

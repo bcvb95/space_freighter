@@ -18,10 +18,26 @@ namespace Simulation {
   }
 
   void Generator::GenerateAllWorlds () {
+    SolarSystem* current_solar_system = 0;
+    int current_ss_id;
+    int worlds_to_next_system = 0;
+
+    std::uniform_real_distribution<float> position_dist(MIN_XY_WORLDPOS, MAX_XY_WORLDPOS+1);
     std::uniform_real_distribution<float> diffspecies_dist(1, SPECIES_MAX+1);
     std::normal_distribution<float> population_dist(100, 40); 
-    for (int i=0; i < this->universe->getSize(); i++) {
-      World* newWorld = new World(i);
+    for (int i=0; i < this->universe->getWorldCount(); i++) {
+      if (worlds_to_next_system <= 0) {
+        if (current_solar_system != 0) {
+          current_solar_system->Init(glm::vec2(position_dist(*this->m_mtgen), position_dist(*this->m_mtgen)));
+        }
+        current_solar_system = new SolarSystem(this->universe->getSolarSystemCount());
+        current_ss_id = current_solar_system->getID();
+        this->universe->AddSolarSystem(current_solar_system);
+        worlds_to_next_system = rand() % (MAX_WORLDS_PER_SOLARSYSTEM - MIN_WORLDS_PER_SOLARSYSTEM) + MIN_WORLDS_PER_SOLARSYSTEM;
+      }
+      World* newWorld = new World(i, current_ss_id);
+      worlds_to_next_system--;
+
       float sample = population_dist(*this->m_mtgen);
       if (sample <= 0.0f) { sample = 0.0f; }
       
@@ -41,6 +57,7 @@ namespace Simulation {
       if (max_pop < 0) { max_pop = 0; }
 
       this->GenerateWorld(newWorld, diffspecies_dist(*this->m_mtgen), max_pop);
+      current_solar_system->AddWorld(newWorld);
       this->universe->setIthWorld(i, newWorld);
     }
   }
@@ -76,12 +93,12 @@ namespace Simulation {
     unsigned long tradehub_count;
     unsigned long spacestation_count;
     if (max_world_pop > 0 && is_populated == 0) {
-      tradehub_count = POP_PER_TRADEHUB % max_world_pop + 1;
-      tradehub_count += rand() % tradehub_count - tradehub_count / 2;
+      tradehub_count = max_world_pop / POP_PER_TRADEHUB + 1;
+      tradehub_count += rand() % tradehub_count - tradehub_count / 4;
 
-      spacestation_count = POP_PER_SPACESTATION % max_world_pop;
+      spacestation_count = max_world_pop / POP_PER_SPACESTATION;
       if (spacestation_count > 0 ) {
-        spacestation_count += rand() % spacestation_count - spacestation_count;
+        spacestation_count += rand() % spacestation_count - spacestation_count / 2;
       }
     }
     else {
@@ -116,7 +133,7 @@ namespace Simulation {
 
   int Generator::CheckDuplicateNames (char* name) {
     int i;
-    for (i=0; i < this->universe->getSize(); i++) {
+    for (i=0; i < this->universe->getWorldCount(); i++) {
       if (this->universe->getIthWorld(i) == NULL) { return 0; }
 
       if (strcmp(this->universe->getIthWorld(i)->getName(), name) == 0) {

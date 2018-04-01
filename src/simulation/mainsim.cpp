@@ -1,5 +1,7 @@
 #include "mainsim.h"
 
+#include <glm/glm.hpp>
+
 namespace Simulation 
 {
   // Constructor
@@ -27,30 +29,43 @@ namespace Simulation
     this->universe->Update(this->stepsize);
   }
 
+  void DisplayWorld(World* world, unsigned long* maxpop, unsigned long* minpop);
+
   void MainSim::DisplayWorlds () {
     if (this->universe == NULL) {
       throw ReferencedUninitialisedValueException((char*)"DisplayWorlds was called before universe was initialised");
     }
-    World** worlds = this->universe->getWorlds();
-    if (worlds == NULL) {
-      throw ReferencedUninitialisedValueException((char*)"DisplayWorlds was called before worlds were initialised");
-    }
     unsigned long maxpop = std::numeric_limits<unsigned long>::min();
     unsigned long minpop = std::numeric_limits<unsigned long>::max();
-    for (int i=0; i < this->universe->getSize(); i++) {
-      printf("World %d: %s\n", worlds[i]->getID(), worlds[i]->getName());
-      unsigned long* popu = worlds[i]->getPopulation();
+    SolarSystem** solarsystems = this->universe->getSolarSystems();
+    World** worlds;
+    for (int i=0; i < this->universe->getSolarSystemCount(); i++) {
+        worlds = solarsystems[i]->getWorlds(); 
+        if (worlds == NULL) {
+            throw ReferencedUninitialisedValueException((char*)"DisplayWorlds was called before worlds were initialised");
+        }
+        glm::vec2 ss_pos = solarsystems[i]->getPosition();
+        printf("\nSolar System %d - At position (%d, %d)\n", solarsystems[i]->getID(), static_cast<int>(ss_pos.x), static_cast<int>(ss_pos.y));
+        for (int j=0; j < solarsystems[i]->getWorldCount(); j++) {
+            DisplayWorld(worlds[j], &maxpop, &minpop);
+        }
+    }
+    
+    printf("Lowest population: %lu\nHighest population: %lu\n", minpop, maxpop);
+  }
+
+  void DisplayWorld(World* world, unsigned long* maxpop, unsigned long* minpop) {
+      printf("World %d: %s\n", world->getID(), world->getName());
+      unsigned long* popu = world->getPopulation();
       for (unsigned int i = 0; i < SPECIES_MAX ; i++) {
         if (popu[i] > 0) {
           printf("- %s population:  %lu\n", SpeciesToString(static_cast<Species>(i)),popu[i]);
-          if (popu[i] > maxpop) { maxpop = popu[i]; }
-          if (popu[i] < minpop) { minpop = popu[i]; }
+          if (popu[i] > *maxpop) { *maxpop = popu[i]; }
+          if (popu[i] < *minpop) { *minpop = popu[i]; } 
         }
       }
-      if (worlds[i]->getTradehubCount() > 0) 
-        printf("Tradehubs: %d\nSpacestations: %d\n", worlds[i]->getTradehubCount(), worlds[i]->getSpacestationCount());
-    }
-    printf("Lowest population: %lu\nHighest population: %lu\n", minpop, maxpop);
+      if (world->getTradehubCount() > 0) 
+        printf("- Tradehubs: %d\n- Spacestations: %d\n", world->getTradehubCount(), world->getSpacestationCount());
   }
   
 }
