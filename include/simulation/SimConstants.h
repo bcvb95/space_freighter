@@ -7,7 +7,7 @@ namespace Simulation {
   
   // Universe content 
   static const int MAX_WORLDS = 1000;
-  static const int MAX_SOLARSYSTEMS = 250;
+  static const int MAX_SOLARSYSTEMS = 500;
   static const int MAX_WORLDS_PER_SOLARSYSTEM = 10;
   static const int MIN_WORLDS_PER_SOLARSYSTEM = 2;
   static const int MAX_UNIQUE_NAMES = 1000;
@@ -23,8 +23,8 @@ namespace Simulation {
   static const long POP_PER_SPACESTATION = 100000;
 
   // Planet orbits
-  static const int ORBIT_BASESIZE = 5;
-  static const int ORBIT_BASESPEED = 1;
+  static const int ORBIT_BASESIZE = 10;
+  static const float ORBIT_BASESPEED = 0.05f;
   static const int ORBIT_INC_X = 5;
   static const int ORBIT_INC_Y = 5;
 }

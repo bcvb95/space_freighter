@@ -24,7 +24,7 @@ namespace Simulation {
    
   }
 
-  void Universe::Update(int dt) {
+  void Universe::Update(float dt) {
     for (int i = 0; i < this->solar_system_count; i++) {
       solar_systems[i]->Update(dt);
     }

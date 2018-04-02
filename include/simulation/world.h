@@ -14,9 +14,9 @@ namespace Simulation {
             ~World(void);
 
             void Init(const unsigned char*, unsigned long[], unsigned int, unsigned int);
-            void Update(int dt);
+            void Update(float dt);
 
-            void SetOrbit(int orbit_layer, int speed, int start_degree, glm::vec2* solarsys_pos);
+            void SetOrbit(int orbit_layer, float speed, int start_degree, glm::vec2* solarsys_pos);
             int getID() { return this->ID; }
             char* getName() { return (char*)this->name; }
             glm::vec2 getPosition() { return this->position; }
@@ -35,13 +35,13 @@ namespace Simulation {
             unsigned int spacestation_count;
 
             // orbit in system
-            void UpdateOrbit(int step);
+            void UpdateOrbit(float step);
             glm::vec2 position;
             glm::vec2* system_position;
             glm::vec2 orbit_radius;
             
-            int orbital_speed;
-            int orbital_degree;
+            float orbital_speed;
+            float orbital_degree;
     };
 
 }

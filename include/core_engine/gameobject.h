@@ -40,7 +40,7 @@ class DrawableGameObject : public GameObject
             delete m_sprite;
         }
         
-        void DrawSprite(Camera* cam) 
+        virtual void DrawSprite(Camera* cam) 
         {
             m_sprite->Draw(m_transform, cam);
         };

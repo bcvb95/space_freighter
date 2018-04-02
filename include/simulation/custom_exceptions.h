@@ -81,6 +81,11 @@ namespace Simulation {
         return msg_buf; 
       }
   };
+
+  class WorldWithoutSystemException: public UniverseException {
+    public:
+      const char* what() const throw() { return "A world has no solar system"; }  
+  };
 }
 
 

@@ -15,18 +15,16 @@ namespace Simulation
     delete this->m_mtgen;
   }
 
-  void MainSim::Init(unsigned int seed, int universe_size, int _delta_time) {
+  void MainSim::Init(unsigned int seed, int universe_size) {
     srand(seed); // for rand()
     this->m_mtgen = new std::mt19937(seed);
     this->generator = new Generator(this->m_mtgen);
     this->universe = new Universe(universe_size);
     this->generator->GenerateUniverse(this->universe);
-
-    this->delta_time = _delta_time;
   }
 
-  void MainSim::Update() { 
-    this->universe->Update(this->delta_time);
+  void MainSim::Update(float dt) { 
+    this->universe->Update(dt);//;this->delta_time);
   }
 
   void DisplayWorld(World* world, unsigned long* maxpop, unsigned long* minpop);

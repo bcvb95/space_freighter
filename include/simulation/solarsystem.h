@@ -13,7 +13,7 @@ namespace Simulation {
             ~SolarSystem(void);
 
             void Init(glm::vec2);
-            void Update(int stepsize);
+            void Update(float dt);
 
             void AddWorld (World* newworld);
             int getID() { return this->ID; }

@@ -5,6 +5,7 @@
 #include <camera.h>
 #include <gameobject.h>
 #include "mainsim.h"
+#include "world_go.h"
 
 #define WIDTH 800
 #define HEIGHT 500
@@ -21,7 +22,7 @@ int main(int argc, char** argv)
     Texture* star_tex = new Texture("../res/star_tex1.png");
     Shader* shader = new Shader("../res/basicShader");
 
-    DrawableGameObject* planet_GOs[Simulation::MAX_WORLDS]; 
+    WorldGO* planet_GOs[Simulation::MAX_WORLDS]; 
     DrawableGameObject* star_GOs[Simulation::MAX_SOLARSYSTEMS];
     //= new DrawableGameObject("planet1", planet_tex, shader);
 
@@ -33,7 +34,7 @@ int main(int argc, char** argv)
     Simulation::MainSim* sim;
     try {
         sim = new Simulation::MainSim();
-        sim->Init(simulation_seed, universe_size, dt);
+        sim->Init(simulation_seed, universe_size);
     } 
     catch ( const Simulation::GeneratorException &e ) {
         std::cout << "Error in Generator while starting up: " << e.what() << std::endl;
@@ -45,6 +46,7 @@ int main(int argc, char** argv)
     }
     catch ( const Simulation::SimulationException &e) {
         std::cout << "Error in main simulation while starting up: " << e.what() << std::endl;
+        return 1;
     }
 
     // Create gameobjects
@@ -61,10 +63,10 @@ int main(int argc, char** argv)
     }
 
     for (int i=0; i < universe->getWorldCount(); i++) {
-        planet_GOs[i] = new DrawableGameObject(worlds[i]->getName(), planet_tex, shader);
+        planet_GOs[i] = new WorldGO(worlds[i]->getName(), planet_tex, shader, worlds[i]);
         Transform* transform = planet_GOs[i]->GetTransform();
-        glm::vec2 worldpos = worlds[i]->getPosition();
-        transform->SetPos(glm::vec3(worldpos.x, worldpos.y, 1));
+        //glm::vec2 worldpos = worlds[i]->getPosition();
+        //transform->SetPos(glm::vec3(worldpos.x, worldpos.y, 1));
         transform->SetScale(glm::vec3(2, 2, 1));
     }
 
@@ -105,9 +107,22 @@ int main(int argc, char** argv)
                 cam->Update(cam_dir, delta_time);
             }
         }
-        
+        try {
+            sim->Update(delta_time);
+        }
+        catch ( const Simulation::GeneratorException &e ) {
+            std::cout << "Error in Generator while running: " << e.what() << std::endl;
+            return 1;
+        }
+        catch ( const Simulation::UniverseException &e ) {
+            std::cout << "Error in Universe while running: " << e.what() << std::endl;
+            return 1;
+        }
+        catch ( const Simulation::SimulationException &e) {
+            std::cout << "Error in main simulation while running: " << e.what() << std::endl;
+            return 1;
+        }
         // DRAW
-
         for (int i=0; i < universe->getSolarSystemCount(); i++) {
             star_GOs[i]->DrawSprite(cam);
         }
@@ -116,7 +131,7 @@ int main(int argc, char** argv)
         }
 
         window->SwapBuffers();
-        SDL_Delay(1);
+        SDL_Delay(17);
     } 
     
     for (int i=0; i < universe->getWorldCount(); i++) {
