@@ -5,6 +5,5 @@ add_library(core_lib
             gameobject.cpp
             sprite.cpp
             input_handler.cpp
+            core_utils.cpp
 )   
-
-#link_libraries(core_lib graphic_lib)

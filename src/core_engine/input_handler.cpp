@@ -1,53 +1,96 @@
 #include <input_handler.h>
 
-InputHandler::InputHandler(const Uint8* keystate, Camera* cam)
+#define MOUSEPAN_SPEEDFAC 0.8f;
+
+
+InputHandler::InputHandler(const Uint8* keystate, Camera* cam, Display* window)
 {
     m_keystate = keystate; 
     m_cam = cam;
+    m_window = window;
 }
 
 void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning)
 {
+    float winWidth, winHeight;
+    winWidth = (float)m_window->GetWindowWidth();
+    winHeight = (float)m_window->GetWindowHeight();
+
+    // Get mouse position
+    int x, y;
+    SDL_GetMouseState(&x,&y);
+    m_mousePosScreen.x = static_cast<float>(x); 
+    m_mousePosScreen.y = static_cast<float>(y); 
+
+    // Get mouse position in world coordinates
+    m_mousePosWorld = ScreenToWorld(m_mousePosScreen, winWidth, winHeight, m_cam);
+
+    // update camera with mouse world coordinates
+    m_cam->SetMouseWorldPos(m_mousePosWorld);
+  
+    /// HANDLE MOUSE CAMERA PAN 
+    glm::vec3 cam_dir(0,0,0); // For camera movement 
+
+    if( m_mousePosScreen.x >= winWidth-5 || m_mousePosScreen.x <= 5
+        || m_mousePosScreen.y >= winHeight-5 || m_mousePosScreen.y <= 5) 
+    {
+        if (m_mousePosScreen.x >= m_window->GetWindowWidth()-5)
+            cam_dir.x = 1.0 * MOUSEPAN_SPEEDFAC;
+        if (m_mousePosScreen.x <= 5)
+            cam_dir.x = -1.0 * MOUSEPAN_SPEEDFAC;
+        if (m_mousePosScreen.y >= m_window->GetWindowHeight()-5)
+            cam_dir.y = -1.0 * MOUSEPAN_SPEEDFAC;
+        if (m_mousePosScreen.y <= 5)
+            cam_dir.y = 1.0 * MOUSEPAN_SPEEDFAC;
+        // move camera
+        m_cam->Move(cam_dir, delta_time);
+    }
+
+    /// HANDLE EVENTS
     while(SDL_PollEvent(e))
     {
-        if (e->type == SDL_QUIT)
+        SDL_PumpEvents(); // ensures keystate update
+
+        // check for game exit
+        if (e->type == SDL_QUIT || m_keystate[SDL_SCANCODE_ESCAPE])
             *isGameRunning = false;
 
-        // CAMERA INPUTS
-        else if (e->type == SDL_KEYDOWN || e->type == SDL_MOUSEBUTTONDOWN 
-                || e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONUP 
-                || e->type == SDL_MOUSEWHEEL)
+        // CAMERA INPUT
+        // Camera input with keys(WASDZX)/and mousewheel scroll-zoom
+        else if (e->type == SDL_KEYDOWN || e->type == SDL_MOUSEWHEEL)
         {   
-            // get mousestate
-            
-            /// CAMERA INPUT ////
-            glm::vec3 cam_dir(0,0,0); // default camera moving direction.
-            SDL_PumpEvents();
-            // Camera zooo
-            if (m_keystate[SDL_SCANCODE_Z])
-                *m_cam->GetZoom() -= 0.05;
-            if (m_keystate[SDL_SCANCODE_X])
-                *m_cam->GetZoom() += 0.05;
+            if (e->type == SDL_MOUSEWHEEL) { 
+                if (e->wheel.y > 0) { // if scrolling up(zoom in)
+                    m_cam->Zoom(true, delta_time); 
+                } else { // scrolling down(zoom out)
+                    m_cam->Zoom(false, delta_time);
+                } 
+            }
+            if (e->type == SDL_KEYDOWN) // Keypress camera movement
+            {
+                // Camera zooom
+                if (m_keystate[SDL_SCANCODE_Z]) 
+                    m_cam->Zoom(true, delta_time);
+                if (m_keystate[SDL_SCANCODE_X]) 
+                    m_cam->Zoom(false, delta_time);
 
-            // Camera pan movement
-            if (m_keystate[SDL_SCANCODE_W])
-                cam_dir.y += 1;
-            if (m_keystate[SDL_SCANCODE_S])
-                cam_dir.y += -1;
-            if (m_keystate[SDL_SCANCODE_D])
-                cam_dir.x += 1;
-            if (m_keystate[SDL_SCANCODE_A])
-                cam_dir.x += -1;
-
-
-            // Mouse pan
-            int x,y;
-            SDL_GetMouseState(&x,&y);
-            std::cout<<"x="<<x<<", y="<<y<<std::endl;
-
-            // update camera
-            m_cam->Update(cam_dir, delta_time);
-            //// END CAMERA InPUT HANDLE ///
+                // Camera pan movement
+                if (m_keystate[SDL_SCANCODE_W])
+                    cam_dir.y += 1;
+                if (m_keystate[SDL_SCANCODE_S])
+                    cam_dir.y += -1;
+                if (m_keystate[SDL_SCANCODE_D])
+                    cam_dir.x += 1;
+                if (m_keystate[SDL_SCANCODE_A])
+                    cam_dir.x += -1;
+                m_cam->Move(cam_dir, delta_time);
+                //// END CAMERA InPUT HANDLE ///
+            }
+            // LSHIFT + P to print mouse world position
+            if (m_keystate[SDL_SCANCODE_P] && m_keystate[SDL_SCANCODE_LSHIFT])
+            {
+            std::cout<<"Mouse position world (X,Y) = (" << m_mousePosWorld.x<<","<<m_mousePosWorld.y<<")"<< std::endl;
+            }
         }
     }
 }

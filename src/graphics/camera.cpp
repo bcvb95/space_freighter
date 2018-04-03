@@ -2,38 +2,78 @@
 #include <camera.h>
 
 
-Camera::Camera(const glm::vec3& pos, float width, float height, int type)
+Camera::Camera(const glm::vec3& pos, float width, float height, int type, Display* window)
 {
     m_camType=type;
-    m_aspect = width / height;
-    m_width = width;
-    m_height = height;
+    m_window = window;
+     
+    m_zoom = 1.0f;
+    m_maxzoom = 10.0f;
+    m_zoomspeed = 0.05f;
+
+    float windowAspect = m_window->GetWindowAspect();
 
     if (type==1)
-        m_perspective = glm::perspective(FOV, m_aspect, ZNEAR_PERSP, ZFAR);
+        m_perspective = glm::perspective(FOV, windowAspect, ZNEAR_PERSP, ZFAR);
     else
     {
-        this->SetZoom(0.1); // sets the orthographic matrix with the zoom value
-        glm::vec3 defdir(0.0f,0.0f,0.0f);
-        this->Update(defdir , 0.0f);
+        // Make zoom.
+        float min = -pow(10.0f, m_zoom);
+        float max = pow(10.0f, m_zoom);
+        this->m_ortho = glm::ortho(min*windowAspect,max*windowAspect, min, max, ZNEAR_ORTHO, ZFAR);
+        
+        m_camWidth = max*windowAspect - min*windowAspect;
+        m_camHeight = max - min;
     }
-
-    m_speed = 2.0f;
-    m_maxzoom = 3.0f;
-
     m_pos = pos;
     m_forward = glm::vec3(0,0,-1);
     m_up = glm::vec3(0,1,0);
 }
 
-void Camera::Update(glm::vec3 dir, float delta_time)
+void Camera::Zoom(bool zoomIn, float delta_time)
+{
+    if (zoomIn) { m_zoom -= m_zoomspeed; } 
+    else { m_zoom += m_zoomspeed; }
+    // if zooming in move camera towards target zoom point (mousepos in world coords)
+    if (zoomIn)
+        m_pos += (glm::vec3(m_mouseWorldPos, 1) - m_pos) * 0.1f; 
+    
+    float winAspect = m_window->GetWindowAspect(); 
+    float winWidth = (float)(m_window->GetWindowWidth());
+    float winHeight = (float)(m_window->GetWindowHeight());
+
+    // calculate limits for camera based on zoom
+    float min = -pow(10.0f, m_zoom);         
+    float max = pow(10.f, m_zoom);
+
+    float left, right, bottom, top;
+    if (winWidth >= winHeight) 
+    {
+        left = min*winAspect; 
+        right = max*winAspect; 
+        bottom = min;
+        top = max;
+    } else {
+        left = min;
+        right = max;
+        bottom = min/winAspect;
+        top = max/winAspect;
+    }
+
+    // update camera size
+    m_camWidth = right - left;
+    m_camHeight = top - bottom;
+
+    // update perspective matrix
+    this->m_ortho = glm::ortho(left, right, bottom, top, ZNEAR_ORTHO, ZFAR);
+
+}
+
+void Camera::Move(glm::vec2 dir, float delta_time)
 {   
-    // zoom/scale limits.
-    if (m_zoom < 0.0f) {
-        m_zoom = 0.0f;
-    } else if(m_zoom > m_maxzoom){
-        m_zoom = m_maxzoom;
-    } 
+    // Ensure zoom limits.
+    if (m_zoom <= 1.0f) { m_zoom = 1.0f; } 
+    else if(m_zoom >= m_maxzoom){ m_zoom = m_maxzoom; } 
 
     // set pan speed based on fraction of zooming
     float pan_factor = 4.0f;
@@ -41,18 +81,6 @@ void Camera::Update(glm::vec3 dir, float delta_time)
     m_speed = zoom_frag*pow(pan_factor, 4);
 
     // pan camera
-    if (dir.x || dir.y)
-    {
-        m_pos += dir * delta_time * m_speed; // move camera
-    }
+    m_pos += glm::vec3(dir,0) * delta_time * m_speed;
 
-    // Make zoom.
-    float min = -pow(10, m_zoom);
-    float max = pow(10, m_zoom);
-    if (m_width >= m_height){
-        m_ortho = glm::ortho(min*m_aspect,max*m_aspect, min, max, ZNEAR_ORTHO, ZFAR);
-    }else {
-        m_ortho = glm::ortho(min,max, min/m_aspect, max/m_aspect, ZNEAR_ORTHO, ZFAR);
-    }
-    
 }

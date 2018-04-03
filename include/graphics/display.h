@@ -13,6 +13,12 @@ public:
 	void SwapBuffers();
 
 	virtual ~Display();
+	SDL_Window* GetSDLWindow() {return this->m_window;}
+
+	int GetWindowWidth() {return m_windowWidth;}
+	int GetWindowHeight() {return m_windowHeight;}
+	float GetWindowAspect() {return m_windowAspect;}
+
 protected:
 private:
 	void operator=(const Display& display) {}
@@ -20,6 +26,10 @@ private:
 
 	SDL_Window* m_window;
 	SDL_GLContext m_glContext;
+
+	int m_windowWidth;
+	int m_windowHeight;
+	float m_windowAspect;
 };
 
 struct Clock
