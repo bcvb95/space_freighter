@@ -47,8 +47,6 @@ int main(int argc, char** argv)
         //// HANDLE INPUT HERE
         input_handler->HandleInput(&e, delta_time, &isRunning);
         /// END INPUT HANDLING
-        
-        printf("cam pos: (%f, %f)\n", cam->GetPos()->x, cam->GetPos()->y);
 
         go1->DrawSprite(cam);
 

@@ -8,7 +8,7 @@ Camera::Camera(const glm::vec3& pos, float width, float height, int type, Displa
     m_window = window;
      
     m_zoom = 1.0f;
-    m_maxzoom = 10.0f;
+    m_maxzoom = 5.0f;
     m_zoomspeed = 0.05f;
 
     float windowAspect = m_window->GetWindowAspect();
@@ -32,6 +32,10 @@ Camera::Camera(const glm::vec3& pos, float width, float height, int type, Displa
 
 void Camera::Zoom(bool zoomIn, float delta_time)
 {
+    // Ensure zoom limits.
+    if (m_zoom <= 1.0f) { m_zoom = 1.0f; } 
+    else if(m_zoom >= m_maxzoom){ m_zoom = m_maxzoom; } 
+
     if (zoomIn) { m_zoom -= m_zoomspeed; } 
     else { m_zoom += m_zoomspeed; }
     // if zooming in move camera towards target zoom point (mousepos in world coords)
@@ -71,16 +75,13 @@ void Camera::Zoom(bool zoomIn, float delta_time)
 
 void Camera::Move(glm::vec2 dir, float delta_time)
 {   
-    // Ensure zoom limits.
-    if (m_zoom <= 1.0f) { m_zoom = 1.0f; } 
-    else if(m_zoom >= m_maxzoom){ m_zoom = m_maxzoom; } 
-
     // set pan speed based on fraction of zooming
-    float pan_factor = 4.0f;
-    float zoom_frag = m_zoom / m_maxzoom; 
-    m_speed = zoom_frag*pow(pan_factor, 4);
+    float pan_factor = 2.0f;
+    float zoom_frac = m_zoom / m_maxzoom; 
+    printf("zoomfrac: %f\n", zoom_frac);
+    m_speed =zoom_frac*zoom_frac * pow(15.0f, pan_factor);;
 
     // pan camera
-    m_pos += glm::vec3(dir,0) * delta_time * m_speed;
+    m_pos += glm::vec3(dir,0) * delta_time * pan_factor * m_speed;
 
 }
