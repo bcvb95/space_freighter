@@ -18,9 +18,12 @@ include_directories(include/graphics
                     lib/freetype-2.9/include
                     ) 
 
-add_subdirectory(src)
+# compile third party libraries
 add_subdirectory(lib/SOIL)
 add_subdirectory(lib/freetype-2.9)
+
+#compile src library
+add_subdirectory(src)
 
 SET(CMAKE_C_COMPILER "/usr/bin/gcc")
 SET(CMAKE_CXX_COMPILER "/usr/bin/g++")
@@ -31,5 +34,5 @@ target_link_libraries(space_freighter core_lib graphic_lib soil freetype)
 add_executable(simulation_test src/simulation/main.cpp)
 target_link_libraries(simulation_test simulation_lib)
 
-#add_executable(graphical_simulation src/gamemanager/graphicalsim_main.cpp)
-#target_link_libraries(graphical_simulation core_lib graphic_lib soil simulation_lib gamemanager_lib)
+add_executable(graphical_simulation src/gamemanager/graphicalsim_main.cpp)
+target_link_libraries(graphical_simulation core_lib graphic_lib soil simulation_lib gamemanager_lib)
