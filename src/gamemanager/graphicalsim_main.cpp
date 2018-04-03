@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     // Graphics
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
     Camera* cam = new Camera(glm::vec3(0,0,0), (float)WIDTH, (float)HEIGHT, 0, window);
-    cam->SetZoom(3.5f);
+    cam->SetZoom(3.2f);
     Clock clock;
 
     Texture* planet_tex = new Texture("../res/planet_tex1.png");

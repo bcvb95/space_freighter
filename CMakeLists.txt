@@ -31,5 +31,5 @@ target_link_libraries(space_freighter core_lib graphic_lib soil freetype)
 add_executable(simulation_test src/simulation/main.cpp)
 target_link_libraries(simulation_test simulation_lib)
 
-#add_executable(graphical_simulation src/gamemanager/graphicalsim_main.cpp)
-#target_link_libraries(graphical_simulation core_lib graphic_lib soil simulation_lib gamemanager_lib)
+add_executable(graphical_simulation src/gamemanager/graphicalsim_main.cpp)
+target_link_libraries(graphical_simulation core_lib graphic_lib soil simulation_lib gamemanager_lib)
