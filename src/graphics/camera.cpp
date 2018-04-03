@@ -76,12 +76,12 @@ void Camera::Zoom(bool zoomIn, float delta_time)
 void Camera::Move(glm::vec2 dir, float delta_time)
 {   
     // set pan speed based on fraction of zooming
-    float pan_factor = 2.0f;
-    float zoom_frac = m_zoom / m_maxzoom; 
-    printf("zoomfrac: %f\n", zoom_frac);
-    m_speed =zoom_frac*zoom_frac * pow(15.0f, pan_factor);;
+    float max_pan = 10000.0f;
+    float min_pan = 1.0f;
+    float zoom_frac = m_zoom / m_maxzoom;
+    m_speed = max_pan * pow(zoom_frac, 4) + min_pan * (1 - zoom_frac);
 
     // pan camera
-    m_pos += glm::vec3(dir,0) * delta_time * pan_factor * m_speed;
+    m_pos += glm::vec3(dir,0) * delta_time * m_speed;
 
 }

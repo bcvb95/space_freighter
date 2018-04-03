@@ -27,7 +27,7 @@ namespace Simulation {
 
   // Planet orbits
   static const int ORBIT_BASESIZE = 10;
-  static const float ORBIT_BASESPEED = 0.05f;
+  static const float ORBIT_BASESPEED = 1.0f;
   static const int ORBIT_INC_X = 5;
   static const int ORBIT_INC_Y = 5;
 }

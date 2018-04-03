@@ -4,6 +4,7 @@
 #include <display.h>
 #include <camera.h>
 #include <gameobject.h>
+#include <input_handler.h>
 #include "mainsim.h"
 #include "world_go.h"
 
@@ -15,7 +16,8 @@ int main(int argc, char** argv)
 {
     // Graphics
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
-    Camera* cam = new Camera(glm::vec3(0,0,1), (float)WIDTH, (float)HEIGHT, 0);
+    Camera* cam = new Camera(glm::vec3(0,0,0), (float)WIDTH, (float)HEIGHT, 0, window);
+    cam->SetZoom(3.5f);
     Clock clock;
 
     Texture* planet_tex = new Texture("../res/planet_tex1.png");
@@ -72,7 +74,10 @@ int main(int argc, char** argv)
     SDL_Event e;
     bool isRunning = true;
     const Uint8* keystate = SDL_GetKeyboardState(nullptr);
+    InputHandler* input_handler = new InputHandler(keystate, cam, window);
+
     float delta_time;
+    float time_mul = 1.0f;
     while(isRunning) 
     {
         clock.tick();
@@ -80,33 +85,10 @@ int main(int argc, char** argv)
 
         window->Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
-        while(SDL_PollEvent(&e))
-        {
-            if (e.type == SDL_QUIT)
-                isRunning = false;
-            else if (e.type == SDL_KEYDOWN)
-            {
-                glm::vec3 cam_dir(0,0,0);
-                SDL_PumpEvents();
-                // panning cammera
-                if (keystate[SDL_SCANCODE_W])
-                    cam_dir.y += 1;
-                if (keystate[SDL_SCANCODE_S])
-                    cam_dir.y += -1;
-                if (keystate[SDL_SCANCODE_D])
-                    cam_dir.x += 1;
-                if (keystate[SDL_SCANCODE_A])
-                    cam_dir.x += -1;
-                if (keystate[SDL_SCANCODE_Z])
-                    *cam->GetZoom() -= 0.05;
-                if (keystate[SDL_SCANCODE_X])
-                    *cam->GetZoom() += 0.05;
-                // zooming camera
-                cam->Update(cam_dir, delta_time);
-            }
-        }
+        input_handler->HandleInput(&e, delta_time, &isRunning, &time_mul);
+
         try {
-            sim->Update(delta_time);
+            sim->Update(delta_time * time_mul);
         }
         catch ( const Simulation::GeneratorException &e ) {
             std::cout << "Error in Generator while running: " << e.what() << std::endl;
