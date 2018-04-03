@@ -37,7 +37,7 @@ public:
     glm::vec2 GetMouseWorldPos() {return m_mouseWorldPos;}
 
     // Setters
-    void SetZoom(float zoomVal) {m_zoom = zoomVal;}
+    void SetZoom(float zoomVal) {m_zoom = zoomVal; this->Zoom(true, 0); }
     void SetMouseWorldPos(glm::vec2 pos) {m_mouseWorldPos = pos;}
 
 protected:
