@@ -7,6 +7,10 @@
 #include <gameobject.h>
 #include <input_handler.h>
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
+
 #define WIDTH 800
 #define HEIGHT 500
 
