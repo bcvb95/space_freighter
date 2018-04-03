@@ -12,7 +12,7 @@ set(CMAKE_MODULE_PATH "/usr/local/lib/x86_64-linux-gnu/cmake/" "/usr/lib/x86_64-
 
 
 
-include_directories(include/graphics include/core_engine include/simulation include/SOIL/inc) #include/SOIL/inc/SOIL)
+include_directories(include/graphics include/simulation include/core_engine include/gamemanager include/SOIL/inc) #include/SOIL/inc/SOIL)
 add_subdirectory(src)
 add_subdirectory(include/SOIL)
 
@@ -23,4 +23,4 @@ add_executable(simulation_test src/simulation/main.cpp)
 target_link_libraries(simulation_test simulation_lib)
 
 add_executable(graphical_simulation src/gamemanager/graphicalsim_main.cpp)
-target_link_libraries(graphical_simulation core_lib graphic_lib soil simulation_lib)
+target_link_libraries(graphical_simulation core_lib graphic_lib soil simulation_lib gamemanager_lib)

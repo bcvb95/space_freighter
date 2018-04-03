@@ -19,12 +19,12 @@ namespace Simulation {
         // Put planets in orbit
         int orbit_layer = 1;
         for (int i=0; i < this->world_count; i++) {
-            orbit_layer += rand() % 5;
+            orbit_layer += rand() % 5 + 2;
             this->worlds[i]->SetOrbit(orbit_layer, ORBIT_BASESPEED, rand()%360, &this->position);
         }
     }
 
-    void SolarSystem::Update(int dt) {
+    void SolarSystem::Update(float dt) {
         for (int i=0; i < this->world_count; i++) {
             worlds[i]->Update(dt);
         }

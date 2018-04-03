@@ -1,6 +1,7 @@
 #include <iostream>
 #include "mainsim.h"
 #include "custom_exceptions.h"
+#include <unistd.h>
 
 void ExtractNumber(char*, int*);
 
@@ -14,7 +15,7 @@ int main (int argc, char *argv[]) {
   Simulation::MainSim* sim;
   try {
     sim = new Simulation::MainSim();
-    sim->Init(simulation_seed, universe_size, delta_time);
+    sim->Init(simulation_seed, universe_size);
   } 
   catch ( const Simulation::GeneratorException &e ) {
     std::cout << "Error in Generator while starting up: " << e.what() << std::endl;
@@ -51,15 +52,19 @@ int main (int argc, char *argv[]) {
         if (number != '\0') {
           std::cout << "Updating " << number << " times." << std::endl;
           for (int i = 0; i < number; i++) {
-            sim->Update();
+            sim->Update(1);
           }
         }
         else {
           std::cout << "Updating once." << std::endl;
-          sim->Update();
+          sim->Update(1);
         }
-        
         break;
+      case 'l':
+        while (1) {
+          sim->Update(1);
+          sleep(1);
+        }
       case 'd':
         readflags = pop_flag = pos_flag = false;
         displaysteps = 0;

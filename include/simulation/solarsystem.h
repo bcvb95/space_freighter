@@ -13,7 +13,7 @@ namespace Simulation {
             ~SolarSystem(void);
 
             void Init(glm::vec2);
-            void Update(int stepsize);
+            void Update(float dt);
 
             void AddWorld (World* newworld);
             int getID() { return this->ID; }
@@ -22,7 +22,7 @@ namespace Simulation {
             World** getWorlds() { return this->worlds; }
         private:
             int ID;
-            glm::vec2 position;
+            glm::vec2 position = glm::vec2(MAX_XY_WORLDPOS+1, MAX_XY_WORLDPOS+1);
             World* worlds[MAX_WORLDS_PER_SOLARSYSTEM] = {NULL};
             int world_count = 0;
             

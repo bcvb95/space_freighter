@@ -53,6 +53,11 @@ namespace Simulation {
       const char* what() const throw() { return "No more unique world names."; }
   };
 
+  class NoValidPositionSSException: public GeneratorException {
+    public:
+      const char* what() const throw() { return "No valid position for new solar system. Consider increasing max size of universe or decreasing amount of worlds generated."; }
+  };
+
   // Universe Exceptions
   class UniverseException: public std::exception { 
     public: 
@@ -80,6 +85,11 @@ namespace Simulation {
         sprintf(msg_buf, "Value exceeds defined maximum value: %s", m_msg); 
         return msg_buf; 
       }
+  };
+
+  class WorldWithoutSystemException: public UniverseException {
+    public:
+      const char* what() const throw() { return "A world has no solar system"; }  
   };
 }
 
