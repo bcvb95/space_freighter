@@ -30,7 +30,8 @@ public:
     // Getters
     glm::vec3* GetPos() {return &m_pos;}
     float* GetZoom() {return &m_zoom;}
-    
+
+    Display* GetWindow() {return m_window;}
     float GetCamWidth() {return m_camWidth;}
     float GetCamHeight() {return m_camHeight;}
 
