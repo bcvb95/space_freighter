@@ -17,6 +17,7 @@ int main(int argc, char** argv)
     // Graphics
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
     Camera* cam = new Camera(glm::vec3(0,0,0), (float)WIDTH, (float)HEIGHT, 0, window);
+    cam->SetZoom(3.5f);
     Clock clock;
 
     Texture* planet_tex = new Texture("../res/planet_tex1.png");
@@ -76,6 +77,7 @@ int main(int argc, char** argv)
     InputHandler* input_handler = new InputHandler(keystate, cam, window);
 
     float delta_time;
+    float time_mul = 1.0f;
     while(isRunning) 
     {
         clock.tick();
@@ -83,10 +85,10 @@ int main(int argc, char** argv)
 
         window->Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
-        input_handler->HandleInput(&e, delta_time, &isRunning);
-        
+        input_handler->HandleInput(&e, delta_time, &isRunning, &time_mul);
+
         try {
-            sim->Update(delta_time);
+            sim->Update(delta_time * time_mul);
         }
         catch ( const Simulation::GeneratorException &e ) {
             std::cout << "Error in Generator while running: " << e.what() << std::endl;

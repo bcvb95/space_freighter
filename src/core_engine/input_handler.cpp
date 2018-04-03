@@ -10,9 +10,9 @@ InputHandler::InputHandler(const Uint8* keystate, Camera* cam, Display* window)
     m_window = window;
 }
 
-void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning)
+void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning, float* time_mul)
 {
-    float winWidth, winHeight;
+    float winWidth, winHeight; 
     winWidth = (float)m_window->GetWindowWidth();
     winHeight = (float)m_window->GetWindowHeight();
 
@@ -85,6 +85,21 @@ void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunni
                     cam_dir.x += -1;
                 m_cam->Move(cam_dir, delta_time);
                 //// END CAMERA InPUT HANDLE ///
+                
+                if (time_mul != NULL) {
+                    if (m_keystate[SDL_SCANCODE_1])
+                        *time_mul = 1.0f;
+                    else if (m_keystate[SDL_SCANCODE_2])
+                        *time_mul = 5.0f;
+                    else if (m_keystate[SDL_SCANCODE_3])
+                        *time_mul = 10.0f;
+                    else if (m_keystate[SDL_SCANCODE_4])
+                        *time_mul = 100.0f;
+                    else if (m_keystate[SDL_SCANCODE_5])
+                        *time_mul = 1000.0f;
+                }
+                
+
             }
             // LSHIFT + P to print mouse world position
             if (m_keystate[SDL_SCANCODE_P] && m_keystate[SDL_SCANCODE_LSHIFT])

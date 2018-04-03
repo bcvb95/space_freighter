@@ -12,7 +12,7 @@ class InputHandler
 public:
     InputHandler(const Uint8* keystate, Camera* cam, Display* window);
     
-    void HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning);
+    void HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning, float* time_mul = NULL);
 
 
 protected:

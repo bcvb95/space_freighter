@@ -34,7 +34,7 @@ namespace Simulation {
     void World::UpdateOrbit(float dt) {
         this->orbital_degree += (dt * this->orbital_speed);
         if (this->orbital_degree >= 360.0f) { this->orbital_degree = 0.0f; }
-        this->position.x = this->system_position->x + this->orbit_radius.x * cos(this->orbital_degree);
+        this->position.x = this->system_position->x + this->orbit_radius.x  * cos(this->orbital_degree);
         this->position.y = this->system_position->y + this->orbit_radius.y * sin(this->orbital_degree);
     }
 
@@ -42,7 +42,7 @@ namespace Simulation {
         this->orbit_radius = glm::vec2( (ORBIT_BASESIZE + ORBIT_INC_X * pow(_orbit_layer, 1.1)) / 2.0f,
                                         (ORBIT_BASESIZE + ORBIT_INC_Y * pow(_orbit_layer, 1.1)) / 2.0f );
         this->system_position = _solarsys_pos;
-        this->orbital_speed = _speed;
+        this->orbital_speed = _speed / pow(_orbit_layer, 2);
         if ( _start_degree > 360 ) { _start_degree = _start_degree % 360; }
         this->orbital_degree = _start_degree;
         this->UpdateOrbit(0);
