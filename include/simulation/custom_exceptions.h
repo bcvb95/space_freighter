@@ -53,6 +53,11 @@ namespace Simulation {
       const char* what() const throw() { return "No more unique world names."; }
   };
 
+  class NoValidPositionSSException: public GeneratorException {
+    public:
+      const char* what() const throw() { return "No valid position for new solar system. Consider increasing max size of universe or decreasing amount of worlds generated."; }
+  };
+
   // Universe Exceptions
   class UniverseException: public std::exception { 
     public: 

@@ -22,6 +22,7 @@ namespace Simulation {
         private:
             void GenerateAllWorlds();
             void GenerateWorld(World*, int, unsigned long);
+            glm::vec2 GetNewSolarSystemPosition();
             char* GetUniqueWorldName();
             int CheckDuplicateNames(char*);
             void LoadWorldNames();

@@ -2,8 +2,8 @@
 #define SIMCONSTANTS_H
 namespace Simulation {
   // Universe size
-  static const long MIN_XY_WORLDPOS = -1000;
-  static const long MAX_XY_WORLDPOS =  1000;
+  static const float MIN_XY_WORLDPOS = -10000.0f;
+  static const float MAX_XY_WORLDPOS =  10000.0f;
   
   // Universe content 
   static const int MAX_WORLDS = 1000;
@@ -11,6 +11,9 @@ namespace Simulation {
   static const int MAX_WORLDS_PER_SOLARSYSTEM = 10;
   static const int MIN_WORLDS_PER_SOLARSYSTEM = 2;
   static const int MAX_UNIQUE_NAMES = 1000;
+
+  // Generator
+  static const float MIN_SOLARSYSTEM_DISTANCE = 100.0f;
 
   // Population
   enum Species { Human, Orcish, Elvish, Reptillian };

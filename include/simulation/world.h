@@ -18,6 +18,8 @@ namespace Simulation {
 
             void SetOrbit(int orbit_layer, float speed, int start_degree, glm::vec2* solarsys_pos);
             int getID() { return this->ID; }
+            int getSolarSystemID() { return this->solar_system_ID; }
+            glm::vec2* getSolarSystemPosition() { return this->system_position; }
             char* getName() { return (char*)this->name; }
             glm::vec2 getPosition() { return this->position; }
             unsigned long* getPopulation() { return this->popu_count; }

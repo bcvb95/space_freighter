@@ -1,5 +1,6 @@
 #include "world.h"
 #include<iostream>
+#include <stdio.h>
 namespace Simulation {
     
     World::World (int _ID, int _ss_ID) {
@@ -24,14 +25,13 @@ namespace Simulation {
     }
 
     void World::Update(float dt) {
+        if (this->system_position == NULL) {
+            throw WorldWithoutSystemException();
+        }
         this->UpdateOrbit(dt);
     }
 
     void World::UpdateOrbit(float dt) {
-        if (this->system_position == NULL) {
-            return;// TODO CHANGE THIS SHIT (THERE'S A WORLD WITHOUT SOLAR SYSTEM)
-            throw WorldWithoutSystemException();
-        }
         this->orbital_degree += (dt * this->orbital_speed);
         if (this->orbital_degree >= 360.0f) { this->orbital_degree = 0.0f; }
         this->position.x = this->system_position->x + this->orbit_radius.x * cos(this->orbital_degree);

@@ -55,7 +55,7 @@ int main(int argc, char** argv)
     Simulation::SolarSystem** solar_systems = universe->getSolarSystems();
 
     for (int i=0; i < universe->getSolarSystemCount(); i++) {
-        star_GOs[i] = new DrawableGameObject("sun", star_tex, shader);
+        star_GOs[i] = new DrawableGameObject("sun " + i, star_tex, shader);
         Transform* star_transform = star_GOs[i]->GetTransform();
         glm::vec2 starpos = solar_systems[i]->getPosition();
         star_transform->SetPos(glm::vec3(starpos.x, starpos.y, 0));
@@ -65,8 +65,6 @@ int main(int argc, char** argv)
     for (int i=0; i < universe->getWorldCount(); i++) {
         planet_GOs[i] = new WorldGO(worlds[i]->getName(), planet_tex, shader, worlds[i]);
         Transform* transform = planet_GOs[i]->GetTransform();
-        //glm::vec2 worldpos = worlds[i]->getPosition();
-        //transform->SetPos(glm::vec3(worldpos.x, worldpos.y, 1));
         transform->SetScale(glm::vec3(2, 2, 1));
     }
 

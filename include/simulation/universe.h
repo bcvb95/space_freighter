@@ -21,8 +21,6 @@ namespace Simulation
       void AddSolarSystem (SolarSystem* solarsystem); 
 
       // Getters and setters
-      
-      
       SolarSystem** getSolarSystems() { return this->solar_systems; }
       SolarSystem* getIthSolarSystem(int i) { return this->solar_systems[i]; }
       SolarSystem* getSolarSystemByID(int id);
