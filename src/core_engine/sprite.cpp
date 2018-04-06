@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <sprite.h>
 
-Sprite::Sprite(Texture* _texure, Shader* _shader)//const char* tex_file, const std::string& shader_file)
+Sprite::Sprite(Texture* _texure, BasicShader* _shader)//const char* tex_file, const std::string& shader_file)
 { 
     glm::vec3 v2_pos(-1.0f, 1.0f, 0.0f);
     glm::vec3 v1_pos(-1.0f, -1.0f, 0.0f);

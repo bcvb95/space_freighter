@@ -30,7 +30,7 @@ protected:
 class DrawableGameObject : public GameObject
 {
     public:
-        DrawableGameObject(const std::string& go_name, Texture* _texture, Shader* _shader) :  GameObject(go_name)
+        DrawableGameObject(const std::string& go_name, Texture* _texture, BasicShader* _shader) :  GameObject(go_name)
         {
             m_sprite = new Sprite(_texture, _shader);
         };

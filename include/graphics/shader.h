@@ -7,6 +7,10 @@
 #include <transform.h>
 #include <camera.h>
 
+std::string LoadShader(const std::string& fileName);
+void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
+GLuint CreateShader(const std::string& text, GLenum type);
+
 class Shader 
 {
     public:
@@ -14,18 +18,22 @@ class Shader
 
         void Bind();
         virtual ~Shader();
-
-        void Update(const Transform* transform, Camera* cam);
-
     protected:
-    private:
         static const unsigned int NUM_SHADERS = 2;
+        GLuint m_program;
+	    GLuint m_shaders[NUM_SHADERS];
+    private:
+};
 
-        std::string LoadShader(const std::string& fileName);
-	    void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
-        GLuint CreateShader(const std::string& text, GLenum type);
 
-        enum 
+class BasicShader : public Shader
+{   
+public:
+    BasicShader(const std::string& filename);
+    void Update(const Transform* transform, Camera* cam);
+protected:
+private:
+        enum // basic shader enum 
         {
             // Vertex shader uniform handles
             MODEL_U,    // model transform matrix
@@ -40,13 +48,28 @@ class Shader
             MATDIFFUSE_U,// material diffuse
             MATSPEC_U,   // materal specular
             MATSHINE_U,  // material shiniess
-            MATAMBI_U,
+
+            MATAMBI_U,   // global ambiance
             NUM_UNIFORMS 
         };
 
-        GLuint m_program;
-	    GLuint m_shaders[NUM_SHADERS];
         GLuint m_uniforms[NUM_UNIFORMS];
+};
+
+class TextShader : public Shader
+{
+public:
+    TextShader(const std::string& filename);
+    GLuint GetShaderProgram() {return m_program;}
+protected:
+private:
+    enum
+    {
+        PROJMAT_U,
+        NUM_UNIFORMS
+    };
+
+    GLuint m_uniforms[NUM_UNIFORMS];
 };
 
 #endif

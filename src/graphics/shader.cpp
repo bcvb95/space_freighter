@@ -4,10 +4,8 @@
 #include <transform.h>
 #include <glm/gtc/type_ptr.hpp>
 
-void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
-static std::string LoadShader(const std::string& filename);
-GLuint CreateShader(const std::string& text, GLenum shaderType);
 
+/// Base shader classs ///
 Shader::Shader(const std::string& filename)
 {
     m_program = glCreateProgram();
@@ -18,44 +16,11 @@ Shader::Shader(const std::string& filename)
     for (unsigned int i = 0; i < NUM_SHADERS; i++)
         glAttachShader(m_program, m_shaders[i]);
 
-    glBindAttribLocation(m_program, 0, "position");
-    glBindAttribLocation(m_program, 1, "texCoord"); 
-    glBindAttribLocation(m_program, 2, "normal" );
-
     glLinkProgram(m_program);
     CheckShaderError(m_program, GL_LINK_STATUS, GL_TRUE, "Error: Shaderprogram failed linking");
 
     glValidateProgram(m_program);
     CheckShaderError(m_program, GL_VALIDATE_STATUS, GL_TRUE, "Error: Shaderprogram is invalid");
-
-    // this->Bind();
-
-    // projection view and model 
-    m_uniforms[MODEL_U] = glGetUniformLocation(m_program, "modelMat");  // model matrix
-    m_uniforms[PROJMAT_U] = glGetUniformLocation(m_program, "projMat"); // model view projection matrix
-    
-    // Lighting properties
-    m_uniforms[CAMPOS_U] = glGetUniformLocation(m_program, "camPos");
-    m_uniforms[LIGHTPOS_U] = glGetUniformLocation(m_program, "lightPos");
-    m_uniforms[LIGHTCOL_U] = glGetUniformLocation(m_program, "lightColor");
-    
-    // material properties
-    m_uniforms[MATEMIS_U] = glGetUniformLocation(m_program, "matEmmissive");
-    m_uniforms[MATDIFFUSE_U] = glGetUniformLocation(m_program, "matDiffuse");
-    m_uniforms[MATSPEC_U] = glGetUniformLocation(m_program, "matSpecular");
-    m_uniforms[MATSHINE_U] = glGetUniformLocation(m_program, "matShiny");
-
-    // global ambient effect
-    m_uniforms[MATAMBI_U] = glGetUniformLocation(m_program, "ambient");
-
-    // check for errors finding uniform locations.
-    for (unsigned int i = 0; i < NUM_UNIFORMS; i++)
-    {
-        if (m_uniforms[i] == -1)
-        {
-            std::cout << "glUniformLocation " << i << " failed" << std::endl; 
-        }     
-    }
 
 }
 
@@ -74,9 +39,46 @@ void Shader::Bind()
 {
     glUseProgram(m_program);
 }
+//// end base shader class
 
 
-void Shader::Update(const Transform* transform, Camera* cam)
+/// Basic shader derived from shader class
+
+BasicShader::BasicShader(const std::string& filename) : Shader(filename)
+{
+    // projection view and model 
+    glBindAttribLocation(this->m_program, 0, "position");
+    glBindAttribLocation(this->m_program, 1, "texCoord"); 
+    glBindAttribLocation(this->m_program, 2, "normal" );
+
+    m_uniforms[MODEL_U] = glGetUniformLocation(this->m_program, "modelMat");  // model matrix
+    m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projMat"); // model view projection matrix
+    
+    // Lighting properties
+    m_uniforms[CAMPOS_U] = glGetUniformLocation(this->m_program, "camPos");
+    m_uniforms[LIGHTPOS_U] = glGetUniformLocation(this->m_program, "lightPos");
+    m_uniforms[LIGHTCOL_U] = glGetUniformLocation(this->m_program, "lightColor");
+    
+    // material properties
+    m_uniforms[MATEMIS_U] = glGetUniformLocation(this->m_program, "matEmmissive");
+    m_uniforms[MATDIFFUSE_U] = glGetUniformLocation(this->m_program, "matDiffuse");
+    m_uniforms[MATSPEC_U] = glGetUniformLocation(this->m_program, "matSpecular");
+    m_uniforms[MATSHINE_U] = glGetUniformLocation(this->m_program, "matShiny");
+
+    // global ambient effect
+    m_uniforms[MATAMBI_U] = glGetUniformLocation(m_program, "ambient");
+
+    // check for errors finding uniform locations.
+    for (unsigned int i = 0; i < NUM_UNIFORMS; i++)
+    {
+        if (m_uniforms[i] == -1)
+        {
+            std::cout << "glUniformLocation " << i << " failed" << std::endl; 
+        }     
+    }
+}
+
+void BasicShader::Update(const Transform* transform, Camera* cam)
 {  
     glm::vec4 black(0);
     glm::vec4 white(1);
@@ -110,8 +112,15 @@ void Shader::Update(const Transform* transform, Camera* cam)
 }
 
 
+TextShader::TextShader(const std::string& filename) : Shader(filename)
+{
+    m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projection");
+    glm::mat4 proj_mat = glm::ortho(0.0f, 800.0f, 0.0f, 500.0f);
+    glUniformMatrix4fv(m_uniforms[PROJMAT_U], 1, GL_FALSE, glm::value_ptr(proj_mat));
+}
 
-GLuint Shader::CreateShader(const std::string& text, GLenum type)
+
+GLuint CreateShader(const std::string& text, GLenum type)
 {
     GLuint shader = glCreateShader(type);
 
@@ -132,7 +141,7 @@ GLuint Shader::CreateShader(const std::string& text, GLenum type)
     return shader;
 }
 
-std::string Shader::LoadShader(const std::string& fileName)
+std::string LoadShader(const std::string& fileName)
 {
     std::ifstream file;
     file.open((fileName).c_str());
@@ -155,7 +164,7 @@ std::string Shader::LoadShader(const std::string& fileName)
     return output;
 }
 
-void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
+void CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 {
     GLint success = 0;
     GLchar error[1024] = { 0 };

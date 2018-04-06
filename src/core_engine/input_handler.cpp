@@ -23,7 +23,7 @@ void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunni
     m_mousePosScreen.y = static_cast<float>(y); 
 
     // Get mouse position in world coordinates
-    m_mousePosWorld = ScreenToWorld(m_mousePosScreen, winWidth, winHeight, m_cam);
+    m_mousePosWorld = ScreenToWorld(m_mousePosScreen, m_cam);
 
     // update camera with mouse world coordinates
     m_cam->SetMouseWorldPos(m_mousePosWorld);

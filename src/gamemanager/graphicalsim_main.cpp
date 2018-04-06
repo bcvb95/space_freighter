@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 
     Texture* planet_tex = new Texture("../res/planet_tex1.png");
     Texture* star_tex = new Texture("../res/star_tex1.png");
-    Shader* shader = new Shader("../res/basicShader");
+    BasicShader* shader = new BasicShader("../res/basicShader");
 
     WorldGO* planet_GOs[Simulation::MAX_WORLDS]; 
     DrawableGameObject* star_GOs[Simulation::MAX_SOLARSYSTEMS];

@@ -6,7 +6,7 @@
 
 class WorldGO : public DrawableGameObject {
     public:
-        WorldGO(const std::string& go_name, Texture* _texture, Shader* _shader, Simulation::World* _world);
+        WorldGO(const std::string& go_name, Texture* _texture, BasicShader* _shader, Simulation::World* _world);
         ~WorldGO();
 
         void DrawSprite(Camera* cam);

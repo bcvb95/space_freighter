@@ -12,12 +12,12 @@
 class Sprite
 {
 public:
-    Sprite(Texture*, Shader*);
+    Sprite(Texture*, BasicShader*);
     virtual ~Sprite();
 
     Mesh* GetMesh() {return m_mesh;}
     Texture* GetTexture() {return m_texture;}
-    Shader* GetShader() {return m_shader;}
+    BasicShader* GetShader() {return m_shader;}
 
     void Draw(const Transform* transform, Camera* cam ); 
 
@@ -31,6 +31,6 @@ private:
 
     Mesh* m_mesh;
     Texture* m_texture;
-    Shader* m_shader; 
+    BasicShader* m_shader; 
 };
 #endif

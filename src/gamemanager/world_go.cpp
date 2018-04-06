@@ -1,6 +1,6 @@
 #include "world_go.h"
 
-WorldGO::WorldGO(const std::string& go_name, Texture* _texture, Shader* _shader, Simulation::World* _world) 
+WorldGO::WorldGO(const std::string& go_name, Texture* _texture, BasicShader* _shader, Simulation::World* _world) 
 :  DrawableGameObject(go_name, _texture, _shader) 
 {
     this->m_world = _world;

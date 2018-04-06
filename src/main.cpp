@@ -6,9 +6,9 @@
 #include <camera.h>
 #include <gameobject.h>
 #include <input_handler.h>
+#include <text_renderer.h>
+#include <GLFW/glfw3.h>
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 
 #define WIDTH 800
@@ -20,9 +20,14 @@ int main(int argc, char** argv)
     Camera* cam = new Camera(glm::vec3(0,0,0), (float)WIDTH, (float)HEIGHT, 0, window);
     Clock clock;
 
-    Shader* shader1 = new Shader("../res/basicShader");
+    BasicShader* shader1 = new BasicShader("../res/basicShader");
+    TextShader* text_shader = new TextShader("../res/textShader");
+
     Texture* texture1 = new Texture("../res/tex.png");
     Texture* texture2 = new Texture("../res/img1.png");
+
+    TextRenderer* text_renderer = new TextRenderer("../res/data-latin.tff", text_shader);
+
 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture1, shader1);  
     DrawableGameObject* go2 = new DrawableGameObject("GO 2", texture2, shader1);  
@@ -53,6 +58,8 @@ int main(int argc, char** argv)
         /// END INPUT HANDLING
 
         go1->DrawSprite(cam);
+
+        text_renderer->DrawText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
 
         counter += 0.01;
 
