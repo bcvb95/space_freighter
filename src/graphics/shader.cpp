@@ -6,7 +6,7 @@
 
 
 /// Base shader classs ///
-Shader::Shader(const std::string& filename)
+Shader::Shader(const std::string& filename, Camera* cam)
 {
     m_program = glCreateProgram();
 
@@ -21,6 +21,8 @@ Shader::Shader(const std::string& filename)
 
     glValidateProgram(m_program);
     CheckShaderError(m_program, GL_VALIDATE_STATUS, GL_TRUE, "Error: Shaderprogram is invalid");
+
+    m_cam = cam;
 
 }
 
@@ -41,10 +43,32 @@ void Shader::Bind()
 }
 //// end base shader class
 
+TextShader::TextShader(const std::string filename, Camera* cam) : Shader(filename, cam)
+{
+    glBindAttribLocation(this->m_program, 0, "position");
+
+    m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projMat");
+    m_uniforms[COLOR_U] = glGetUniformLocation(this->m_program, "color");
+
+    // check for errors finding uniform locations.
+    for (unsigned int i = 0; i < NUM_UNIFORMS; i++)
+    {
+        if (m_uniforms[i] == -1)
+        {
+            std::cout << "glUniformLocation " << i << " failed" << std::endl; 
+        }     
+    }
+}
+
+void TextShader::Update (Camera* cam, glm::vec4 text_color) {
+    // uniforms for transforming vertex positions 
+    glUniformMatrix4fv(m_uniforms[PROJMAT_U], 1,GL_FALSE, glm::value_ptr(cam->GetUIOrtho()));
+
+    glUniform4fv(m_uniforms[COLOR_U], 1, glm::value_ptr(text_color));
+}
 
 /// Basic shader derived from shader class
-
-BasicShader::BasicShader(const std::string& filename) : Shader(filename)
+BasicShader::BasicShader(const std::string& filename, Camera* cam) : Shader(filename, cam)
 {
     // projection view and model 
     glBindAttribLocation(this->m_program, 0, "position");
@@ -78,7 +102,7 @@ BasicShader::BasicShader(const std::string& filename) : Shader(filename)
     }
 }
 
-void BasicShader::Update(const Transform* transform, Camera* cam)
+void BasicShader::Update(const Transform* transform)
 {  
     glm::vec4 black(0);
     glm::vec4 white(1);
@@ -88,13 +112,13 @@ void BasicShader::Update(const Transform* transform, Camera* cam)
 
     // uniforms for transforming vertex positions 
     glm::mat4 model_mat = transform->GetTransformMatrix();
-    glm::mat4 proj_mat = cam->GetViewProjectionMatrix() * model_mat;
+    glm::mat4 proj_mat = m_cam->GetViewProjectionMatrix() * model_mat;
     glUniformMatrix4fv(m_uniforms[MODEL_U],1, GL_FALSE, glm::value_ptr(model_mat));
     glUniformMatrix4fv(m_uniforms[PROJMAT_U], 1,GL_FALSE, glm::value_ptr(proj_mat));
 
     // uniforms for lighting
-    glm::vec4 cam_pos = glm::vec4(*cam->GetPos(), 1); // get camera position
-    glm::vec4 light_pos = glm::vec4(0.0f,100.0f, 0.0f,1.0f);         // set lighting position // NEEDS TO BE CHANGED //
+    glm::vec4 cam_pos = glm::vec4(*m_cam->GetPos(), 1); // get camera position
+    glm::vec4 light_pos = glm::vec4(0.0f,-100.0f, 0.0f,1.0f); // set lighting position // NEEDS TO BE CHANGED //
     glm::vec4 light_col = glm::vec4(1.0f,1.0f,1.0f,1.0f); // color of light (RED)
 
     glUniform4fv(m_uniforms[CAMPOS_U], 4, glm::value_ptr(cam_pos));
@@ -105,20 +129,14 @@ void BasicShader::Update(const Transform* transform, Camera* cam)
     glUniform4fv(m_uniforms[MATEMIS_U], 4, glm::value_ptr(black)); 
     glUniform4fv(m_uniforms[MATDIFFUSE_U], 4, glm::value_ptr(white));
     glUniform4fv(m_uniforms[MATSPEC_U], 4 , glm::value_ptr(white));
-    glUniform1f(m_uniforms[MATSHINE_U], 1000.0f);
+    glUniform1f(m_uniforms[MATSHINE_U], 100.0f);
 
     //global ambiance
     glUniform4fv(m_uniforms[MATAMBI_U],1, glm::value_ptr(ambient));
 }
 
 
-TextShader::TextShader(const std::string& filename) : Shader(filename)
-{
-    m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projection");
-    glm::mat4 proj_mat = glm::ortho(0.0f, 800.0f, 0.0f, 500.0f);
-    glUniformMatrix4fv(m_uniforms[PROJMAT_U], 1, GL_FALSE, glm::value_ptr(proj_mat));
-}
-
+// Shader helper functions
 
 GLuint CreateShader(const std::string& text, GLenum type)
 {
@@ -144,7 +162,7 @@ GLuint CreateShader(const std::string& text, GLenum type)
 std::string LoadShader(const std::string& fileName)
 {
     std::ifstream file;
-    file.open((fileName).c_str());
+    file.open((fileName).c_str());    
 
     std::string output;
     std::string line;

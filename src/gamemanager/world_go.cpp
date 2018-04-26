@@ -10,12 +10,12 @@ WorldGO::~WorldGO() {
 
 }
 
-void WorldGO::DrawSprite(Camera* cam) {
+void WorldGO::DrawSprite() {
     glm::vec2 world_pos = this->m_world->getPosition();
     // Idea: reposition draw of worlds depending on zoom factor of camera -
     // - the further out the zoom is, move the worlds towards the center of -
     // - the system so that they will be hidden behind it
     glm::vec2 system_pos = *this->m_world->getSolarSystemPosition();
     this->m_transform->SetPos(glm::vec3(world_pos.x, world_pos.y, 0));
-    DrawableGameObject::DrawSprite(cam);
+    DrawableGameObject::DrawSprite();
 }

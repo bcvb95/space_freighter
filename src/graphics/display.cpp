@@ -4,7 +4,8 @@
 
 Display::Display(int width, int height, const std::string& title)
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
+	SDL_Init(SDL_INIT_VIDEO || SDL_INIT_AUDIO || SDL_INIT_EVENTS || SDL_INIT_TIMER);
+
 
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -26,19 +27,21 @@ Display::Display(int width, int height, const std::string& title)
     {
 		std::cerr << "Glew failed to initialize!" << std::endl;
     }
-	glViewport(0,0, width, height); // stricly not needed
 
-	// Cull the front face of faces
-	glCullFace(GL_FRONT); 	glEnable(GL_CULL_FACE);
-	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_TEXTURE_2D);
 
 	// Set texture blending
 	glEnable(GL_BLEND);  
  	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_LINE_SMOOTH);
+
+	// Cull the front face of faces
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK); 	
+	glFrontFace(GL_CCW);
 
 	// trap mouse inside window
 	SDL_SetWindowGrab(m_window, SDL_TRUE);
+
 
 	//  make SDL_GL context from window and find make the window the current SDL context.
 	SDL_GL_MakeCurrent(m_window, m_glContext);

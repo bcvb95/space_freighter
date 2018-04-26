@@ -3,6 +3,8 @@
 
 #include <string>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <GL/glew.h>
 
 class Display
 {
@@ -35,7 +37,7 @@ private:
 struct Clock
 {
 	uint32_t last_tick_time = 0;
-	float delta_time = 0;
+	float delta_time = 0.0f;
 
 	void tick()
 	{

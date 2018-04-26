@@ -24,6 +24,9 @@ public:
             return m_perspective * glm::lookAt(m_pos, m_pos+m_forward, m_up);
     }
 
+    inline glm::mat4 GetOrtho() {return m_ortho;}
+    inline glm::mat4 GetUIOrtho() {return m_orthoUI;}
+
     void Zoom(bool zoomIn, float delta_time);
     void Move(glm::vec2 dir, float delta_time);
 
@@ -59,6 +62,7 @@ private:
     glm::vec3 m_forward;
     glm::vec3 m_up;
 
+    glm::mat4 m_orthoUI;
     Display* m_window;
 };
 

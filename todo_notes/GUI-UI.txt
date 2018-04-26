@@ -1,0 +1,10 @@
+The UI system consists of one canvas which acts as the root of the GUI-element tree.
+A panel has either the canvas or another panel as its parent. 
+All children of any gui-element must have the relative position to parent.
+The UI/system should have a way of disabling gui-elements so when disabled, they are not drawn.
+
+* Canvas
+* Panel
+* Checkbox
+* Sliders
+* Buttons

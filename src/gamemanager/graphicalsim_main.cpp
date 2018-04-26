@@ -22,7 +22,7 @@ int main(int argc, char** argv)
 
     Texture* planet_tex = new Texture("../res/planet_tex1.png");
     Texture* star_tex = new Texture("../res/star_tex1.png");
-    BasicShader* shader = new BasicShader("../res/basicShader");
+    BasicShader* shader = new BasicShader("../res/basicShader", cam);
 
     WorldGO* planet_GOs[Simulation::MAX_WORLDS]; 
     DrawableGameObject* star_GOs[Simulation::MAX_SOLARSYSTEMS];
@@ -104,10 +104,10 @@ int main(int argc, char** argv)
         }
         // DRAW
         for (int i=0; i < universe->getSolarSystemCount(); i++) {
-            star_GOs[i]->DrawSprite(cam);
+            star_GOs[i]->DrawSprite();
         }
         for (int i=0; i < universe->getWorldCount(); i++) {
-            planet_GOs[i]->DrawSprite(cam);
+            planet_GOs[i]->DrawSprite();
         }
 
         window->SwapBuffers();

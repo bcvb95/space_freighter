@@ -1,0 +1,8 @@
+
+TO DO list:
+
+* UI/GUI system
+* Clickable gameobjects
+* Transformable text (position, rotation, scale)
+* Resource manager/loader
+* audio/sound

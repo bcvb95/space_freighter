@@ -5,6 +5,7 @@
 #include <transform.h>
 #include <sprite.h>
 #include <camera.h>
+#include <math.h>
 
 class GameObject
 {
@@ -12,6 +13,9 @@ public:
     GameObject(const std::string& go_name) : m_name(go_name) 
     {
         m_transform = new Transform();
+
+        // rotate all gameobjects 180
+        m_transform->GetRot()->y += M_PI;
     };
 
     virtual ~GameObject()
@@ -40,9 +44,9 @@ class DrawableGameObject : public GameObject
             delete m_sprite;
         }
         
-        virtual void DrawSprite(Camera* cam) 
+        void DrawSprite() 
         {
-            m_sprite->Draw(m_transform, cam);
+            m_sprite->Draw(m_transform);
         };
 
         Sprite* GetSprite() {return m_sprite;};

@@ -6,10 +6,12 @@ Camera::Camera(const glm::vec3& pos, float width, float height, int type, Displa
 {
     m_camType=type;
     m_window = window;
+
+    m_orthoUI = glm::ortho(0.0f, (float)m_window->GetWindowWidth(), (float)m_window->GetWindowHeight(), 0.0f, ZNEAR_ORTHO, ZFAR);
      
     m_zoom = 1.0f;
     m_maxzoom = 5.0f;
-    m_zoomspeed = 0.05f;
+    m_zoomspeed = 0.04f;
 
     float windowAspect = m_window->GetWindowAspect();
 

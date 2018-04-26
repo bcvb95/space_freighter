@@ -19,7 +19,7 @@ public:
     Texture* GetTexture() {return m_texture;}
     BasicShader* GetShader() {return m_shader;}
 
-    void Draw(const Transform* transform, Camera* cam ); 
+    void Draw(const Transform* transform); 
 
     void SetTexture(Texture* tex)
     {
