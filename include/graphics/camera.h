@@ -14,7 +14,7 @@
 class Camera 
 {
 public:
-    Camera(const glm::vec3& pos, float width, float height, int type, Display* window);
+    Camera(const glm::vec3& pos, int type, Display* window);
 
     inline glm::mat4 GetViewProjectionMatrix() const 
     {
@@ -25,7 +25,6 @@ public:
     }
 
     inline glm::mat4 GetOrtho() {return m_ortho;}
-    inline glm::mat4 GetUIOrtho() {return m_orthoUI;}
 
     void Zoom(bool zoomIn, float delta_time);
     void Move(glm::vec2 dir, float delta_time);
@@ -62,7 +61,6 @@ private:
     glm::vec3 m_forward;
     glm::vec3 m_up;
 
-    glm::mat4 m_orthoUI;
     Display* m_window;
 };
 

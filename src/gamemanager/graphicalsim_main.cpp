@@ -7,6 +7,7 @@
 #include <input_handler.h>
 #include "mainsim.h"
 #include "world_go.h"
+#include "text_renderer.h"
 
 #define WIDTH 800
 #define HEIGHT 500
@@ -16,7 +17,7 @@ int main(int argc, char** argv)
 {
     // Graphics
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
-    Camera* cam = new Camera(glm::vec3(0,0,0), (float)WIDTH, (float)HEIGHT, 0, window);
+    Camera* cam = new Camera(glm::vec3(0,0,0), 0, window);
     cam->SetZoom(3.2f);
     Clock clock;
 
@@ -76,6 +77,10 @@ int main(int argc, char** argv)
     const Uint8* keystate = SDL_GetKeyboardState(nullptr);
     InputHandler* input_handler = new InputHandler(keystate, cam, window);
 
+    TextShader* text_shader = new TextShader("../res/textShader", cam);
+    TextRenderer* text_renderer = new TextRenderer(text_shader);
+    text_renderer->LoadFont("../res/data-latin.ttf", 14);
+
     float delta_time;
     float time_mul = 1.0f;
     while(isRunning) 
@@ -109,6 +114,8 @@ int main(int argc, char** argv)
         for (int i=0; i < universe->getWorldCount(); i++) {
             planet_GOs[i]->DrawSprite();
         }
+        // GUI
+        text_renderer->RenderText("Good times were had", 0, window->GetWindowHeight()-10, 1, glm::vec4(1));
 
         window->SwapBuffers();
         SDL_Delay(17);

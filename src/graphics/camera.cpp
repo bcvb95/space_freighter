@@ -2,13 +2,11 @@
 #include <camera.h>
 
 
-Camera::Camera(const glm::vec3& pos, float width, float height, int type, Display* window)
+Camera::Camera(const glm::vec3& pos, int type, Display* window)
 {
     m_camType=type;
     m_window = window;
 
-    m_orthoUI = glm::ortho(0.0f, (float)m_window->GetWindowWidth(), (float)m_window->GetWindowHeight(), 0.0f, ZNEAR_ORTHO, ZFAR);
-     
     m_zoom = 1.0f;
     m_maxzoom = 5.0f;
     m_zoomspeed = 0.04f;
@@ -72,7 +70,6 @@ void Camera::Zoom(bool zoomIn, float delta_time)
 
     // update perspective matrix
     this->m_ortho = glm::ortho(left, right, bottom, top, ZNEAR_ORTHO, ZFAR);
-
 }
 
 void Camera::Move(glm::vec2 dir, float delta_time)

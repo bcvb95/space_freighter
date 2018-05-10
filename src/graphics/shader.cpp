@@ -43,6 +43,28 @@ void Shader::Bind()
 }
 //// end base shader class
 
+GUI_Shader::GUI_Shader(const std::string filename, Camera* cam) : Shader(filename, cam)
+{
+    glBindAttribLocation(this->m_program, 0, "position");
+    m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projMat");
+
+    // check for errors finding uniform locations.
+    for (unsigned int i = 0; i < NUM_UNIFORMS; i++)
+    {
+        if (m_uniforms[i] == -1)
+        {
+            std::cout << "glUniformLocation " << i << " failed" << std::endl; 
+        }     
+    }
+
+    m_uiRect =  glm::ortho(0.0f, (float)cam->GetWindow()->GetWindowWidth(), (float)cam->GetWindow()->GetWindowHeight(), 0.0f, -1.0f, 1000.0f);
+}
+
+void GUI_Shader::Update (Camera* cam) {
+    // uniforms for transforming vertex positions 
+    glUniformMatrix4fv(m_uniforms[PROJMAT_U], 1,GL_FALSE, glm::value_ptr(m_uiRect));
+}
+
 TextShader::TextShader(const std::string filename, Camera* cam) : Shader(filename, cam)
 {
     glBindAttribLocation(this->m_program, 0, "position");
@@ -58,11 +80,13 @@ TextShader::TextShader(const std::string filename, Camera* cam) : Shader(filenam
             std::cout << "glUniformLocation " << i << " failed" << std::endl; 
         }     
     }
+
+    m_uiRect =  glm::ortho(0.0f, (float)cam->GetWindow()->GetWindowWidth(), (float)cam->GetWindow()->GetWindowHeight(), 0.0f, -1.0f, 1000.0f);
 }
 
 void TextShader::Update (Camera* cam, glm::vec4 text_color) {
     // uniforms for transforming vertex positions 
-    glUniformMatrix4fv(m_uniforms[PROJMAT_U], 1,GL_FALSE, glm::value_ptr(cam->GetUIOrtho()));
+    glUniformMatrix4fv(m_uniforms[PROJMAT_U], 1,GL_FALSE, glm::value_ptr(m_uiRect));
 
     glUniform4fv(m_uniforms[COLOR_U], 1, glm::value_ptr(text_color));
 }

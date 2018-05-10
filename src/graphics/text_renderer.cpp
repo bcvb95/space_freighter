@@ -49,10 +49,9 @@ void TextRenderer::LoadFont(std::string filename, GLuint fontsize)
 
         // Generate texture
         GLuint texture;
-        glActiveTexture(GL_TEXTURE1);
+        glActiveTexture(GL_TEXTURE0);
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
-
   
         glTexImage2D(
             GL_TEXTURE_2D,

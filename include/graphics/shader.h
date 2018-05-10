@@ -31,6 +31,23 @@ class Shader
     private:
 };
 
+class GUI_Shader : public Shader
+{
+public:
+    GUI_Shader(const std::string filename, Camera* cam);
+    void Update(Camera* cam);
+private:
+    enum
+    {
+        PROJMAT_U,
+        NUM_UNIFORMS
+    };
+
+    GLuint m_uniforms[NUM_UNIFORMS];
+
+    glm::mat4 m_uiRect;
+};
+
 class TextShader : public Shader
 {
 public:
@@ -39,13 +56,15 @@ public:
 private:
     enum // basic shader enum 
     {
-        // Vertex shader uniform handles
+        // vertex shader uniform handles
         PROJMAT_U,
         COLOR_U,
         NUM_UNIFORMS
     };
 
     GLuint m_uniforms[NUM_UNIFORMS];
+
+    glm::mat4 m_uiRect;
 };
 
 class BasicShader : public Shader

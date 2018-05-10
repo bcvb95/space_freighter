@@ -6,7 +6,7 @@ Texture::Texture() {};
 
 Texture::Texture(const char* fileName)
 {
-    glActiveTexture(GL_TEXTURE0);
+    //glActiveTexture(GL_TEXTURE0);
     glGenTextures(1, &m_texture);
     glBindTexture(GL_TEXTURE_2D, m_texture);
     

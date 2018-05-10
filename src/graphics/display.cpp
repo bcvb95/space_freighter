@@ -6,7 +6,6 @@ Display::Display(int width, int height, const std::string& title)
 {
 	SDL_Init(SDL_INIT_VIDEO || SDL_INIT_AUDIO || SDL_INIT_EVENTS || SDL_INIT_TIMER);
 
-
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
@@ -41,7 +40,6 @@ Display::Display(int width, int height, const std::string& title)
 
 	// trap mouse inside window
 	SDL_SetWindowGrab(m_window, SDL_TRUE);
-
 
 	//  make SDL_GL context from window and find make the window the current SDL context.
 	SDL_GL_MakeCurrent(m_window, m_glContext);
