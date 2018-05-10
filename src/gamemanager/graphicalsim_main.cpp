@@ -7,8 +7,9 @@
 #include <input_handler.h>
 #include "mainsim.h"
 #include "world_go.h"
+#include <gui_objects.h>
 #include "text_renderer.h"
-
+ 
 #define WIDTH 800
 #define HEIGHT 500
 
@@ -18,6 +19,8 @@ int main(int argc, char** argv)
     // Graphics
     Display* window = new Display(WIDTH, HEIGHT, argv[0]+2);
     Camera* cam = new Camera(glm::vec3(0,0,0), 0, window);
+    GUI::Canvas* canvas = new GUI::Canvas(window);
+
     cam->SetZoom(3.2f);
     Clock clock;
 
@@ -75,7 +78,7 @@ int main(int argc, char** argv)
     SDL_Event e;
     bool isRunning = true;
     const Uint8* keystate = SDL_GetKeyboardState(nullptr);
-    InputHandler* input_handler = new InputHandler(keystate, cam, window);
+    InputHandler* input_handler = new InputHandler(keystate, cam, window, canvas);
 
     TextShader* text_shader = new TextShader("../res/textShader", cam);
     TextRenderer* text_renderer = new TextRenderer(text_shader);

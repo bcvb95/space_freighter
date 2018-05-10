@@ -4,7 +4,7 @@
 #include "solarsystem.h"
 #include "SimConstants.h"
 
-#include "custom_exceptions.h"
+#include "custom_sim_exceptions.h"
 
 namespace Simulation
 { 

@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits>
+#include <glm/glm.hpp>
 
 namespace Simulation
 {

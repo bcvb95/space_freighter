@@ -1,7 +1,7 @@
 #ifndef SIMUTILS_H
 #define SIMUTILS_H
 
-#include "custom_exceptions.h"
+#include "custom_sim_exceptions.h"
 #include "SimConstants.h"
 #include <glm/glm.hpp>
 

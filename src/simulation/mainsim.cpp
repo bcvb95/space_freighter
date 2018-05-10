@@ -1,6 +1,5 @@
 #include "mainsim.h"
 
-#include <glm/glm.hpp>
 
 namespace Simulation 
 {

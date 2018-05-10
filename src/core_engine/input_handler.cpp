@@ -3,11 +3,12 @@
 #define MOUSEPAN_SPEEDFAC 0.8f;
 
 
-InputHandler::InputHandler(const Uint8* keystate, Camera* cam, Display* window)
+InputHandler::InputHandler(const Uint8* keystate, Camera* cam, Display* window, GUI::Canvas* canvas)
 {
     m_keystate = keystate; 
-    m_cam = cam;
+    m_cam = cam; 
     m_window = window;
+    m_canvas = canvas;
 }
 
 void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning, float* time_mul)
@@ -73,6 +74,8 @@ void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunni
         if (m_keystate[SDL_SCANCODE_P] && m_keystate[SDL_SCANCODE_LSHIFT])
         {
             std::cout<<"Mouse position world (X,Y) = (" << m_mousePosWorld.x<<","<<m_mousePosWorld.y<<")"<< std::endl;
+            std::cout<<"Mouse position screen (X,Y) = (" << m_mousePosScreen.x<<","<<m_mousePosScreen.y<<")"<< std::endl;
+            m_canvas->MouseClicked(m_mousePosScreen);
         }
         
     }

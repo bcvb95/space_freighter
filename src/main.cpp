@@ -16,6 +16,8 @@ glm::vec4 black(0.0f,0.0f,0.0f,1.0f);
 
 using namespace GUI;
 
+void ClickFunction() { std::cout << "CLICKED!" << std::endl; }
+
 int main(int argc, char** argv)
 {
     // window/display, camera and clock-struct
@@ -32,33 +34,21 @@ int main(int argc, char** argv)
     Texture* texture1 = new Texture("../res/tex.png");
     Texture* texture2 = new Texture("../res/img1.png");
     
-    // init gui 
+    // init gui  
     Canvas* canvas = new Canvas(window); 
-    Panel* panel1 = canvas->NewPanel();
-    Panel* panel2 = canvas->NewPanel(panel1);
-    
-    RectTransform* rectus1 = new RectTransform ( glm::vec2(0.25f, 0.25f), glm::vec2(0.75f, 0.25f),
-                                               glm::vec2(0.25f, 0.75f), glm::vec2(0.75f, 0.75f), glm::vec2(0.0f,0.0f), glm::vec2(WIDTH, HEIGHT));
-
-    float rect1_width = rectus1->vert_br.x - rectus1->vert_bl.x;
-    float rect1_height = rectus1->vert_br.y - rectus1->vert_tr.y;
-
-    RectTransform* rectus2 = new RectTransform ( glm::vec2(0.25f, 0.25f), glm::vec2(0.75f, 0.25f),
-                                               glm::vec2(0.25f, 0.75f), glm::vec2(0.75f, 0.75f), rectus1->vert_tl, 
-                                               glm::vec2(rect1_width, rect1_height));
-
-    printf("p1: %f,%f\n", rectus2->vert_tl.x, rectus2->vert_tl.y);
-
-    panel1->SetRectTransform(rectus1);
-    panel2->SetRectTransform(rectus2);
+    Panel* panel1 = canvas->NewPanel(glm::vec2(0.25f, 0.25f), glm::vec2(0.75f, 0.25f), glm::vec2(0.25f, 0.75f), glm::vec2(0.75f, 0.75f));
+    Panel* panel2 = canvas->NewPanel(glm::vec2(0.25f, 0.25f), glm::vec2(0.75f, 0.25f), glm::vec2(0.25f, 0.75f), glm::vec2(0.75f, 0.75f), panel1);
 
     panel1->InitTexture(gui_shader, texture2);
     panel2->InitTexture(gui_shader, texture1);
+
+    Button* button1 = new Button(1);
+    button1->SetOnClick(ClickFunction);
+    button1->Click();
     
     // initlialize textrenderer with font.
     TextRenderer* text_rend = new TextRenderer(text_shader);
     text_rend->LoadFont("../res/FreeSans.ttf", 48);
-
 
     // 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture2, shader1);  
@@ -72,7 +62,7 @@ int main(int argc, char** argv)
     const Uint8* keystate = SDL_GetKeyboardState(nullptr); // holds a snapshot of the keyboard.
     bool isRunning = true;
 
-    InputHandler* input_handler = new InputHandler(keystate, cam, window);
+    InputHandler* input_handler = new InputHandler(keystate, cam, window, canvas);
 
     float delta_time;    
     float counter = 0.0;
@@ -94,7 +84,7 @@ int main(int argc, char** argv)
 
 
         text_rend->RenderText("The text is readaable?", 20.0f, 20.0f, 0.5f, black);
-        panel1->DrawPanel(cam);
+        panel1->Draw(cam);
         
         counter += 0.01;
 

@@ -4,7 +4,7 @@
 #include "SimConstants.h"
 #include "world.h"
 #include <glm/glm.hpp>
-#include "custom_exceptions.h"
+#include "custom_sim_exceptions.h"
 
 namespace Simulation {
     class SolarSystem {
