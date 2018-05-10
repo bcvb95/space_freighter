@@ -7,7 +7,7 @@
 #
 # Don't put empty lines into this file!
 #
-.gitignore
+#.gitignore
 #
 builds/unix/pkg.m4
 #
