@@ -16,7 +16,26 @@ glm::vec4 black(0.0f,0.0f,0.0f,1.0f);
 
 using namespace GUI;
 
-void ClickFunction() { std::cout << "CLICKED!" << std::endl; }
+//void DisableClickFunction(void* button) { 
+//    static_cast<Button*>(button)->Disable();
+//}
+//
+//struct TwoButtons {
+//    Button* button1;
+//    Button* button2;
+//    TwoButtons(Button* b1, Button* b2) : button1(b1), button2(b2) {}
+//};
+//
+//void SwitchButtons(void* twobuttons) {
+//    TwoButtons* tb_struct = static_cast<TwoButtons*>(twobuttons);
+//    if (tb_struct->button1->IsDisabled()) {
+//        tb_struct->button1->Enable();
+//        tb_struct->button2->Disable();
+//    } else {
+//        tb_struct->button1->Disable();
+//        tb_struct->button2->Enable();
+//    }
+//}
 
 int main(int argc, char** argv)
 {
@@ -43,12 +62,56 @@ int main(int argc, char** argv)
 
     panel1->InitTexture(gui_shader, texture2);
     panel2->InitTexture(gui_shader, texture1);
+    panel2->Disable();
 
+<<<<<<< HEAD
     Label* label1 = canvas->NewLabel(glm::vec2(0.1f,0.8f), panel1, text_rend, "hello", FS_18);
 
     Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(0.4f, 0.1f), glm::vec2(0.1f, 0.3f), glm::vec2(0.4f, 0.3f), panel2);
+=======
+    // Buttons
+    Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(60,20), panel2);
+>>>>>>> cf6155ec38b544df72b88ed05b217bdecbe37ddf
     button1->InitTexture(gui_shader, texture3);
-    button1->SetOnClick(ClickFunction);
+
+    Button* button2 = canvas->NewButton(glm::vec2(0.6f, 0.1f), glm::vec2(60,20), panel2);
+    button2->InitTexture(gui_shader, texture3);
+    button2->Disable();
+
+    std::function<void(void*)> SwitchButtons = 
+        [button1, button2](void* num) {
+            std::cout << *(int*)num << std::endl;
+            if (button1->IsDisabled()) {
+                button1->Enable();
+                button2->Disable();
+            } else {
+                button1->Disable();
+                button2->Enable();
+            }
+        };
+    int num1 = 123;
+    int num2 = 321;
+    button1->SetOnClick( SwitchButtons, (void*)&num1 );
+    button2->SetOnClick( SwitchButtons, (void*)&num2 );
+
+    Button* button3 = canvas->NewButton(glm::vec2(0.4f, 0.5f), glm::vec2(60,20), panel1);
+    button3->InitTexture(gui_shader, texture3);
+    //panel1->SwapChildrenOrder(panel1->GetChildCount()-1, 0);
+
+    Button* button4 = canvas->NewButton(glm::vec2(0.6f, 0.7f), glm::vec2(60,20), panel2);
+    button4->InitTexture(gui_shader, texture3);
+
+    std::function<void(void*)> TogglePanel = 
+        [](void* p) { 
+            Panel* panel = static_cast<Panel*>(p);
+            if (!panel->IsDisabled()) {
+                panel->Disable();
+            } else {
+                panel->Enable();
+            }
+        };
+    button3->SetOnClick( TogglePanel, panel2 ); 
+    button4->SetOnClick( TogglePanel, panel2 );
     
     // initlialize textrenderer with font.
 
@@ -78,7 +141,13 @@ int main(int argc, char** argv)
         delta_time = clock.delta_time / 1000.0; // in seconds.
         
         //// HANDLE INPUT HERE
-        input_handler->HandleInput(&e, delta_time, &isRunning);
+        try {
+            input_handler->HandleInput(&e, delta_time, &isRunning);
+        }
+        catch ( const GUI::GUIException &e ) {
+            std::cout << "Error in GUI while running: " << e.what() << std::endl;
+            return 1;
+        }
         /// END INPUT HANDLING
 
 

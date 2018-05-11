@@ -17,19 +17,20 @@ namespace GUI {
     }
 
     void GUIObject::Draw(Camera* cam) {
+        if (m_disabled) { return; }
         m_texStruct->shader->Bind();
         m_texStruct->shader->Update(cam);
 
         glBindVertexArray(m_texStruct->vertexArrayObject);
 
         GLfloat vertices[6][4] = {
-            { m_rect->vert_bl.x , m_rect->vert_bl.y,  0.0, 1.0 },
-            { m_rect->vert_tr.x, m_rect->vert_tr.y ,  1.0, 0.0 },
-            { m_rect->vert_tl.x, m_rect->vert_tl.y ,  0.0, 0.0 },
+            { m_rect->m_bottom_left.x , m_rect->m_bottom_left.y,  0.0, 1.0 },
+            { m_rect->m_top_right.x, m_rect->m_top_right.y ,  1.0, 0.0 },
+            { m_rect->m_top_left.x, m_rect->m_top_left.y ,  0.0, 0.0 },
 
-            { m_rect->vert_bl.x, m_rect->vert_bl.y,   0.0, 1.0 },
-            { m_rect->vert_br.x, m_rect->vert_br.y,   1.0, 1.0 },
-            { m_rect->vert_tr.x, m_rect->vert_tr.y,   1.0, 0.0 }
+            { m_rect->m_bottom_left.x, m_rect->m_bottom_left.y,   0.0, 1.0 },
+            { m_rect->m_bottom_right.x, m_rect->m_bottom_right.y,   1.0, 1.0 },
+            { m_rect->m_top_right.x, m_rect->m_top_right.y,   1.0, 0.0 }
         };
 
         // Render glyph texture over quad
@@ -47,16 +48,18 @@ namespace GUI {
     }
 
     bool GUIObject::MouseInBounds(glm::vec2 mousepos, bool clicked) {
-        if (m_rect->vert_tl.x < mousepos.x && m_rect->vert_tr.x > mousepos.x &&
-            m_rect->vert_tl.y < mousepos.y && m_rect->vert_bl.y > mousepos.y) 
+        if (m_disabled) { return false; }
+        if (m_rect->m_top_left.x < mousepos.x && m_rect->m_top_right.x > mousepos.x &&
+            m_rect->m_top_left.y < mousepos.y && m_rect->m_bottom_left.y > mousepos.y) 
         {
-            std::cout << "Clicked object with ID: " << m_id << std::endl;
             GUIObjectType object_type = this->GetObjectType(); 
             if (object_type == PANEL) {
                 Panel* panel = static_cast<Panel*>(this);
                 GUIObject** children = panel->GetChildren();
-                for (int i = 0; i < panel->GetChildCount(); i++) { 
-                    children[i]->MouseInBounds(mousepos, clicked);
+                for (int i = 0; i  < panel->GetChildCount() ; i++) { 
+                    if (children[i]->MouseInBounds(mousepos, clicked)) {
+                        break;
+                    }
                 }
             } else if (object_type == BUTTON) {
                 if (clicked) {
@@ -64,7 +67,10 @@ namespace GUI {
                     button->Click();
                 }
             }
+
+            return true;
         }
+        return false;
     }
 
     //////////////////////////////////////////////////////////////////
@@ -95,13 +101,19 @@ namespace GUI {
         new_object->SetParent(this);
         m_children[m_childCount] = new_object;
         m_childCount++;
-        new_object->SetRectTransform(new RectTransform(tl, tr, bl, br, this->m_rect->vert_tl, this->m_rect->wh_size));   
+        new_object->SetRectTransform(new RectTransform(tl, tr, bl, br, this->m_rect->m_top_left, this->m_rect->wh_size));   
     } 
 
     void Panel::AddChild(GUIObject* new_object)
     {
         m_children[m_childCount] = new_object;
         m_childCount++;
+    }
+    void Panel::AddChild(glm::vec2 rel_pos, glm::vec2 wh_size, GUIObject* new_object) {
+        new_object->SetParent(this);
+        m_children[m_childCount] = new_object;
+        m_childCount++;
+        new_object->SetRectTransform(new RectTransform(rel_pos, wh_size, this->m_rect->m_top_left, this->m_rect->wh_size));   
     }
 
     void Panel::RemoveChild(GUIObject* child_object)
@@ -111,9 +123,10 @@ namespace GUI {
 
     void Panel::Draw(Camera* cam)
     {
+        if (m_disabled) { return; }
         GUIObject::Draw(cam); // Base class draw method
         
-        for (int i = 0; i < m_childCount; i++) 
+        for (int i = m_childCount-1; i >= 0; i--) 
         {
             switch (m_children[i]->GetObjectType()) {
                 case PANEL:
@@ -130,6 +143,12 @@ namespace GUI {
                     break;
             }
         }
+    }
+
+    void Panel::SwapChildrenOrder(int idx1, int idx2) { 
+        GUIObject* tmp = m_children[idx1];  
+        m_children[idx1] = m_children[idx2];
+        m_children[idx2] = tmp;
     }
 
     void RemoveFromObjectList(GUIObject* object, GUIObject** object_list, int* count)
@@ -249,6 +268,22 @@ namespace GUI {
         return new_panel;
     }     
 
+    Panel* Canvas::NewPanel(glm::vec2 rel_pos, glm::vec2 wh_size, Panel* parent) {
+        Panel* new_panel = new Panel(m_unique_panelID);
+        m_unique_panelID++;
+
+        if (parent == NULL) {
+            new_panel->SetRectTransform(new RectTransform(rel_pos, wh_size, glm::vec2(0), glm::vec2(m_width, m_height)));
+            m_rootPanelList[m_numPanels] = new_panel;
+            m_numPanels++;
+        }
+        else {
+           parent->AddChild(rel_pos, wh_size, new_panel); 
+        }
+
+        return new_panel;
+    }
+
     void Canvas::DeletePanel(Panel* panel) 
     {
         if (panel->GetChildCount() > 0) {
@@ -268,14 +303,27 @@ namespace GUI {
 
     void Canvas::MouseInBounds(glm::vec2 mousepos, bool clicked) {
         for (int i=0; i < m_numPanels; i++) {
-            m_rootPanelList[i]->MouseInBounds(mousepos, clicked);
+            if (m_rootPanelList[i]->MouseInBounds(mousepos, clicked)) {
+                return;
+            }
         }
+    }
+    
+    Button* Canvas::m_NewButton() {
+        Button* new_button = new Button(m_unique_buttonID);
+        m_unique_buttonID++;
+        return new_button;
     }
 
     Button* Canvas::NewButton(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent) {
-        Button* new_button = new Button(m_unique_buttonID);
+        Button* new_button = m_NewButton();
         parent->AddChild(tl, tr, bl, br, new_button);
-        m_unique_buttonID++;
+        return new_button;
+    }
+
+    Button* Canvas::NewButton(glm::vec2 rel_pos, glm::vec2 wh_size, Panel* parent) {
+        Button* new_button = m_NewButton();
+        parent->AddChild(rel_pos, wh_size, new_button);
         return new_button;
     }
 
