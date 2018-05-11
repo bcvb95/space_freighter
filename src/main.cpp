@@ -48,6 +48,7 @@ int main(int argc, char** argv)
     BasicShader* shader1 = new BasicShader("../res/basicShader", cam);
     TextShader* text_shader = new TextShader("../res/textShader", cam);
     GUI_Shader* gui_shader = new GUI_Shader("../res/gui_shader", cam);
+    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
 
     //
     Texture* texture1 = new Texture("../res/tex.png");
@@ -63,8 +64,14 @@ int main(int argc, char** argv)
     panel2->InitTexture(gui_shader, texture1);
     panel2->Disable();
 
+<<<<<<< HEAD
+    Label* label1 = canvas->NewLabel(glm::vec2(0.1f,0.8f), panel1, text_rend, "hello", FS_18);
+
+    Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(0.4f, 0.1f), glm::vec2(0.1f, 0.3f), glm::vec2(0.4f, 0.3f), panel2);
+=======
     // Buttons
     Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(60,20), panel2);
+>>>>>>> cf6155ec38b544df72b88ed05b217bdecbe37ddf
     button1->InitTexture(gui_shader, texture3);
 
     Button* button2 = canvas->NewButton(glm::vec2(0.6f, 0.1f), glm::vec2(60,20), panel2);
@@ -107,7 +114,6 @@ int main(int argc, char** argv)
     button4->SetOnClick( TogglePanel, panel2 );
     
     // initlialize textrenderer with font.
-    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
 
     // 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture2, shader1);  
@@ -148,7 +154,6 @@ int main(int argc, char** argv)
         go1->DrawSprite();
 
 
-        text_rend->RenderText("The text is readaable?", 20.0f, 20.0f, 0.5f, black, FS_48);
         panel1->Draw(cam);
         
         counter += 0.01;
