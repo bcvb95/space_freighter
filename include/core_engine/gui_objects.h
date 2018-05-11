@@ -224,9 +224,6 @@ namespace GUI {
 
         int m_numPanels = 0;
         Panel* m_rootPanelList[MAX_PANELS_IN_CANVAS]; 
-
-        Panel* m_NewPanel();
-        Button* m_NewButton();
     };
 
     void RemoveFromObjectList(GUIObject* object, GUIObject** object_list, int* count);

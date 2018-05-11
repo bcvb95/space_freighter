@@ -255,20 +255,16 @@ namespace GUI {
         }
     }
     
-    Button* Canvas::m_NewButton() {
+    Button* Canvas::NewButton(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent) {
         Button* new_button = new Button(m_unique_buttonID);
         m_unique_buttonID++;
-        return new_button;
-    }
-
-    Button* Canvas::NewButton(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent) {
-        Button* new_button = m_NewButton();
         parent->AddChild(tl, tr, bl, br, new_button);
         return new_button;
     }
 
     Button* Canvas::NewButton(glm::vec2 rel_pos, glm::vec2 wh_size, Panel* parent) {
-        Button* new_button = m_NewButton();
+        Button* new_button = new Button(m_unique_buttonID);
+        m_unique_buttonID++;
         parent->AddChild(rel_pos, wh_size, new_button);
         return new_button;
     }
