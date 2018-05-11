@@ -17,6 +17,7 @@ namespace GUI {
     }
 
     void GUIObject::Draw(Camera* cam) {
+        if (m_disabled) { return; }
         m_texStruct->shader->Bind();
         m_texStruct->shader->Update(cam);
 
@@ -47,10 +48,10 @@ namespace GUI {
     }
 
     bool GUIObject::MouseInBounds(glm::vec2 mousepos, bool clicked) {
+        if (m_disabled) { return false; }
         if (m_rect->vert_tl.x < mousepos.x && m_rect->vert_tr.x > mousepos.x &&
             m_rect->vert_tl.y < mousepos.y && m_rect->vert_bl.y > mousepos.y) 
         {
-            std::cout << "Clicked object with ID: " << m_id << std::endl;
             GUIObjectType object_type = this->GetObjectType(); 
             if (object_type == PANEL) {
                 Panel* panel = static_cast<Panel*>(this);
@@ -64,7 +65,10 @@ namespace GUI {
                     button->Click();
                 }
             }
+
+            return true;
         }
+        return false;
     }
 
     //////////////////////////////////////////////////////////////////
@@ -105,6 +109,7 @@ namespace GUI {
 
     void Panel::Draw(Camera* cam)
     {
+        if (m_disabled) { return; }
         GUIObject::Draw(cam); // Base class draw method
         
         for (int i = 0; i < m_childCount; i++) 

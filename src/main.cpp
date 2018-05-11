@@ -16,7 +16,26 @@ glm::vec4 black(0.0f,0.0f,0.0f,1.0f);
 
 using namespace GUI;
 
-void ClickFunction() { std::cout << "CLICKED!" << std::endl; }
+void DisableClickFunction(void* button) { 
+    static_cast<Button*>(button)->Disable();
+}
+
+struct TwoButtons {
+    Button* button1;
+    Button* button2;
+    TwoButtons(Button* b1, Button* b2) : button1(b1), button2(b2) {}
+};
+
+void SwitchButtons(void* twobuttons) {
+    TwoButtons* tb_struct = static_cast<TwoButtons*>(twobuttons);
+    if (tb_struct->button1->IsDisabled()) {
+        tb_struct->button1->Enable();
+        tb_struct->button2->Disable();
+    } else {
+        tb_struct->button1->Disable();
+        tb_struct->button2->Enable();
+    }
+}
 
 int main(int argc, char** argv)
 {
@@ -43,9 +62,18 @@ int main(int argc, char** argv)
     panel1->InitTexture(gui_shader, texture2);
     panel2->InitTexture(gui_shader, texture1);
 
+    // Buttons
     Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(0.4f, 0.1f), glm::vec2(0.1f, 0.3f), glm::vec2(0.4f, 0.3f), panel2);
     button1->InitTexture(gui_shader, texture3);
-    button1->SetOnClick(ClickFunction);
+
+    Button* button2 = canvas->NewButton(glm::vec2(0.6f, 0.1f), glm::vec2(0.9f, 0.1f), glm::vec2(0.6f, 0.3f), glm::vec2(0.9f, 0.3f), panel2);
+    button2->InitTexture(gui_shader, texture3);
+    button2->Disable();
+
+    TwoButtons* tb_struct = new TwoButtons(button1, button2);
+
+    button1->SetOnClick(SwitchButtons, tb_struct);
+    button2->SetOnClick(SwitchButtons, tb_struct);
     
     // initlialize textrenderer with font.
     TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");

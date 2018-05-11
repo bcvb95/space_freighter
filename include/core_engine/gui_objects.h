@@ -74,6 +74,9 @@ namespace GUI {
         }
     };
 
+    //////////////////////////////////////////////////////////////////
+    // GUI Object Type Enum
+    //////////////////////////////////////////////////////////////////
     enum GUIObjectType {
         PANEL=0, BUTTON=1, NONE=2
     };
@@ -98,8 +101,12 @@ namespace GUI {
             virtual GUIObject* SetParent(GUIObject* parent) {this->m_parent;}
 
             unsigned int GetID() { return m_id; }
+            bool IsDisabled () { return m_disabled; }
+            void Disable() { m_disabled = true; }
+            void Enable() { m_disabled = false; }
         protected:
             unsigned int m_id;
+            bool m_disabled = false;
             GUIObject* m_parent = NULL;
             RectTransform* m_rect;
             TextureStruct* m_texStruct = NULL;
@@ -155,8 +162,9 @@ namespace GUI {
 
             virtual GUIObjectType GetObjectType() { return BUTTON; }
             
-            void SetOnClick(void (*f)(void)) { m_onClick = f; }
-            void Click() { m_onClick(); }
+            void SetOnClick(void (*f)(void*), void* param = NULL) { m_onClick = f; m_param = param; }
+
+            void Click() { m_onClick(m_param); }
             virtual Panel* GetParent() { return static_cast<Panel*>(m_parent); }
 
             virtual void Draw(Camera* cam);
@@ -164,7 +172,8 @@ namespace GUI {
         private:
             Panel* m_parent;
 
-            void (*m_onClick) (void);
+            void (*m_onClick) (void*);
+            void* m_param;
     };
 
     //////////////////////////////////////////////////////////////////
