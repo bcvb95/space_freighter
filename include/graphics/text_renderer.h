@@ -11,6 +11,14 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
+enum FONTSIZE
+{
+    FS_12,
+    FS_18,
+    FS_24,
+    FS_48,
+    MAX_NUM_FONTSIZES
+};
 
 struct Character {
     GLuint     TextureID;  // ID handle of the glyph texture
@@ -23,10 +31,10 @@ struct Character {
 class TextRenderer
 {
 public:
-    TextRenderer(TextShader* shader);
+    TextRenderer(TextShader* shader, std::string filename);
     
-    void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec4 color=glm::vec4(0,0,0,1));
-    void LoadFont(std::string filename, GLuint fontsize);
+    void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec4 color=glm::vec4(0,0,0,1), FONTSIZE fs_enum = FS_12);
+    void LoadFont();
 
 protected:
 private:
@@ -40,11 +48,14 @@ private:
     GLuint m_vertexArrayObject;
     GLuint m_vertexArrayBuffer;
 
-    // storage for fontcharacters
-    std::map<GLchar, Character> m_characters;
+
+    // array of charcters-structs for each loaded fontsize
+    std::map<GLchar, Character> m_characters[MAX_NUM_FONTSIZES];
 
     // pointer to shader
     TextShader* m_shader;
+
+    std::string m_filename;
 };
 
 

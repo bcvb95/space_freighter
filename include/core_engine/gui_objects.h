@@ -74,6 +74,10 @@ namespace GUI {
         }
     };
 
+    enum GUIObjectType {
+        PANEL=0, BUTTON=1, NONE=2
+    };
+
     //////////////////////////////////////////////////////////////////
     // Generic GUI Object
     //////////////////////////////////////////////////////////////////
@@ -83,19 +87,24 @@ namespace GUI {
             GUIObject(unsigned int id);
             ~GUIObject();
 
+            virtual GUIObjectType GetObjectType() { return NONE; }
+
             RectTransform* GetRectTransform() { return m_rect; }
             void SetRectTransform(RectTransform* rect) {this->m_rect = rect;}
-            bool MouseInBounds(glm::vec2 mousepos);
+            bool MouseInBounds(glm::vec2 mousepos, bool clicked);
 
             void InitTexture(GUI_Shader* shader, Texture* texture);
+            virtual GUIObject* GetParent() {return m_parent;}
+            virtual GUIObject* SetParent(GUIObject* parent) {this->m_parent;}
 
             unsigned int GetID() { return m_id; }
         protected:
             unsigned int m_id;
+            GUIObject* m_parent = NULL;
             RectTransform* m_rect;
             TextureStruct* m_texStruct = NULL;
-
             virtual void Draw(Camera* cam);
+
     };
 
     //////////////////////////////////////////////////////////////////
@@ -115,24 +124,24 @@ namespace GUI {
     //////////////////////////////////////////////////////////////////
     class Panel : public GUIObject
     {
-    public:
-        Panel(unsigned int id); 
-        ~Panel();
+        public:
+            Panel(unsigned int id); 
+            ~Panel();
 
-        Panel* GetParent() {return m_parent;}
-        void SetParent(Panel* parent) {this->m_parent = parent;}
+            virtual GUIObjectType GetObjectType() { return PANEL; }
 
-        int GetChildCount() {return m_childCount;}
-        Panel** GetChildPanels() {return m_childrenPanels;}
-        void AddChildPanel(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* child_panel);
-        void RemoveChildPanel(Panel* child_panel);
+            virtual Panel* GetParent() { return static_cast<Panel*>(m_parent); }
+            virtual Panel* SetParent(Panel* parent) { m_parent = parent; }
 
-        virtual void Draw(Camera* cam);
-    protected:
-        Panel* m_parent;
+            int GetChildCount() {return m_childCount;}
+            GUIObject** GetChildren() {return m_children;}
+            void AddChild(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, GUIObject* child_object);
+            void RemoveChild(GUIObject* child_object);
 
-        int m_childCount = 0; 
-        Panel* m_childrenPanels[MAX_CHILD_PANELS];
+            virtual void Draw(Camera* cam);
+        protected:
+            int m_childCount = 0; 
+            GUIObject* m_children[MAX_CHILD_PANELS];
     };
 
     //////////////////////////////////////////////////////////////////
@@ -143,9 +152,14 @@ namespace GUI {
         public:
             Button(unsigned int id);
             ~Button();
+
+            virtual GUIObjectType GetObjectType() { return BUTTON; }
             
             void SetOnClick(void (*f)(void)) { m_onClick = f; }
             void Click() { m_onClick(); }
+            virtual Panel* GetParent() { return static_cast<Panel*>(m_parent); }
+
+            virtual void Draw(Camera* cam);
 
         private:
             Panel* m_parent;
@@ -166,7 +180,8 @@ namespace GUI {
         void DeletePanel(Panel* panel);
         Button* NewButton(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent);
         void DeleteButton(Button* button);
-        void MouseClicked(glm::vec2 mousepos);
+        
+        void MouseInBounds(glm::vec2 mousepos, bool clicked);
     private:
         // rect defining the size of the canvas
         int m_width, m_height;
@@ -178,7 +193,7 @@ namespace GUI {
 
     };
 
-    void RemoveFromPanelList(Panel* panel, Panel** panel_list, int* count);
+    void RemoveFromObjectList(GUIObject* object, GUIObject** object_list, int* count);
 }
 
 

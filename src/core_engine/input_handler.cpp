@@ -54,6 +54,14 @@ void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunni
         if (e->type == SDL_QUIT || m_keystate[SDL_SCANCODE_ESCAPE])
             *isGameRunning = false;
 
+
+        // Mouse click
+        if (e->type == SDL_MOUSEBUTTONDOWN) {
+            if (e->button.button == SDL_BUTTON_LEFT) {
+                m_canvas->MouseInBounds(m_mousePosScreen, true);
+            } 
+        }
+
         HandleCamInput(e, delta_time);
 
         // Handle input for setting time speed
@@ -75,8 +83,9 @@ void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunni
         {
             std::cout<<"Mouse position world (X,Y) = (" << m_mousePosWorld.x<<","<<m_mousePosWorld.y<<")"<< std::endl;
             std::cout<<"Mouse position screen (X,Y) = (" << m_mousePosScreen.x<<","<<m_mousePosScreen.y<<")"<< std::endl;
-            m_canvas->MouseClicked(m_mousePosScreen);
+
         }
+
         
     }
 }

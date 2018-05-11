@@ -33,6 +33,7 @@ int main(int argc, char** argv)
     //
     Texture* texture1 = new Texture("../res/tex.png");
     Texture* texture2 = new Texture("../res/img1.png");
+    Texture* texture3 = new Texture("../res/buttontex.png");
     
     // init gui  
     Canvas* canvas = new Canvas(window); 
@@ -42,9 +43,9 @@ int main(int argc, char** argv)
     panel1->InitTexture(gui_shader, texture2);
     panel2->InitTexture(gui_shader, texture1);
 
-    Button* button1 = new Button(1);
+    Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(0.4f, 0.1f), glm::vec2(0.1f, 0.3f), glm::vec2(0.4f, 0.3f), panel2);
+    button1->InitTexture(gui_shader, texture3);
     button1->SetOnClick(ClickFunction);
-    button1->Click();
     
     // initlialize textrenderer with font.
     TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
