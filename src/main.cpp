@@ -47,8 +47,7 @@ int main(int argc, char** argv)
     button1->Click();
     
     // initlialize textrenderer with font.
-    TextRenderer* text_rend = new TextRenderer(text_shader);
-    text_rend->LoadFont("../res/FreeSans.ttf", 48);
+    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
 
     // 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture2, shader1);  
@@ -83,7 +82,7 @@ int main(int argc, char** argv)
         go1->DrawSprite();
 
 
-        text_rend->RenderText("The text is readaable?", 20.0f, 20.0f, 0.5f, black);
+        text_rend->RenderText("The text is readaable?", 20.0f, 20.0f, 0.5f, black, FS_48);
         panel1->Draw(cam);
         
         counter += 0.01;
