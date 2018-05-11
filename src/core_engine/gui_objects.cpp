@@ -137,7 +137,7 @@ namespace GUI {
 
     Button::~Button() { } 
 
-    
+
 
     //////////////////////////////////////////////////////////////////
     // Canvas 
@@ -156,7 +156,7 @@ namespace GUI {
     }
 
     Panel* Canvas::NewPanel(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent) 
-    {   
+    {  
         Panel* new_panel = new Panel(m_unique_panelID);
         m_unique_panelID++;
 
