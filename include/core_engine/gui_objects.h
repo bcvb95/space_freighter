@@ -7,9 +7,11 @@
 #include <iostream>
 
 #include <gui_constants.h>
+#include <gui_exceptions.h>
 #include <display.h>
 #include <texture.h>
 #include <shader.h>
+#include <functional>
 
 namespace GUI {
 
@@ -162,9 +164,16 @@ namespace GUI {
 
             virtual GUIObjectType GetObjectType() { return BUTTON; }
             
-            void SetOnClick(void (*f)(void*), void* param = NULL) { m_onClick = f; m_param = param; }
+            //void SetOnClick(void (*f)(void*), void* param = NULL) { m_onClick = f; m_param = param; }
+            void SetOnClick(std::function<void(void*)> f, void* param = NULL) { m_onClick = f; m_param = param; } 
 
-            void Click() { m_onClick(m_param); }
+            void Click() { 
+                //m_onClick(m_param);
+                if (m_onClick == NULL) {
+                    throw NoFunctionOnButtonException(m_id);
+                }
+                m_onClick(m_param);  
+            }
             virtual Panel* GetParent() { return static_cast<Panel*>(m_parent); }
 
             virtual void Draw(Camera* cam);
@@ -172,7 +181,8 @@ namespace GUI {
         private:
             Panel* m_parent;
 
-            void (*m_onClick) (void*);
+            //void (*m_onClick) (void*);
+            std::function<void(void*)> m_onClick = NULL;
             void* m_param;
     };
 

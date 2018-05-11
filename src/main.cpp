@@ -16,26 +16,26 @@ glm::vec4 black(0.0f,0.0f,0.0f,1.0f);
 
 using namespace GUI;
 
-void DisableClickFunction(void* button) { 
-    static_cast<Button*>(button)->Disable();
-}
-
-struct TwoButtons {
-    Button* button1;
-    Button* button2;
-    TwoButtons(Button* b1, Button* b2) : button1(b1), button2(b2) {}
-};
-
-void SwitchButtons(void* twobuttons) {
-    TwoButtons* tb_struct = static_cast<TwoButtons*>(twobuttons);
-    if (tb_struct->button1->IsDisabled()) {
-        tb_struct->button1->Enable();
-        tb_struct->button2->Disable();
-    } else {
-        tb_struct->button1->Disable();
-        tb_struct->button2->Enable();
-    }
-}
+//void DisableClickFunction(void* button) { 
+//    static_cast<Button*>(button)->Disable();
+//}
+//
+//struct TwoButtons {
+//    Button* button1;
+//    Button* button2;
+//    TwoButtons(Button* b1, Button* b2) : button1(b1), button2(b2) {}
+//};
+//
+//void SwitchButtons(void* twobuttons) {
+//    TwoButtons* tb_struct = static_cast<TwoButtons*>(twobuttons);
+//    if (tb_struct->button1->IsDisabled()) {
+//        tb_struct->button1->Enable();
+//        tb_struct->button2->Disable();
+//    } else {
+//        tb_struct->button1->Disable();
+//        tb_struct->button2->Enable();
+//    }
+//}
 
 int main(int argc, char** argv)
 {
@@ -70,10 +70,30 @@ int main(int argc, char** argv)
     button2->InitTexture(gui_shader, texture3);
     button2->Disable();
 
-    TwoButtons* tb_struct = new TwoButtons(button1, button2);
+    std::function<void(void*)> SwitchButtons = 
+        [button1, button2](void* num) {
+            std::cout << *(int*)num << std::endl;
+            if (button1->IsDisabled()) {
+                button1->Enable();
+                button2->Disable();
+            } else {
+                button1->Disable();
+                button2->Enable();
+            }
+        };
+    int num1 = 123;
+    int num2 = 321;
+    button1->SetOnClick( SwitchButtons, (void*)&num1 );
+    button2->SetOnClick( SwitchButtons, (void*)&num2 );
 
-    button1->SetOnClick(SwitchButtons, tb_struct);
-    button2->SetOnClick(SwitchButtons, tb_struct);
+    Button* button3 = canvas->NewButton(glm::vec2(0.35f, 0.5f), glm::vec2(0.65f, 0.5f), glm::vec2(0.35f, 0.7f), glm::vec2(0.65f, 0.7f), panel2);
+    button3->InitTexture(gui_shader, texture3);
+    int clickCounter = 0;
+    button3->SetOnClick( [&clickCounter](void*) { 
+        clickCounter++; 
+        std::cout << "Counter: " << clickCounter << std::endl; } );
+
+        
     
     // initlialize textrenderer with font.
     TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
@@ -104,7 +124,13 @@ int main(int argc, char** argv)
         delta_time = clock.delta_time / 1000.0; // in seconds.
         
         //// HANDLE INPUT HERE
-        input_handler->HandleInput(&e, delta_time, &isRunning);
+        try {
+            input_handler->HandleInput(&e, delta_time, &isRunning);
+        }
+        catch ( const GUI::GUIException &e ) {
+            std::cout << "Error in GUI while running: " << e.what() << std::endl;
+            return 1;
+        }
         /// END INPUT HANDLING
 
 
