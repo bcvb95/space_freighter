@@ -61,12 +61,13 @@ int main(int argc, char** argv)
 
     panel1->InitTexture(gui_shader, texture2);
     panel2->InitTexture(gui_shader, texture1);
+    panel2->Disable();
 
     // Buttons
-    Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(0.4f, 0.1f), glm::vec2(0.1f, 0.3f), glm::vec2(0.4f, 0.3f), panel2);
+    Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(60,20), panel2);
     button1->InitTexture(gui_shader, texture3);
 
-    Button* button2 = canvas->NewButton(glm::vec2(0.6f, 0.1f), glm::vec2(0.9f, 0.1f), glm::vec2(0.6f, 0.3f), glm::vec2(0.9f, 0.3f), panel2);
+    Button* button2 = canvas->NewButton(glm::vec2(0.6f, 0.1f), glm::vec2(60,20), panel2);
     button2->InitTexture(gui_shader, texture3);
     button2->Disable();
 
@@ -86,14 +87,24 @@ int main(int argc, char** argv)
     button1->SetOnClick( SwitchButtons, (void*)&num1 );
     button2->SetOnClick( SwitchButtons, (void*)&num2 );
 
-    Button* button3 = canvas->NewButton(glm::vec2(0.35f, 0.5f), glm::vec2(0.65f, 0.5f), glm::vec2(0.35f, 0.7f), glm::vec2(0.65f, 0.7f), panel2);
+    Button* button3 = canvas->NewButton(glm::vec2(0.4f, 0.5f), glm::vec2(60,20), panel1);
     button3->InitTexture(gui_shader, texture3);
-    int clickCounter = 0;
-    button3->SetOnClick( [&clickCounter](void*) { 
-        clickCounter++; 
-        std::cout << "Counter: " << clickCounter << std::endl; } );
+    //panel1->SwapChildrenOrder(panel1->GetChildCount()-1, 0);
 
-        
+    Button* button4 = canvas->NewButton(glm::vec2(0.6f, 0.7f), glm::vec2(60,20), panel2);
+    button4->InitTexture(gui_shader, texture3);
+
+    std::function<void(void*)> TogglePanel = 
+        [](void* p) { 
+            Panel* panel = static_cast<Panel*>(p);
+            if (!panel->IsDisabled()) {
+                panel->Disable();
+            } else {
+                panel->Enable();
+            }
+        };
+    button3->SetOnClick( TogglePanel, panel2 ); 
+    button4->SetOnClick( TogglePanel, panel2 );
     
     // initlialize textrenderer with font.
     TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");

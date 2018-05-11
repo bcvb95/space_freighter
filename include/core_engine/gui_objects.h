@@ -20,33 +20,44 @@ namespace GUI {
     //////////////////////////////////////////////////////////////////
     struct RectTransform
     {
-        glm::vec2 top_left;
-        glm::vec2 top_right;
-        glm::vec2 bottom_left;
-        glm::vec2 bottom_right;
+        glm::vec2 m_top_left;
+        glm::vec2 m_top_right;
+        glm::vec2 m_bottom_left;
+        glm::vec2 m_bottom_right;
 
-        glm::vec2 vert_tl;
-        glm::vec2 vert_tr;
-        glm::vec2 vert_bl;
-        glm::vec2 vert_br;
+        glm::vec2 m_rel_tl;
+        glm::vec2 m_rel_tr;
+        glm::vec2 m_rel_bl;
+        glm::vec2 m_rel_br;
 
         glm::vec2 wh_size; // width, height
 
-        RectTransform(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, glm::vec2 pos, glm::vec2 size) 
-            : top_left(tl), top_right(tr), bottom_left(bl), bottom_right(br) 
-            {
-                vert_tl = pos + (size * top_left);
-                vert_tr = pos + (size * top_right);
-                vert_bl = pos + (size * bottom_left);
-                vert_br = pos + (size * bottom_right);
+        RectTransform(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, glm::vec2 parent_pos, glm::vec2 parent_size) 
+        : m_rel_tl(tl), m_rel_tr(tr), m_rel_bl(bl), m_rel_br(br) {
+            m_top_left = parent_pos + (parent_size * m_rel_tl);
+            m_top_right = parent_pos + (parent_size * m_rel_tr);
+            m_bottom_left = parent_pos + (parent_size * m_rel_bl);
+            m_bottom_right = parent_pos + (parent_size * m_rel_br);
 
-                wh_size = glm::vec2(vert_tr.x - vert_tl.x, vert_br.y - vert_tr.y);
-            }
+            wh_size = glm::vec2(m_top_right.x - m_top_left.x, m_bottom_right.y - m_top_right.y);
+        }
+        RectTransform(glm::vec2 rel_tl, glm::vec2 size, glm::vec2 parent_pos, glm::vec2 parent_size) 
+        : wh_size(size) {
+            m_top_left = parent_pos + (parent_size * rel_tl);
+            m_top_right = m_top_left + glm::vec2(wh_size.x, 0);
+            m_bottom_left = m_top_left + glm::vec2(0, wh_size.y);
+            m_bottom_right = m_top_left + glm::vec2(wh_size.x, wh_size.y);
+
+            m_rel_tl = (m_top_left-parent_pos) / parent_size;
+            m_rel_tr = (m_top_right-parent_pos) / parent_size;
+            m_rel_bl = (m_bottom_left-parent_pos) / parent_size;
+            m_rel_br = (m_bottom_right-parent_pos) / parent_size;
+        }
         void print_verts() {
-            std::cout << "Top left: " << vert_tl.x << ", " << vert_tl.y << std::endl;
-            std::cout << "Top right: " << vert_tr.x << ", " << vert_tr.y << std::endl;
-            std::cout << "Bottom left: " << vert_bl.x << ", " << vert_bl.y << std::endl;
-            std::cout << "Bottom right: " << vert_br.x << ", " << vert_br.y << std::endl;
+            std::cout << "Top left: " << m_top_left.x << ", " << m_top_left.y << std::endl;
+            std::cout << "Top right: " << m_top_right.x << ", " << m_top_right.y << std::endl;
+            std::cout << "Bottom left: " << m_bottom_left.x << ", " << m_bottom_left.y << std::endl;
+            std::cout << "Bottom right: " << m_bottom_right.x << ", " << m_bottom_right.y << std::endl;
         }
     };
 
@@ -100,7 +111,7 @@ namespace GUI {
 
             void InitTexture(GUI_Shader* shader, Texture* texture);
             virtual GUIObject* GetParent() {return m_parent;}
-            virtual GUIObject* SetParent(GUIObject* parent) {this->m_parent;}
+            virtual GUIObject* SetParent(GUIObject* parent) {this->m_parent = parent;}
 
             unsigned int GetID() { return m_id; }
             bool IsDisabled () { return m_disabled; }
@@ -145,7 +156,9 @@ namespace GUI {
             int GetChildCount() {return m_childCount;}
             GUIObject** GetChildren() {return m_children;}
             void AddChild(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, GUIObject* child_object);
+            void AddChild(glm::vec2 rel_pos, glm::vec2 wh_size, GUIObject* child_object);
             void RemoveChild(GUIObject* child_object);
+            void SwapChildrenOrder(int idx1, int idx2);
 
             virtual void Draw(Camera* cam);
         protected:
@@ -196,8 +209,10 @@ namespace GUI {
         ~Canvas();
 
         Panel* NewPanel(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent = NULL);
+        Panel* NewPanel(glm::vec2 rel_pos, glm::vec2 wh_size, Panel* parent = NULL);
         void DeletePanel(Panel* panel);
         Button* NewButton(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent);
+        Button* NewButton(glm::vec2 rel_pos, glm::vec2 wh_size, Panel* parent);
         void DeleteButton(Button* button);
         
         void MouseInBounds(glm::vec2 mousepos, bool clicked);
@@ -210,6 +225,8 @@ namespace GUI {
         int m_numPanels = 0;
         Panel* m_rootPanelList[MAX_PANELS_IN_CANVAS]; 
 
+        Panel* m_NewPanel();
+        Button* m_NewButton();
     };
 
     void RemoveFromObjectList(GUIObject* object, GUIObject** object_list, int* count);
