@@ -155,7 +155,7 @@ namespace GUI {
     Button::Button(unsigned int id) : ClickableGUIObject(id) {
     }
 
-    Button::~Button() { } 
+    Button::~Button() { }  
 
     void Button::Draw(Camera* cam) {
         GUIObject::Draw(cam);
