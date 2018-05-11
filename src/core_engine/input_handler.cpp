@@ -75,7 +75,7 @@ void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunni
         {
             std::cout<<"Mouse position world (X,Y) = (" << m_mousePosWorld.x<<","<<m_mousePosWorld.y<<")"<< std::endl;
             std::cout<<"Mouse position screen (X,Y) = (" << m_mousePosScreen.x<<","<<m_mousePosScreen.y<<")"<< std::endl;
-            m_canvas->MouseClicked(m_mousePosScreen);
+            m_canvas->MouseInBounds(m_mousePosScreen, true);
         }
         
     }
