@@ -157,10 +157,13 @@ namespace GUI {
 
     Button::~Button() { }  
 
+    void Button::Draw(Camera* cam) {
+        GUIObject::Draw(cam);
+    }
 
     //////////////////////////////////////////////////////////////////
     // Canvas 
-    //////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
     Canvas::Canvas(Display* window) 
     {
         m_width = window->GetWindowWidth();
@@ -175,7 +178,7 @@ namespace GUI {
     }
 
     Panel* Canvas::NewPanel(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent) 
-    {  
+    {   
         Panel* new_panel = new Panel(m_unique_panelID);
         m_unique_panelID++;
 
