@@ -11,12 +11,9 @@
 #include <display.h>
 #include <texture.h>
 #include <shader.h>
-<<<<<<< HEAD
 #include <text_renderer.h>
 
-=======
 #include <functional>
->>>>>>> cf6155ec38b544df72b88ed05b217bdecbe37ddf
 
 namespace GUI {
 
@@ -161,11 +158,8 @@ namespace GUI {
             int GetChildCount() {return m_childCount;}
             GUIObject** GetChildren() {return m_children;}
             void AddChild(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, GUIObject* child_object);
-<<<<<<< HEAD
             void AddChild(GUIObject* child_object);
-=======
             void AddChild(glm::vec2 rel_pos, glm::vec2 wh_size, GUIObject* child_object);
->>>>>>> cf6155ec38b544df72b88ed05b217bdecbe37ddf
             void RemoveChild(GUIObject* child_object);
             void SwapChildrenOrder(int idx1, int idx2);
 
