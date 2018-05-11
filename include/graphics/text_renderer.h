@@ -36,6 +36,8 @@ public:
     void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec4 color=glm::vec4(0,0,0,1), FONTSIZE fs_enum = FS_12);
     void LoadFont();
 
+    std::map<GLchar, Character>* GetCharacterMap() {return m_characters;}
+
 protected:
 private:
     enum 

@@ -113,6 +113,8 @@ void TextRenderer::LoadFont()
 
 void TextRenderer::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec4 color, FONTSIZE fs_enum)
 {
+    glm::vec2 text_size(0);
+    
     // bind and update textshader
     m_shader->Bind();
     m_shader->Update(m_shader->GetCam(), color);
@@ -156,4 +158,5 @@ void TextRenderer::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat sc
     }
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+
 }

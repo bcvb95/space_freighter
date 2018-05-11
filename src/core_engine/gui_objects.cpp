@@ -98,6 +98,12 @@ namespace GUI {
         new_object->SetRectTransform(new RectTransform(tl, tr, bl, br, this->m_rect->vert_tl, this->m_rect->wh_size));   
     } 
 
+    void Panel::AddChild(GUIObject* new_object)
+    {
+        m_children[m_childCount] = new_object;
+        m_childCount++;
+    }
+
     void Panel::RemoveChild(GUIObject* child_object)
     {
         RemoveFromObjectList(child_object, m_children, &m_childCount);
@@ -115,6 +121,9 @@ namespace GUI {
                     break;
                 case BUTTON:
                     static_cast<Button*>(m_children[i])->Draw(cam);
+                    break;
+                case LABEL:
+                    static_cast<Label*>(m_children[i])->Draw(cam);
                     break;
                 default:
                     std::cout << "PANEL: Could not determine child object type." << std::endl;
@@ -160,6 +169,52 @@ namespace GUI {
     void Button::Draw(Camera* cam) {
         GUIObject::Draw(cam);
     }
+
+    //////////////////////////////////////////////////////////////////
+    // Label 
+    /////////////////////////////////////////////////////////////////
+
+    Label::Label(unsigned int id, TextRenderer* text_render) : GUIObject(id) {
+        m_textRender = text_render;
+    }
+
+    Label::~Label() { }
+
+    void Label::ConfigText(std::string text, FONTSIZE font_size, glm::vec2 pos)
+    {
+        m_fontSize = font_size;
+        std::strcpy(m_text, text.c_str());
+
+        // Iterate through all characters
+        std::string::const_iterator c;
+        for (c = text.begin(); c != text.end(); c++)
+        {
+            Character ch = (m_textRender->GetCharacterMap())[font_size][*c];
+
+            m_textSize.x += ch.Size.x + 0.75;
+
+        };
+        m_textSize.y = m_textRender->GetCharacterMap()[font_size]['H'].Size.y;
+
+        
+        std::cout<<"no seg yet!"<<std::endl;
+        this->m_parent->GetRectTransform();
+        std::cout<<"no seg yet!"<<std::endl;
+
+        glm::vec2 tr = glm::vec2(pos.x + (this->m_textSize.x / this->m_parent->GetRectTransform()->wh_size.x), pos.y);
+        glm::vec2 bl = glm::vec2(pos.x, pos.y + (this->m_textSize.y / this->m_parent->GetRectTransform()->wh_size.y));
+        glm::vec2 br = glm::vec2(pos.x + (this->m_textSize.x / this->m_parent->GetRectTransform()->wh_size.x), 
+                                pos.y + (this->m_textSize.y / this->m_parent->GetRectTransform()->wh_size.y)); 
+
+
+        this->SetRectTransform(new RectTransform(pos, tr, bl, br, this->m_parent->GetRectTransform()->vert_tl, this->m_parent->GetRectTransform()->wh_size));
+        
+    }
+
+    void Label::Draw(Camera* cam) {
+        m_textRender->RenderText(m_text, m_rect->vert_tl.x, m_rect->vert_tl.y, 1.0f, PURPLE, m_fontSize);
+    }
+
 
     //////////////////////////////////////////////////////////////////
     // Canvas 
@@ -223,5 +278,18 @@ namespace GUI {
         m_unique_buttonID++;
         return new_button;
     }
- 
+
+    Label* Canvas::NewLabel(glm::vec2 pos, Panel* parent, TextRenderer* text_render, std::string text, FONTSIZE font_size)
+    {
+        Label* new_label = new Label(m_unique_labelID, text_render);
+
+        new_label->SetParent(parent);
+        
+        new_label->ConfigText(text, font_size, pos);
+        parent->AddChild(new_label);
+        new_label->GetRectTransform()->print_verts();
+
+        m_unique_labelID++;
+        return new_label;
+    }
 }

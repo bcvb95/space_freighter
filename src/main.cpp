@@ -29,6 +29,7 @@ int main(int argc, char** argv)
     BasicShader* shader1 = new BasicShader("../res/basicShader", cam);
     TextShader* text_shader = new TextShader("../res/textShader", cam);
     GUI_Shader* gui_shader = new GUI_Shader("../res/gui_shader", cam);
+    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
 
     //
     Texture* texture1 = new Texture("../res/tex.png");
@@ -43,12 +44,13 @@ int main(int argc, char** argv)
     panel1->InitTexture(gui_shader, texture2);
     panel2->InitTexture(gui_shader, texture1);
 
+    Label* label1 = canvas->NewLabel(glm::vec2(0.1f,0.8f), panel1, text_rend, "hello", FS_18);
+
     Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(0.4f, 0.1f), glm::vec2(0.1f, 0.3f), glm::vec2(0.4f, 0.3f), panel2);
     button1->InitTexture(gui_shader, texture3);
     button1->SetOnClick(ClickFunction);
     
     // initlialize textrenderer with font.
-    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
 
     // 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture2, shader1);  
@@ -83,7 +85,6 @@ int main(int argc, char** argv)
         go1->DrawSprite();
 
 
-        text_rend->RenderText("The text is readaable?", 20.0f, 20.0f, 0.5f, black, FS_48);
         panel1->Draw(cam);
         
         counter += 0.01;

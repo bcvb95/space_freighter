@@ -10,6 +10,8 @@
 #include <display.h>
 #include <texture.h>
 #include <shader.h>
+#include <text_renderer.h>
+
 
 namespace GUI {
 
@@ -75,7 +77,7 @@ namespace GUI {
     };
 
     enum GUIObjectType {
-        PANEL=0, BUTTON=1, NONE=2
+        PANEL=0, BUTTON=1, LABEL=2, NONE=3
     };
 
     //////////////////////////////////////////////////////////////////
@@ -95,7 +97,7 @@ namespace GUI {
 
             void InitTexture(GUI_Shader* shader, Texture* texture);
             virtual GUIObject* GetParent() {return m_parent;}
-            virtual GUIObject* SetParent(GUIObject* parent) {this->m_parent;}
+            virtual GUIObject* SetParent(GUIObject* parent) {this->m_parent = parent;}
 
             unsigned int GetID() { return m_id; }
         protected:
@@ -136,6 +138,7 @@ namespace GUI {
             int GetChildCount() {return m_childCount;}
             GUIObject** GetChildren() {return m_children;}
             void AddChild(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, GUIObject* child_object);
+            void AddChild(GUIObject* child_object);
             void RemoveChild(GUIObject* child_object);
 
             virtual void Draw(Camera* cam);
@@ -167,6 +170,30 @@ namespace GUI {
             void (*m_onClick) (void);
     };
 
+    class Label : public GUIObject
+    {
+    public:
+        Label(unsigned int id, TextRenderer* text_render);
+        ~Label();
+        virtual GUIObjectType GetObjectType() { return LABEL; }
+
+        void ConfigText(std::string text, FONTSIZE fs, glm::vec2 pos);
+        virtual void Draw(Camera* cam);
+
+        virtual Panel* GetParent() {return static_cast<Panel*>(m_parent);}
+        virtual void SetParent(Panel* panel) {this->m_parent = panel;}
+
+
+    private:
+        TextRenderer* m_textRender;
+
+        char m_text[255];
+        FONTSIZE m_fontSize;
+        glm::vec2 m_textSize;
+
+        Panel* m_parent;
+    };
+
     //////////////////////////////////////////////////////////////////
     // Canvas
     //////////////////////////////////////////////////////////////////
@@ -180,13 +207,16 @@ namespace GUI {
         void DeletePanel(Panel* panel);
         Button* NewButton(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, Panel* parent);
         void DeleteButton(Button* button);
-        
+        Label* NewLabel(glm::vec2 pos, Panel* parent, TextRenderer* text_render,std::string text, FONTSIZE font_size);        
+        void DeleteLabel(Label* label);
+
         void MouseInBounds(glm::vec2 mousepos, bool clicked);
     private:
         // rect defining the size of the canvas
         int m_width, m_height;
         unsigned int m_unique_panelID = 1;
         unsigned int m_unique_buttonID = 1;
+        unsigned int m_unique_labelID = 1;
 
         int m_numPanels = 0;
         Panel* m_rootPanelList[MAX_PANELS_IN_CANVAS]; 
