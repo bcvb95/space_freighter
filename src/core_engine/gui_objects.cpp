@@ -226,12 +226,12 @@ namespace GUI {
                                 pos.y + (this->m_textSize.y / this->m_parent->GetRectTransform()->wh_size.y)); 
 
 
-        this->SetRectTransform(new RectTransform(pos, tr, bl, br, this->m_parent->GetRectTransform()->vert_tl, this->m_parent->GetRectTransform()->wh_size));
+        this->SetRectTransform(new RectTransform(pos, tr, bl, br, this->m_parent->GetRectTransform()->m_top_left, this->m_parent->GetRectTransform()->wh_size));
         
     }
 
     void Label::Draw(Camera* cam) {
-        m_textRender->RenderText(m_text, m_rect->vert_tl.x, m_rect->vert_tl.y, 1.0f, PURPLE, m_fontSize);
+        m_textRender->RenderText(m_text, m_rect->m_top_left.x, m_rect->m_top_left.y, 1.0f, PURPLE, m_fontSize);
     }
 
 

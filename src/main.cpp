@@ -64,14 +64,10 @@ int main(int argc, char** argv)
     panel2->InitTexture(gui_shader, texture1);
     panel2->Disable();
 
-<<<<<<< HEAD
     Label* label1 = canvas->NewLabel(glm::vec2(0.1f,0.8f), panel1, text_rend, "hello", FS_18);
 
-    Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(0.4f, 0.1f), glm::vec2(0.1f, 0.3f), glm::vec2(0.4f, 0.3f), panel2);
-=======
     // Buttons
     Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(60,20), panel2);
->>>>>>> cf6155ec38b544df72b88ed05b217bdecbe37ddf
     button1->InitTexture(gui_shader, texture3);
 
     Button* button2 = canvas->NewButton(glm::vec2(0.6f, 0.1f), glm::vec2(60,20), panel2);
