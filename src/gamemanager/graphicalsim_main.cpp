@@ -81,8 +81,8 @@ int main(int argc, char** argv)
     InputHandler* input_handler = new InputHandler(keystate, cam, window, canvas);
 
     TextShader* text_shader = new TextShader("../res/textShader", cam);
-    TextRenderer* text_renderer = new TextRenderer(text_shader);
-    text_renderer->LoadFont("../res/data-latin.ttf", 14);
+    TextRenderer* text_renderer = new TextRenderer(text_shader, "../res/data-latin.ttf");
+    text_renderer->LoadFont();
 
     float delta_time;
     float time_mul = 1.0f;
@@ -118,7 +118,7 @@ int main(int argc, char** argv)
             planet_GOs[i]->DrawSprite();
         }
         // GUI
-        text_renderer->RenderText("Good times were had", 0, window->GetWindowHeight()-10, 1, glm::vec4(1));
+        text_renderer->RenderText("Good times were had", 0, window->GetWindowHeight()-10, 1, glm::vec4(1), FS_48);
 
         window->SwapBuffers();
         SDL_Delay(17);
