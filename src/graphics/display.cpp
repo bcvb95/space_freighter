@@ -6,6 +6,7 @@ Display::Display(int width, int height, const std::string& title)
 {
 	SDL_Init(SDL_INIT_VIDEO || SDL_INIT_AUDIO || SDL_INIT_EVENTS || SDL_INIT_TIMER);
 
+
     SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
     SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
@@ -37,6 +38,9 @@ Display::Display(int width, int height, const std::string& title)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK); 	
 	glFrontFace(GL_CCW);
+
+	// disable vsync
+	//SDL_GL_SetSwapInterval(0);
 
 	// trap mouse inside window
 	SDL_SetWindowGrab(m_window, SDL_TRUE);

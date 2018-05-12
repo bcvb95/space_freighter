@@ -51,20 +51,22 @@ int main(int argc, char** argv)
     TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
 
     //
-    Texture* texture1 = new Texture("../res/tex.png");
-    Texture* texture2 = new Texture("../res/img1.png");
-    Texture* texture3 = new Texture("../res/buttontex.png");
+    Texture* texture1 = new Texture("../res/tex.png", false);
+    Texture* texture2 = new Texture("../res/img1.png", false);
+    Texture* texture3 = new Texture("../res/buttontex.png", true);
+
+    Texture* texture_gui = new Texture("../res/tex.png", true);
     
     // init gui  
     Canvas* canvas = new Canvas(window); 
-    Panel* panel1 = canvas->NewPanel(glm::vec2(0.25f, 0.25f), glm::vec2(0.75f, 0.25f), glm::vec2(0.25f, 0.75f), glm::vec2(0.75f, 0.75f));
+    Panel* panel1 = canvas->NewPanel(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(1.0f, 1.0f));
     Panel* panel2 = canvas->NewPanel(glm::vec2(0.25f, 0.25f), glm::vec2(0.75f, 0.25f), glm::vec2(0.25f, 0.75f), glm::vec2(0.75f, 0.75f), panel1);
 
-    panel1->InitTexture(gui_shader, texture2);
+    panel1->InitTexture(gui_shader, texture_gui);
     panel2->InitTexture(gui_shader, texture1);
     panel2->Disable();
 
-    Label* label1 = canvas->NewLabel(glm::vec2(0.1f,0.8f), panel1, text_rend, "hello", FS_18);
+    Label* label1 = canvas->NewLabel(glm::vec2(0.0f,0.005f), panel1, text_rend, "FPS: ", FS_18);
 
     // Buttons
     Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(60,20), panel2);
@@ -113,6 +115,7 @@ int main(int argc, char** argv)
 
     // 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture2, shader1);  
+    DrawableGameObject* go2 = new DrawableGameObject("GO 1", texture1, shader1);  
 
     go1->GetTransform()->GetScale()->x *= 10;
     go1->GetTransform()->GetScale()->y *= 10;
@@ -126,7 +129,8 @@ int main(int argc, char** argv)
     InputHandler* input_handler = new InputHandler(keystate, cam, window, canvas);
 
     float delta_time;    
-    float counter = 0.0;
+    float fps;
+    char fps_string[10];
 
 
     while(isRunning) 
@@ -134,8 +138,14 @@ int main(int argc, char** argv)
         window->Clear(0.0f, 0.2f, 0.0f, 1.0f);
 
         clock.tick();
-        delta_time = clock.delta_time / 1000.0; // in seconds.
-        
+        delta_time = clock.delta_time / 1000.0f; // in seconds.
+
+
+        fps = 1.0f / delta_time;
+        sprintf(fps_string, "FPS: %d", (int)fps);
+        label1->ConfigText(fps_string, FS_18, glm::vec2(0));
+
+
         //// HANDLE INPUT HERE
         try {
             input_handler->HandleInput(&e, delta_time, &isRunning);
@@ -148,19 +158,19 @@ int main(int argc, char** argv)
 
 
         go1->DrawSprite();
-
+        go2->DrawSprite();
 
         panel1->Draw(cam);
         
-        counter += 0.01;
-
         window->SwapBuffers();
-        SDL_Delay(1);
+
+        SDL_Delay(10);
     } 
 
     std::cout << "Cleaning up" << std::endl;
 
     delete go1;
+    delete go2;
     delete cam;
     delete window;
 

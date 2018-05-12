@@ -34,6 +34,7 @@ namespace GUI {
         };
 
         // Render glyph texture over quad
+        //glActiveTexture(GL_TEXTURE2);
         m_texStruct->texture->Bind();
 
         // Update content of VBO memory
@@ -216,9 +217,7 @@ namespace GUI {
         m_textSize.y = m_textRender->GetCharacterMap()[font_size]['H'].Size.y;
 
         
-        std::cout<<"no seg yet!"<<std::endl;
         this->m_parent->GetRectTransform();
-        std::cout<<"no seg yet!"<<std::endl;
 
         glm::vec2 tr = glm::vec2(pos.x + (this->m_textSize.x / this->m_parent->GetRectTransform()->wh_size.x), pos.y);
         glm::vec2 bl = glm::vec2(pos.x, pos.y + (this->m_textSize.y / this->m_parent->GetRectTransform()->wh_size.y));

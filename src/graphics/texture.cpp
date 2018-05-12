@@ -2,12 +2,20 @@
 #include <SOIL.h>
 #include <iostream>
 
-Texture::Texture() {};
+Texture::Texture() {};        // Render glyph texture over quad
 
-Texture::Texture(const char* fileName)
+Texture::Texture(const char* fileName, bool GUI)
 {
-    //glActiveTexture(GL_TEXTURE0);
+    m_GUI = GUI;
     glGenTextures(1, &m_texture);
+    /*
+    if (GUI == false)
+    {
+      glActiveTexture(GL_TEXTURE0);
+    } else {
+      glActiveTexture(GL_TEXTURE2);
+    }   
+*/
     glBindTexture(GL_TEXTURE_2D, m_texture);
     
     int width, height;
@@ -20,9 +28,12 @@ Texture::Texture(const char* fileName)
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+  
+
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
     SOIL_free_image_data(data);
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 Texture::~Texture()
@@ -32,5 +43,12 @@ Texture::~Texture()
 
 void Texture::Bind()
 {
+  /*
+  if (m_GUI == false) {
+    glActiveTexture(GL_TEXTURE0);
+  } else {
+    glActiveTexture(GL_TEXTURE2);
+  }
+  */
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 }
