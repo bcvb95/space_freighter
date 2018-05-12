@@ -24,9 +24,18 @@ int main(int argc, char** argv)
     cam->SetZoom(3.2f);
     Clock clock;
 
-    Texture* planet_tex = new Texture("../res/planet_tex1.png");
-    Texture* star_tex = new Texture("../res/star_tex1.png");
+    Texture* planet_tex = new Texture("../res/planet_tex1.png", false);
+    Texture* star_tex = new Texture("../res/star_tex1.png", false);
+    Texture* tex1 = new Texture("../res/tex.png", true);
+
+    TextShader* text_shader = new TextShader("../res/textShader", cam);
+    TextRenderer* text_renderer = new TextRenderer(text_shader, "../res/data-latin.ttf");
     BasicShader* shader = new BasicShader("../res/basicShader", cam);
+    GUI_Shader* gui_shader = new GUI_Shader("../res/gui_shader", cam);
+
+    GUI::Panel* panel1 = canvas->NewPanel(glm::vec2(0.0f, 0.0f), glm::vec2(100, 50));
+    GUI::Label* fps_label = canvas->NewLabel(glm::vec2(0), panel1,text_renderer, "FPS placeholder", FS_18);
+    panel1->InitTexture(gui_shader, tex1);
 
     WorldGO* planet_GOs[Simulation::MAX_WORLDS]; 
     DrawableGameObject* star_GOs[Simulation::MAX_SOLARSYSTEMS];
@@ -80,16 +89,22 @@ int main(int argc, char** argv)
     const Uint8* keystate = SDL_GetKeyboardState(nullptr);
     InputHandler* input_handler = new InputHandler(keystate, cam, window, canvas);
 
-    TextShader* text_shader = new TextShader("../res/textShader", cam);
-    TextRenderer* text_renderer = new TextRenderer(text_shader, "../res/data-latin.ttf");
-    text_renderer->LoadFont();
 
     float delta_time;
     float time_mul = 1.0f;
+
+    float fps;
+    char fps_string[10];
+    
     while(isRunning) 
     {
         clock.tick();
         delta_time = clock.delta_time / 1000.0; // in seconds.
+
+        fps = 1.0f / delta_time;
+        sprintf(fps_string, "FPS: %d", (int)fps);
+
+        fps_label->ConfigText(fps_string, FS_18, glm::vec2(0));
 
         window->Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -118,7 +133,8 @@ int main(int argc, char** argv)
             planet_GOs[i]->DrawSprite();
         }
         // GUI
-        text_renderer->RenderText("Good times were had", 0, window->GetWindowHeight()-10, 1, glm::vec4(1), FS_48);
+        
+        panel1->Draw(cam);
 
         window->SwapBuffers();
         SDL_Delay(17);

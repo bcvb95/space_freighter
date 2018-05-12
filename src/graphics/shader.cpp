@@ -48,6 +48,8 @@ GUI_Shader::GUI_Shader(const std::string filename, Camera* cam) : Shader(filenam
     glBindAttribLocation(this->m_program, 0, "position");
     m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projMat");
 
+    glUniform1i(glGetUniformLocation(this->m_program, "tex"), 0);
+
     // check for errors finding uniform locations.
     for (unsigned int i = 0; i < NUM_UNIFORMS; i++)
     {
@@ -67,7 +69,10 @@ void GUI_Shader::Update (Camera* cam) {
 
 TextShader::TextShader(const std::string filename, Camera* cam) : Shader(filename, cam)
 {
+    this->Bind();
     glBindAttribLocation(this->m_program, 0, "position");
+
+    glUniform1i(glGetUniformLocation(this->m_program, "tex"), 0);
 
     m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projMat");
     m_uniforms[COLOR_U] = glGetUniformLocation(this->m_program, "color");
@@ -98,7 +103,9 @@ BasicShader::BasicShader(const std::string& filename, Camera* cam) : Shader(file
     glBindAttribLocation(this->m_program, 0, "position");
     glBindAttribLocation(this->m_program, 1, "texCoord"); 
     glBindAttribLocation(this->m_program, 2, "normal" );
-
+    
+    glUniform1i(glGetUniformLocation(this->m_program, "diffuseSampler"), 0);
+    
     m_uniforms[MODEL_U] = glGetUniformLocation(this->m_program, "modelMat");  // model matrix
     m_uniforms[PROJMAT_U] = glGetUniformLocation(this->m_program, "projMat"); // model view projection matrix
     

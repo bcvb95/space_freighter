@@ -55,7 +55,7 @@ void TextRenderer::LoadFont()
         };
 
         FT_Set_Pixel_Sizes(font_face, 0, fs);
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 0);
 
         this->m_characters[i].clear();
 
@@ -69,10 +69,8 @@ void TextRenderer::LoadFont()
                 continue;
             }
 
-
             // Generate texture
             GLuint texture;
-            glActiveTexture(GL_TEXTURE0);
             glGenTextures(1, &texture);
             glBindTexture(GL_TEXTURE_2D, texture);
     
@@ -117,6 +115,9 @@ void TextRenderer::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat sc
     
     // bind and update textshader
     m_shader->Bind();
+    // Render glyph texture over quad
+    glActiveTexture(GL_TEXTURE0);
+
     m_shader->Update(m_shader->GetCam(), color);
 
     glBindVertexArray(this->m_vertexArrayObject);
@@ -144,7 +145,7 @@ void TextRenderer::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat sc
             { xpos + w, ypos,       1.0, 0.0 }
         };
         
-        // Render glyph texture over quad
+        //glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, ch.TextureID);
 
         // Update content of VBO memory

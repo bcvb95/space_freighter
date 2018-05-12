@@ -8,7 +8,7 @@ class Texture
 {
 public:
     Texture(void);
-	Texture(const char* fileName);
+	Texture(const char* fileName, bool GUI);
 	Texture(const Texture& texture) {};
 
 	void Bind();
@@ -18,6 +18,7 @@ protected:
 private:
 
 	GLuint m_texture;
+	bool m_GUI;
 };
 
 #endif
