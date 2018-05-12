@@ -54,6 +54,7 @@ namespace GUI {
             m_rel_tr = (m_top_right-parent_pos) / parent_size;
             m_rel_bl = (m_bottom_left-parent_pos) / parent_size;
             m_rel_br = (m_bottom_right-parent_pos) / parent_size;
+
         }
         void print_verts() {
             std::cout << "Top left: " << m_top_left.x << ", " << m_top_left.y << std::endl;
@@ -244,6 +245,7 @@ namespace GUI {
         Label* NewLabel(glm::vec2 pos, Panel* parent, TextRenderer* text_render,std::string text, FONTSIZE font_size);        
         void DeleteLabel(Label* label);
 
+        void DrawGUI(Camera* cam);
         void MouseInBounds(glm::vec2 mousepos, bool clicked);
     private:
         // rect defining the size of the canvas

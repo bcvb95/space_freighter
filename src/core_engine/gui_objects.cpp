@@ -17,7 +17,7 @@ namespace GUI {
     }
 
     void GUIObject::Draw(Camera* cam) {
-        if (m_disabled) { return; }
+        if (m_disabled || m_texStruct == NULL) { return; }
         m_texStruct->shader->Bind();
         m_texStruct->shader->Update(cam);
 
@@ -335,5 +335,11 @@ namespace GUI {
 
         m_unique_labelID++;
         return new_label;
+    }
+
+    void Canvas::DrawGUI(Camera* cam) {
+        for (int i=m_numPanels-1; i >= 0; i--) {
+            m_rootPanelList[i]->Draw(cam);
+        }
     }
 }

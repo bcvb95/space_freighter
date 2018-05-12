@@ -149,8 +149,7 @@ int main(int argc, char** argv)
 
         go1->DrawSprite();
 
-
-        panel1->Draw(cam);
+        canvas->DrawGUI(cam);
         
         counter += 0.01;
 

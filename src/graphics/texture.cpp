@@ -6,8 +6,8 @@ Texture::Texture() {};
 
 Texture::Texture(const char* fileName)
 {
-    //glActiveTexture(GL_TEXTURE0);
     glGenTextures(1, &m_texture);
+    glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, m_texture);
     
     int width, height;
@@ -32,5 +32,6 @@ Texture::~Texture()
 
 void Texture::Bind()
 {
+  glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 }
