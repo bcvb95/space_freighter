@@ -39,6 +39,7 @@ using namespace GUI;
 
 int main(int argc, char** argv)
 {
+
     // window/display, camera and clock-struct
     Display* window = new Display(WIDTH,HEIGHT, argv[0]+2);
     Camera* cam = new Camera(glm::vec3(0,0,0), 0, window);
@@ -48,8 +49,8 @@ int main(int argc, char** argv)
     BasicShader* shader1 = new BasicShader("../res/basicShader", cam);
     TextShader* text_shader = new TextShader("../res/textShader", cam);
     GUI_Shader* gui_shader = new GUI_Shader("../res/gui_shader", cam);
-    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
 
+    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
     //
     Texture* texture1 = new Texture("../res/tex.png", false);
     Texture* texture2 = new Texture("../res/img1.png", false);
@@ -143,7 +144,7 @@ int main(int argc, char** argv)
 
         fps = 1.0f / delta_time;
         sprintf(fps_string, "FPS: %d", (int)fps);
-        label1->ConfigText(fps_string, FS_18, glm::vec2(0));
+        label1->ConfigText("The quick brown fox jumped over the lazy hounds\n", FS_18, glm::vec2(0));
 
 
         //// HANDLE INPUT HERE

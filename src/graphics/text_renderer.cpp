@@ -28,14 +28,14 @@ void TextRenderer::LoadFont()
         fprintf(stderr, "could not initialize FreeType library\n");
     }
 
+    // Load ttf font.
+    FT_Face font_face;
+    if (FT_New_Face(ft, m_filename.c_str(), 0, &font_face)) {
+        fprintf(stderr,"Could not load true-type font %s\n", m_filename.c_str());
+    }
     // load all sizes
     for (int i = 0; i < MAX_NUM_FONTSIZES; i++) {
 
-        // Load ttf font.
-        FT_Face font_face;
-        if (FT_New_Face(ft, m_filename.c_str(), 0, &font_face)) {
-            fprintf(stderr,"Could not load true-type font %s\n", m_filename.c_str());
-        }
 
         int fs;
 
@@ -72,12 +72,13 @@ void TextRenderer::LoadFont()
             // Generate texture
             GLuint texture;
             glGenTextures(1, &texture);
+            glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, texture);
     
             glTexImage2D(
                 GL_TEXTURE_2D,
                 0,
-                GL_RED,
+                GL_R8,
                 font_face->glyph->bitmap.width,
                 font_face->glyph->bitmap.rows,
                 0,
@@ -89,8 +90,8 @@ void TextRenderer::LoadFont()
             // Set texture options
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
             glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
             // Now store character for later use
             Character character = {
@@ -104,8 +105,8 @@ void TextRenderer::LoadFont()
         };
         glBindTexture(GL_TEXTURE_2D, 0);
         // Destroy FreeType once we're finished
-        FT_Done_Face(font_face);
     };    
+    FT_Done_Face(font_face);
     FT_Done_FreeType(ft);
 }
 
@@ -116,8 +117,7 @@ void TextRenderer::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat sc
     // bind and update textshader
     m_shader->Bind();
     // Render glyph texture over quad
-    glActiveTexture(GL_TEXTURE0);
-
+    //glActiveTexture(GL_TEXTURE0);
     m_shader->Update(m_shader->GetCam(), color);
 
     glBindVertexArray(this->m_vertexArrayObject);
