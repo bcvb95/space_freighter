@@ -55,7 +55,7 @@ void TextRenderer::LoadFont()
         };
 
         FT_Set_Pixel_Sizes(font_face, 0, fs);
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 0);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         this->m_characters[i].clear();
 
@@ -116,7 +116,7 @@ void TextRenderer::RenderText(std::string text, GLfloat x, GLfloat y, GLfloat sc
     // bind and update textshader
     m_shader->Bind();
     // Render glyph texture over quad
-    glActiveTexture(GL_TEXTURE0);
+//    glActiveTexture(GL_TEXTURE0);
 
     m_shader->Update(m_shader->GetCam(), color);
 
