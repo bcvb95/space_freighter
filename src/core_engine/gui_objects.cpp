@@ -107,9 +107,11 @@ namespace GUI {
 
     void Panel::AddChild(GUIObject* new_object)
     {
+        new_object->SetParent(this);
         m_children[m_childCount] = new_object;
         m_childCount++;
     }
+
     void Panel::AddChild(glm::vec2 rel_pos, glm::vec2 wh_size, GUIObject* new_object) {
         new_object->SetParent(this);
         m_children[m_childCount] = new_object;
@@ -150,6 +152,25 @@ namespace GUI {
         GUIObject* tmp = m_children[idx1];  
         m_children[idx1] = m_children[idx2];
         m_children[idx2] = tmp;
+    }
+
+    RectTransform** Panel::CreateMaxRects(int rect_rows, int rect_cols, glm::vec4 padding) {
+        // Padding is vec4 <LEFT, RIGHT, TOP, BOTTOM>
+        float width = (this->m_rect->wh_size.x - (padding.x + padding.y)*rect_cols) / rect_cols;
+        float height = (this->m_rect->wh_size.y - (padding.z + padding.w)*rect_rows) / rect_rows;
+        glm::vec2 parent_pos = this->m_rect->m_top_left;
+        glm::vec2 start_pos = glm::vec2(parent_pos.x + padding.x, parent_pos.y + padding.z);
+        glm::vec2 next_pos = start_pos;
+ 
+        RectTransform** new_rects = (RectTransform**) malloc(rect_rows*rect_cols * sizeof(RectTransform*));
+        for (int i=0; i < rect_rows; i++) {
+            for (int j=0; j < rect_cols; j++) {
+                new_rects[i+j] = new RectTransform(next_pos, width, height, this->m_rect->m_top_left, this->m_rect->wh_size);
+                next_pos += glm::vec2(width + padding.x + padding.y, 0);
+            }
+            next_pos = glm::vec2(start_pos.x, next_pos.y + height + padding.z + padding.w);
+        }
+        return new_rects;
     }
 
     void RemoveFromObjectList(GUIObject* object, GUIObject** object_list, int* count)
@@ -330,7 +351,6 @@ namespace GUI {
         
         new_label->ConfigText(text, font_size, pos);
         parent->AddChild(new_label);
-        new_label->GetRectTransform()->print_verts();
 
         m_unique_labelID++;
         return new_label;

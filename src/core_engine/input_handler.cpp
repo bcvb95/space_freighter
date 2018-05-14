@@ -11,7 +11,7 @@ InputHandler::InputHandler(const Uint8* keystate, Camera* cam, Display* window, 
     m_canvas = canvas;
 }
 
-void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning, float* time_mul)
+void InputHandler::HandleInput(SDL_Event* e, float delta_time, bool* isGameRunning, int* time_mul)
 {
     // Get mouse position
     int x, y;

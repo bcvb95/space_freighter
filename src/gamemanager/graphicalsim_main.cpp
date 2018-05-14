@@ -27,15 +27,43 @@ int main(int argc, char** argv)
     Texture* planet_tex = new Texture("../res/planet_tex1.png", false);
     Texture* star_tex = new Texture("../res/star_tex1.png", false);
     Texture* tex1 = new Texture("../res/tex.png", true);
+    Texture* tex2 = new Texture("../res/img1.png", true);
+    Texture* button1_tex = new Texture("../res/buttontex.png", true);
 
     TextShader* text_shader = new TextShader("../res/textShader", cam);
     TextRenderer* text_renderer = new TextRenderer(text_shader, "../res/data-latin.ttf");
     BasicShader* shader = new BasicShader("../res/basicShader", cam);
     GUI_Shader* gui_shader = new GUI_Shader("../res/gui_shader", cam);
 
-    GUI::Panel* panel1 = canvas->NewPanel(glm::vec2(0.0f, 0.0f), glm::vec2(100, 50));
-    GUI::Label* fps_label = canvas->NewLabel(glm::vec2(0), panel1,text_renderer, "FPS placeholder", FS_18);
+    GUI::Panel* panel1 = canvas->NewPanel(glm::vec2(0.0f, 0.0f), glm::vec2(150, 75));
+    GUI::Panel* panel2 = canvas->NewPanel(glm::vec2(0.0f, 0.5f), glm::vec2(1.0f, 0.5f), glm::vec2(0.0f, 1.0f), glm::vec2(1.0f, 1.0f), panel1);
     panel1->InitTexture(gui_shader, tex1);
+    panel2->InitTexture(gui_shader, tex2);
+
+    GUI::RectTransform** panel2_rects = panel2->CreateMaxRects(1, 4, glm::vec4(0));
+
+    GUI::Button* time_button1 = new GUI::Button(1);
+    time_button1->SetRectTransform(panel2_rects[0]);
+    time_button1->InitTexture(gui_shader, button1_tex);
+
+    GUI::Button* time_button2 = new GUI::Button(2);
+    time_button2->SetRectTransform(panel2_rects[1]);
+    time_button2->InitTexture(gui_shader, button1_tex);
+
+    GUI::Button* time_button3 = new GUI::Button(3);
+    time_button3->SetRectTransform(panel2_rects[2]);
+    time_button3->InitTexture(gui_shader, button1_tex);
+
+    GUI::Button* time_button4 = new GUI::Button(4);
+    time_button4->SetRectTransform(panel2_rects[3]);
+    time_button4->InitTexture(gui_shader, button1_tex);
+
+    panel2->AddChild(time_button1);
+    panel2->AddChild(time_button2);
+    panel2->AddChild(time_button3);
+    panel2->AddChild(time_button4);
+
+    GUI::Label* fps_label = canvas->NewLabel(glm::vec2(0), panel1,text_renderer, "FPS placeholder", FS_18);
 
     WorldGO* planet_GOs[Simulation::MAX_WORLDS]; 
     DrawableGameObject* star_GOs[Simulation::MAX_SOLARSYSTEMS];
@@ -64,6 +92,19 @@ int main(int argc, char** argv)
         return 1;
     }
 
+    int time_mul = 1;
+    int* time_mul_p = &time_mul;
+
+    std::function<void(void*)> SetSimTime =
+        [time_mul_p](void* speed) {
+            *time_mul_p = *(int*) speed;
+        };
+    int numbers[4] = {1, 10, 100, 1000};
+    time_button1->SetOnClick(SetSimTime, (void*)&numbers[0]);
+    time_button2->SetOnClick(SetSimTime, (void*)&numbers[1]);
+    time_button3->SetOnClick(SetSimTime, (void*)&numbers[2]);
+    time_button4->SetOnClick(SetSimTime, (void*)&numbers[3]);
+    
     // Create gameobjects
     Simulation::Universe* universe = sim->getUniverse();
     Simulation::World** worlds = universe->getWorlds();
@@ -91,11 +132,9 @@ int main(int argc, char** argv)
 
 
     float delta_time;
-    float time_mul = 1.0f;
 
     float fps;
     char fps_string[10];
-    
     while(isRunning) 
     {
         clock.tick();
@@ -108,8 +147,7 @@ int main(int argc, char** argv)
 
         window->Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
-        input_handler->HandleInput(&e, delta_time, &isRunning, &time_mul);
-
+        input_handler->HandleInput(&e, delta_time, &isRunning, time_mul_p);
         try {
             sim->Update(delta_time * time_mul);
         }
@@ -125,6 +163,7 @@ int main(int argc, char** argv)
             std::cout << "Error in main simulation while running: " << e.what() << std::endl;
             return 1;
         }
+
         // DRAW
         for (int i=0; i < universe->getSolarSystemCount(); i++) {
             star_GOs[i]->DrawSprite();

@@ -22,6 +22,7 @@ namespace GUI {
     //////////////////////////////////////////////////////////////////
     struct RectTransform
     {
+        // Hey look at me, I have 3 constructors!
         glm::vec2 m_top_left;
         glm::vec2 m_top_right;
         glm::vec2 m_bottom_left;
@@ -34,6 +35,7 @@ namespace GUI {
 
         glm::vec2 wh_size; // width, height
 
+        // Constructor with 4 relative positions/corners
         RectTransform(glm::vec2 tl, glm::vec2 tr, glm::vec2 bl, glm::vec2 br, glm::vec2 parent_pos, glm::vec2 parent_size) 
         : m_rel_tl(tl), m_rel_tr(tr), m_rel_bl(bl), m_rel_br(br) {
             m_top_left = parent_pos + (parent_size * m_rel_tl);
@@ -43,6 +45,7 @@ namespace GUI {
 
             wh_size = glm::vec2(m_top_right.x - m_top_left.x, m_bottom_right.y - m_top_right.y);
         }
+        // Constructor with 1 relative position/corner, a width and a height (size)
         RectTransform(glm::vec2 rel_tl, glm::vec2 size, glm::vec2 parent_pos, glm::vec2 parent_size) 
         : wh_size(size) {
             m_top_left = parent_pos + (parent_size * rel_tl);
@@ -55,6 +58,18 @@ namespace GUI {
             m_rel_bl = (m_bottom_left-parent_pos) / parent_size;
             m_rel_br = (m_bottom_right-parent_pos) / parent_size;
 
+        }
+        // Constructor with an actual position and width/height.
+        RectTransform(glm::vec2 actual_pos, int width, int height, glm::vec2 parent_pos, glm::vec2 parent_size) 
+        : m_top_left(actual_pos), wh_size(glm::vec2(width, height)) {
+            m_top_right = m_top_left + glm::vec2(wh_size.x, 0);
+            m_bottom_left = m_top_left + glm::vec2(0, wh_size.y);
+            m_bottom_right = m_top_left + glm::vec2(wh_size.x, wh_size.y);
+
+            m_rel_tl = (m_top_left-parent_pos) / parent_size;
+            m_rel_tr = (m_top_right-parent_pos) / parent_size;
+            m_rel_bl = (m_bottom_left-parent_pos) / parent_size;
+            m_rel_br = (m_bottom_right-parent_pos) / parent_size;
         }
         void print_verts() {
             std::cout << "Top left: " << m_top_left.x << ", " << m_top_left.y << std::endl;
@@ -163,6 +178,7 @@ namespace GUI {
             void AddChild(glm::vec2 rel_pos, glm::vec2 wh_size, GUIObject* child_object);
             void RemoveChild(GUIObject* child_object);
             void SwapChildrenOrder(int idx1, int idx2);
+            RectTransform** CreateMaxRects(int rect_rows, int rect_cols, glm::vec4 padding);
 
             virtual void Draw(Camera* cam);
         protected:
