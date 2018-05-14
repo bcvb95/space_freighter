@@ -104,7 +104,7 @@ int main(int argc, char** argv)
         fps = 1.0f / delta_time;
         sprintf(fps_string, "FPS: %d", (int)fps);
 
-        fps_label->ConfigText("The quick brown fox jumped over the lazy hounds", FS_18, glm::vec2(0));
+        fps_label->ConfigText(fps_string, FS_18, glm::vec2(0));
 
         window->Clear(0.0f, 0.0f, 0.0f, 1.0f);
 
