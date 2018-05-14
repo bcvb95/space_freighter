@@ -41,7 +41,7 @@ int main(int argc, char** argv)
 {
     // window/display, camera and clock-struct
     Display* window = new Display(WIDTH,HEIGHT, argv[0]+2);
-    Camera* cam = new Camera(glm::vec3(0,0,0), 0, window);
+    Camera* cam = new Camera(glm::vec3(0,0,100), 0, window);
     Clock clock;
 
     // basic shader

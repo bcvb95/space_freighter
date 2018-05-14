@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     Camera* cam = new Camera(glm::vec3(0,0,0), 0, window);
     GUI::Canvas* canvas = new GUI::Canvas(window);
 
-    cam->SetZoom(3.2f);
+    cam->SetZoom(3.2f, false);
     Clock clock;
 
     Texture* planet_tex = new Texture("../res/planet_tex1.png", false);
@@ -134,6 +134,7 @@ int main(int argc, char** argv)
         }
         // GUI
         
+
         panel1->Draw(cam);
 
         window->SwapBuffers();
