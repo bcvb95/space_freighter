@@ -6,6 +6,7 @@
 #include <mesh.h>
 #include <transform.h>
 #include <camera.h>
+#include <glm/gtc/type_ptr.hpp>
 
 // Shader helper function declarations
 std::string LoadShader(const std::string& fileName);
@@ -35,18 +36,58 @@ class GUI_Shader : public Shader
 {
 public:
     GUI_Shader(const std::string filename, Camera* cam);
-    void Update(Camera* cam);
+
+    void SetBorderProps(float b_width, glm::vec4 b_color, glm::vec2 size);
+    void SetProjectionMat(glm::vec4 ortho_rect);
+
 private:
     enum
     {
         PROJMAT_U,
+        BORDERWIDTH_U,
+        BORDERCOLOR_U,
+        ASPECT_U,
         NUM_UNIFORMS
     };
 
     GLuint m_uniforms[NUM_UNIFORMS];
+    Camera* m_cam;
 
     glm::mat4 m_uiRect;
 };
+
+
+class GUI_RectBoundShader : public Shader
+{
+public:
+    GUI_RectBoundShader(const std::string filename, Camera* cam);
+
+    void SetBorderProps(float b_width, glm::vec4 b_color, glm::vec2 size);
+    void SetProjectionMat(glm::vec4 ortho_rect);
+
+    void SetBoundRect (glm::vec4 b_rect) {
+        this->Bind();
+        glUniform4fv(m_uniforms[BOUNDRECT_U], 1, glm::value_ptr(b_rect));
+    }
+
+private:
+    enum
+    {
+        PROJMAT_U,
+        BORDERWIDTH_U,
+        BORDERCOLOR_U,
+        ASPECT_U,
+        BOUNDRECT_U,
+        NUM_UNIFORMS        
+    };
+
+    GLuint m_uniforms[NUM_UNIFORMS];
+    Camera* m_cam;
+
+    glm::mat4 m_uiRect;
+
+};
+
 
 class TextShader : public Shader
 {

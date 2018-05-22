@@ -82,14 +82,15 @@ namespace GUI {
     //////////////////////////////////////////////////////////////////
     // TextureStruct
     //////////////////////////////////////////////////////////////////
-    struct TextureStruct 
+    struct DrawStruct 
+    // takes a shader and a optional texture and configures the OpenGL VBA and VBO 
     {
         GLuint vertexArrayObject;
         GLuint vertexArrayBuffer;
         Texture* texture;
-        GUI_Shader* shader;
+        Shader* shader;
 
-        TextureStruct (GUI_Shader* gui_shader, Texture* tex) : shader(gui_shader), texture(tex) 
+        DrawStruct (Shader* gui_shader, Texture* tex) : shader(gui_shader), texture(tex) 
         {
             // Configure VAO/VBO for texture quads
             glGenVertexArrays(1, &vertexArrayObject);
@@ -103,6 +104,7 @@ namespace GUI {
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             glBindVertexArray(0);
         }
+
     };
 
     //////////////////////////////////////////////////////////////////
@@ -127,9 +129,25 @@ namespace GUI {
             void SetRectTransform(RectTransform* rect) {this->m_rect = rect;}
             bool MouseInBounds(glm::vec2 mousepos, bool clicked);
 
-            void InitTexture(GUI_Shader* shader, Texture* texture);
+            void InitDrawing(Shader* shader, Texture* texture);
+
             virtual GUIObject* GetParent() {return m_parent;}
             virtual GUIObject* SetParent(GUIObject* parent) {this->m_parent = parent;}
+
+            void SetBorder(float border_width, glm::vec4 border_color) { 
+                
+                if (m_texStruct == NULL) {
+                    std::cerr << "GUIObject ERROR: border was was called before texture struct was initliazed" << std::endl;
+                    return; 
+                }
+
+                m_border_width = border_width /m_rect->wh_size.x;
+
+                m_border_color = border_color;
+
+                static_cast<GUI_Shader*>(m_texStruct->shader)->SetBorderProps(m_border_width, m_border_color, m_rect->wh_size);   
+            } 
+
 
             unsigned int GetID() { return m_id; }
             bool IsDisabled () { return m_disabled; }
@@ -140,7 +158,12 @@ namespace GUI {
             bool m_disabled = false;
             GUIObject* m_parent = NULL;
             RectTransform* m_rect;
-            TextureStruct* m_texStruct = NULL;
+            DrawStruct* m_texStruct = NULL;
+
+
+            float m_border_width = 0;
+            glm::vec4 m_border_color = glm::vec4(0);
+
             virtual void Draw(Camera* cam);
 
     };

@@ -29,8 +29,8 @@ SET(CMAKE_CXX_COMPILER "/usr/bin/g++")
 #compile src library
 add_subdirectory(src)
 
-#add_executable(space_freighter src/main.cpp)
-#target_link_libraries(space_freighter core_lib graphic_lib soil freetype)
+add_executable(space_freighter src/main.cpp)
+target_link_libraries(space_freighter core_lib graphic_lib soil freetype)
 
 add_executable(simulation_test src/simulation/main.cpp)
 target_link_libraries(simulation_test simulation_lib)
