@@ -1,5 +1,5 @@
 #include <gui_objects.h>
-
+ 
 namespace GUI {
 
     //////////////////////////////////////////////////////////////////
@@ -11,15 +11,17 @@ namespace GUI {
     
     GUIObject::~GUIObject() {}
 
-    void GUIObject::InitTexture(GUI_Shader* shader, Texture* texture)
+    void GUIObject::InitDrawing(Shader* shader, Texture* texture)
     {
-        m_texStruct = new TextureStruct(shader, texture);
+        m_texStruct = new DrawStruct(shader, texture);
     }
 
     void GUIObject::Draw(Camera* cam) {
         if (m_disabled || m_texStruct == NULL) { return; }
+
+        // bind and update shader
+
         m_texStruct->shader->Bind();
-        m_texStruct->shader->Update(cam);
 
         glBindVertexArray(m_texStruct->vertexArrayObject);
 
@@ -33,9 +35,10 @@ namespace GUI {
             { m_rect->m_top_right.x, m_rect->m_top_right.y,   1.0, 0.0 }
         };
 
-        // Render glyph texture over quad
-        //glActiveTexture(GL_TEXTURE2);
-        m_texStruct->texture->Bind();
+        // Render bind texture to use in shader
+        if (m_texStruct->texture != NULL) {
+            m_texStruct->texture->Bind();
+        }
 
         // Update content of VBO memory
         glBindBuffer(GL_ARRAY_BUFFER, m_texStruct->vertexArrayBuffer);

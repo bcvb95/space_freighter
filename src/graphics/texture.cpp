@@ -4,18 +4,9 @@
 
 Texture::Texture() {};        // Render glyph texture over quad
 
-Texture::Texture(const char* fileName, bool GUI)
+Texture::Texture(const char* fileName)
 {
-    m_GUI = GUI;
     glGenTextures(1, &m_texture);
-    /*
-    if (GUI == false)
-    {
-      glActiveTexture(GL_TEXTURE0);
-    } else {
-      glActiveTexture(GL_TEXTURE2);
-    }   
-*/
     glBindTexture(GL_TEXTURE_2D, m_texture);
     
     int width, height;
@@ -43,12 +34,5 @@ Texture::~Texture()
 
 void Texture::Bind()
 {
-  /*
-  if (m_GUI == false) {
-    glActiveTexture(GL_TEXTURE0);
-  } else {
-    glActiveTexture(GL_TEXTURE2);
-  }
-  */
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 }

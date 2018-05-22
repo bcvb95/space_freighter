@@ -16,27 +16,6 @@ glm::vec4 black(0.0f,0.0f,0.0f,1.0f);
 
 using namespace GUI;
 
-//void DisableClickFunction(void* button) { 
-//    static_cast<Button*>(button)->Disable();
-//}
-//
-//struct TwoButtons {
-//    Button* button1;
-//    Button* button2;
-//    TwoButtons(Button* b1, Button* b2) : button1(b1), button2(b2) {}
-//};
-//
-//void SwitchButtons(void* twobuttons) {
-//    TwoButtons* tb_struct = static_cast<TwoButtons*>(twobuttons);
-//    if (tb_struct->button1->IsDisabled()) {
-//        tb_struct->button1->Enable();
-//        tb_struct->button2->Disable();
-//    } else {
-//        tb_struct->button1->Disable();
-//        tb_struct->button2->Enable();
-//    }
-//}
-
 int main(int argc, char** argv)
 {
     // window/display, camera and clock-struct
@@ -45,35 +24,42 @@ int main(int argc, char** argv)
     Clock clock;
 
     // basic shader
-    BasicShader* shader1 = new BasicShader("../res/basicShader", cam);
-    TextShader* text_shader = new TextShader("../res/textShader", cam);
-    GUI_Shader* gui_shader = new GUI_Shader("../res/gui_shader", cam);
-    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/FreeSans.ttf");
+    BasicShader* shader1 = new BasicShader("../res/shaders/basicShader", cam);
+    TextShader* text_shader = new TextShader("../res/shaders/textShader", cam);
+    GUI_Shader* gui_shader = new GUI_Shader("../res/shaders/gui_shader", cam);
+    GUI_RectBoundShader* gui_shader_bound = new GUI_RectBoundShader("../res/shaders/gui_bound_shader", cam);
+
+    TextRenderer* text_rend = new TextRenderer(text_shader, "../res/fonts/FreeSans.ttf");
 
     //
-    Texture* texture1 = new Texture("../res/tex.png", false);
-    Texture* texture2 = new Texture("../res/img1.png", false);
-    Texture* texture3 = new Texture("../res/buttontex.png", true);
+    Texture* texture1 = new Texture("../res/tex.png");
+    Texture* texture2 = new Texture("../res/img1.png");
+    Texture* texture3 = new Texture("../res/buttontex.png");
 
-    Texture* texture_gui = new Texture("../res/tex.png", true);
-    
     // init gui  
     Canvas* canvas = new Canvas(window); 
-    Panel* panel1 = canvas->NewPanel(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(1.0f, 1.0f));
-    Panel* panel2 = canvas->NewPanel(glm::vec2(0.25f, 0.25f), glm::vec2(0.75f, 0.25f), glm::vec2(0.25f, 0.75f), glm::vec2(0.75f, 0.75f), panel1);
+    Panel* panel1 = canvas->NewPanel(glm::vec2(0.2f, 0.2f), glm::vec2(0.8f, 0.2f), glm::vec2(0.2f, 0.8f), glm::vec2(0.8f, 0.8f));
+    Panel* panel2 = canvas->NewPanel(glm::vec2(-0.25f, -0.25f), glm::vec2(0.75f, -0.25f), glm::vec2(-0.25f, 0.75f), glm::vec2(0.75f, 0.75f), panel1);
 
-    panel1->InitTexture(gui_shader, texture_gui);
-    panel2->InitTexture(gui_shader, texture1);
+    panel1->InitDrawing(gui_shader, texture1);
+    panel1->SetBorder(20.0f, BLACK);
+
+    glm::vec4 rect = glm::vec4(panel1->GetRectTransform()->m_top_left.x + 20.0f, panel1->GetRectTransform()->m_top_right.x-20.0f, 
+                          panel1->GetRectTransform()->m_top_left.y + 20.0f, panel1->GetRectTransform()->m_bottom_left.y - 20.0f);
+
+    gui_shader_bound->SetBoundRect(rect);
+    panel2->InitDrawing(gui_shader_bound, texture2);
+    panel2->SetBorder(10.0f, PURPLE);
     panel2->Disable();
 
     Label* label1 = canvas->NewLabel(glm::vec2(0.0f,0.005f), panel1, text_rend, "FPS: ", FS_18);
 
     // Buttons
     Button* button1 = canvas->NewButton(glm::vec2(0.1f), glm::vec2(60,20), panel2);
-    button1->InitTexture(gui_shader, texture3);
+    button1->InitDrawing(gui_shader_bound, texture3);
 
     Button* button2 = canvas->NewButton(glm::vec2(0.6f, 0.1f), glm::vec2(60,20), panel2);
-    button2->InitTexture(gui_shader, texture3);
+    button2->InitDrawing(gui_shader_bound, texture3);
     button2->Disable();
 
     std::function<void(void*)> SwitchButtons = 
@@ -93,11 +79,10 @@ int main(int argc, char** argv)
     button2->SetOnClick( SwitchButtons, (void*)&num2 );
 
     Button* button3 = canvas->NewButton(glm::vec2(0.4f, 0.5f), glm::vec2(60,20), panel1);
-    button3->InitTexture(gui_shader, texture3);
-    //panel1->SwapChildrenOrder(panel1->GetChildCount()-1, 0);
+    button3->InitDrawing(gui_shader, texture3);
 
     Button* button4 = canvas->NewButton(glm::vec2(0.6f, 0.7f), glm::vec2(60,20), panel2);
-    button4->InitTexture(gui_shader, texture3);
+    button4->InitDrawing(gui_shader, texture3);
 
     std::function<void(void*)> TogglePanel = 
         [](void* p) { 
@@ -112,8 +97,6 @@ int main(int argc, char** argv)
     button4->SetOnClick( TogglePanel, panel2 );
     
     // initlialize textrenderer with font.
-
-    // 
     DrawableGameObject* go1 = new DrawableGameObject("GO 1", texture2, shader1);  
     DrawableGameObject* go2 = new DrawableGameObject("GO 1", texture1, shader1);  
 
@@ -155,7 +138,6 @@ int main(int argc, char** argv)
             return 1;
         }
         /// END INPUT HANDLING
-
 
         go1->DrawSprite();
         go2->DrawSprite();

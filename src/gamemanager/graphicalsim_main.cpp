@@ -24,39 +24,39 @@ int main(int argc, char** argv)
     cam->SetZoom(3.2f, false);
     Clock clock;
 
-    Texture* planet_tex = new Texture("../res/planet_tex1.png", false);
-    Texture* star_tex = new Texture("../res/star_tex1.png", false);
-    Texture* tex1 = new Texture("../res/tex.png", true);
-    Texture* tex2 = new Texture("../res/img1.png", true);
-    Texture* button1_tex = new Texture("../res/buttontex.png", true);
+    Texture* planet_tex = new Texture("../res/planet_tex1.png" );
+    Texture* star_tex = new Texture("../res/star_tex1.png");
+    Texture* tex1 = new Texture("../res/tex.png");
+    Texture* tex2 = new Texture("../res/img1.png");
+    Texture* button1_tex = new Texture("../res/buttontex.png");
 
-    TextShader* text_shader = new TextShader("../res/textShader", cam);
-    TextRenderer* text_renderer = new TextRenderer(text_shader, "../res/data-latin.ttf");
-    BasicShader* shader = new BasicShader("../res/basicShader", cam);
-    GUI_Shader* gui_shader = new GUI_Shader("../res/gui_shader", cam);
+    TextShader* text_shader = new TextShader("../res/shaders/textShader", cam);
+    TextRenderer* text_renderer = new TextRenderer(text_shader, "../res/fonts/data-latin.ttf");
+    BasicShader* shader = new BasicShader("../res/shaders/basicShader", cam);
+    GUI_Shader* gui_shader = new GUI_Shader("../res/shaders/gui_shader", cam);
 
     GUI::Panel* panel1 = canvas->NewPanel(glm::vec2(0.0f, 0.0f), glm::vec2(150, 75));
     GUI::Panel* panel2 = canvas->NewPanel(glm::vec2(0.0f, 0.5f), glm::vec2(1.0f, 0.5f), glm::vec2(0.0f, 1.0f), glm::vec2(1.0f, 1.0f), panel1);
-    panel1->InitTexture(gui_shader, tex1);
-    panel2->InitTexture(gui_shader, tex2);
+    panel1->InitDrawing(gui_shader, tex1);
+    panel2->InitDrawing(gui_shader, tex2);
 
     GUI::RectTransform** panel2_rects = panel2->CreateMaxRects(1, 4, glm::vec4(0));
 
     GUI::Button* time_button1 = new GUI::Button(1);
     time_button1->SetRectTransform(panel2_rects[0]);
-    time_button1->InitTexture(gui_shader, button1_tex);
+    time_button1->InitDrawing(gui_shader, button1_tex);
 
     GUI::Button* time_button2 = new GUI::Button(2);
     time_button2->SetRectTransform(panel2_rects[1]);
-    time_button2->InitTexture(gui_shader, button1_tex);
+    time_button2->InitDrawing(gui_shader, button1_tex);
 
     GUI::Button* time_button3 = new GUI::Button(3);
     time_button3->SetRectTransform(panel2_rects[2]);
-    time_button3->InitTexture(gui_shader, button1_tex);
+    time_button3->InitDrawing(gui_shader, button1_tex);
 
     GUI::Button* time_button4 = new GUI::Button(4);
     time_button4->SetRectTransform(panel2_rects[3]);
-    time_button4->InitTexture(gui_shader, button1_tex);
+    time_button4->InitDrawing(gui_shader, button1_tex);
 
     panel2->AddChild(time_button1);
     panel2->AddChild(time_button2);
@@ -67,7 +67,6 @@ int main(int argc, char** argv)
 
     WorldGO* planet_GOs[Simulation::MAX_WORLDS]; 
     DrawableGameObject* star_GOs[Simulation::MAX_SOLARSYSTEMS];
-    //= new DrawableGameObject("planet1", planet_tex, shader);
 
     // Simulation
     unsigned int simulation_seed = 123454321;
