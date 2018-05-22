@@ -19,7 +19,6 @@ include_directories(include/graphics
 
 # compile third party libraries
 add_subdirectory(lib/freetype-2.9)
-
 add_subdirectory(lib/SOIL)
 
 # Use gcc and g++ for compiling own source
