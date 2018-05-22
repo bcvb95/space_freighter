@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcore_lib.a  CMakeFiles/core_lib.dir/gameobject.cpp.o CMakeFiles/core_lib.dir/sprite.cpp.o
-/usr/bin/ranlib libcore_lib.a
