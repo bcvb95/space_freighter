@@ -106,13 +106,12 @@ int main(int argc, char** argv)
     
     // Input handling
     SDL_Event e;
-    const Uint8* keystate = SDL_GetKeyboardState(nullptr); // holds a snapshot of the keyboard.
     bool isRunning = true;
 
-    InputHandler* input_handler = new InputHandler(keystate, cam, window, canvas);
+    InputHandler* input_handler = new InputHandler(cam, window, canvas);
 
     float delta_time;    
-    float fps;
+    float fps; 
     char fps_string[10];
 
 

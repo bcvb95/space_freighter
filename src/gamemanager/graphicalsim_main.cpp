@@ -126,8 +126,7 @@ int main(int argc, char** argv)
     // Main loop
     SDL_Event e;
     bool isRunning = true;
-    const Uint8* keystate = SDL_GetKeyboardState(nullptr);
-    InputHandler* input_handler = new InputHandler(keystate, cam, window, canvas);
+    InputHandler* input_handler = new InputHandler(cam, window, canvas);
 
 
     float delta_time;
